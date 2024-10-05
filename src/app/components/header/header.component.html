@@ -1,0 +1,79 @@
+<header [@shrinkHeader]="isHeaderShrunk ? 'shrunk' : 'initial'" 
+        class="fixed top-0 left-0 w-full bg-white shadow-md transition-all duration-300 z-50">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Logo et titre -->
+    <a routerLink="/" 
+       class="flex items-center space-x-2 text-primary hover:text-primary-dark transition-colors duration-200">
+      <mat-icon class="text-2xl">landscape</mat-icon>
+      <span class="text-lg font-semibold">Mon Site</span>
+    </a>
+
+    <!-- Navigation desktop -->
+    <nav class="hidden md:flex items-center space-x-4">
+      <a mat-button routerLink="/home" 
+         routerLinkActive="text-primary font-medium"
+         class="px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">
+         Accueil
+      </a>
+      <a mat-button routerLink="/projects" 
+         routerLinkActive="text-primary font-medium"
+         class="px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">
+         Projets
+      </a>
+      <a mat-button routerLink="/about" 
+         routerLinkActive="text-primary font-medium"
+         class="px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">
+         À propos
+      </a>
+      <a mat-button routerLink="/contact" 
+         routerLinkActive="text-primary font-medium"
+         class="px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">
+         Contact
+      </a>
+    </nav>
+
+    <!-- Bouton menu mobile -->
+    <button mat-icon-button 
+            (click)="toggleMobileMenu()"
+            class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
+      <mat-icon class="text-gray-600">
+        {{ isMobileMenuOpen ? 'close' : 'menu' }}
+      </mat-icon>
+    </button>
+  </div>
+
+  <!-- Menu mobile -->
+  <div class="md:hidden transition-all duration-300 ease-in-out"
+       [class.max-h-0]="!isMobileMenuOpen"
+       [class.max-h-96]="isMobileMenuOpen"
+       [class.opacity-0]="!isMobileMenuOpen"
+       [class.opacity-100]="isMobileMenuOpen"
+       [class.overflow-hidden]="true">
+    <div class="px-4 py-2 bg-gray-50 space-y-1">
+      <a mat-button routerLink="/home" 
+         routerLinkActive="text-primary font-medium"
+         (click)="toggleMobileMenu()"
+         class="block w-full px-3 py-2 text-left rounded-md hover:bg-gray-100 transition-colors duration-200">
+         Accueil
+      </a>
+      <a mat-button routerLink="/projects" 
+         routerLinkActive="text-primary font-medium"
+         (click)="toggleMobileMenu()"
+         class="block w-full px-3 py-2 text-left rounded-md hover:bg-gray-100 transition-colors duration-200">
+         Projets
+      </a>
+      <a mat-button routerLink="/about" 
+         routerLinkActive="text-primary font-medium"
+         (click)="toggleMobileMenu()"
+         class="block w-full px-3 py-2 text-left rounded-md hover:bg-gray-100 transition-colors duration-200">
+         À propos
+      </a>
+      <a mat-button routerLink="/contact" 
+         routerLinkActive="text-primary font-medium"
+         (click)="toggleMobileMenu()"
+         class="block w-full px-3 py-2 text-left rounded-md hover:bg-gray-100 transition-colors duration-200">
+         Contact
+      </a>
+    </div>
+  </div>
+</header>

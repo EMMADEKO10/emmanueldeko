@@ -1,0 +1,19 @@
+h1 {
+    @apply text-4xl font-bold mb-4 font-serif;
+  }
+  
+  h2 {
+    @apply text-3xl font-semibold mb-3 font-serif;
+  }
+  
+  h3 {
+    @apply text-2xl font-medium mb-2 font-serif;
+  }
+  
+  p {
+    @apply text-base mb-4 font-sans;
+  }
+  
+  a {
+    @apply text-primary hover:text-secondary transition-colors duration-300;
+  }
