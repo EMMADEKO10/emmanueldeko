@@ -44,7 +44,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       imageUrl: "/top-view-vegetables-colorful-spices-vegetables-lentil-min.webp",
       technologies: ["Angular", "Node.js", "MongoDB", "Socket.io"],
       githubUrl: "https://github.com/yourusername/ecommerce-platform",
-      liveUrl: "https://ecommerce-platform-demo.com",
+      liveUrl: "https://sotradons.vercel.app",
       featured: true
     },
     {
@@ -54,7 +54,18 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       imageUrl: "/arton59.jpeg",
       technologies: ["Python", "TensorFlow", "Flask", "React"],
       githubUrl: "https://github.com/yourusername/ai-chatbot",
-      liveUrl: "https://ai-chatbot-demo.com",
+      liveUrl: "https://diasporium.vercel.app",
+      featured: true
+    },
+
+    {
+      id: 2,
+      title: "AI-powered Chatbot",
+      description: "An intelligent chatbot using natural language processing for customer support.",
+      imageUrl: "/arton59.jpeg",
+      technologies: ["Python", "TensorFlow", "Flask", "React"],
+      githubUrl: "https://github.com/yourusername/ai-chatbot",
+      liveUrl: "https://poulex.vercel.app",
       featured: true
     },
     // Add more projects here...
