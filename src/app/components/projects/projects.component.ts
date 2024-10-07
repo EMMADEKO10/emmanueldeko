@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+// projects.component.ts
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +27,8 @@ interface Project {
         query(':enter', [
           style({ opacity: 0, transform: 'translateY(50px)' }),
           stagger(100, [
-            animate('0.5s ease', style({ opacity: 1, transform: 'translateY(0)' }))
+            animate('0.5s cubic-bezier(0.4, 0, 0.2, 1)', 
+              style({ opacity: 1, transform: 'translateY(0)' }))
           ])
         ], { optional: true })
       ])
@@ -76,14 +78,34 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
   searchTerm: string = '';
   selectedTechnology: string = '';
   technologies: string[] = [];
+  isLoading: boolean = true;
+  isMobile: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  constructor() {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize() {
+    this.isMobile = window.innerWidth < 768;
+  }
 
   ngOnInit() {
     this.filteredProjects = this.projects;
     this.extractTechnologies();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
 
   ngAfterViewInit() {
-    this.initializeParallaxEffect();
+    if (!this.isMobile) {
+      this.initializeParallaxEffect();
+    }
   }
 
   private extractTechnologies() {
@@ -91,42 +113,54 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
     this.projects.forEach(project => {
       project.technologies.forEach(tech => techSet.add(tech));
     });
-    this.technologies = Array.from(techSet);
+    this.technologies = Array.from(techSet).sort();
   }
 
   filterProjects() {
+    const searchLower = this.searchTerm.toLowerCase();
     this.filteredProjects = this.projects.filter(project =>
-      project.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+      (project.title.toLowerCase().includes(searchLower) ||
+       project.description.toLowerCase().includes(searchLower)) &&
       (this.selectedTechnology === '' || project.technologies.includes(this.selectedTechnology))
     );
   }
 
   private initializeParallaxEffect() {
     const container = this.projectsContainer.nativeElement;
+    let cards: HTMLElement[] = [];
+    
+    const updateCards = () => {
+      cards = Array.from(container.getElementsByClassName('project-card')) as HTMLElement[];
+    };
+
+    updateCards();
+
     container.addEventListener('mousemove', (e: MouseEvent) => {
-      const cards = container.getElementsByClassName('project-card');
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+      const rect = container.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
 
-      for (let i = 0; i < cards.length; i++) {
-        const card = cards[i] as HTMLElement;
-        const rect = card.getBoundingClientRect();
-        const cardX = rect.left + rect.width / 2;
-        const cardY = rect.top + rect.height / 2;
+      cards.forEach((card) => {
+        const cardRect = card.getBoundingClientRect();
+        const cardCenterX = cardRect.left + cardRect.width / 2 - rect.left;
+        const cardCenterY = cardRect.top + cardRect.height / 2 - rect.top;
 
-        const angleX = (mouseY - cardY) / 30;
-        const angleY = (cardX - mouseX) / 30;
+        const angleX = (mouseY - cardCenterY) / 30;
+        const angleY = (cardCenterX - mouseX) / 30;
 
-        card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-      }
+        card.style.transform = `
+          perspective(1000px) 
+          rotateX(${angleX}deg) 
+          rotateY(${angleY}deg) 
+          scale3d(1.02, 1.02, 1.02)
+        `;
+      });
     });
 
     container.addEventListener('mouseleave', () => {
-      const cards = container.getElementsByClassName('project-card');
-      for (let i = 0; i < cards.length; i++) {
-        const card = cards[i] as HTMLElement;
-        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-      }
+      cards.forEach((card) => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+      });
     });
   }
 }
