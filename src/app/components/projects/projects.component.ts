@@ -62,7 +62,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       id: 2,
       title: "AI-powered Chatbot",
       description: "An intelligent chatbot using natural language processing for customer support.",
-      imageUrl: "/arton59.jpeg",
+      imageUrl: "/arton55.jpeg",
       technologies: ["Python", "TensorFlow", "Flask", "React"],
       githubUrl: "https://github.com/yourusername/ai-chatbot",
       liveUrl: "https://poulex.vercel.app",
