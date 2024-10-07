@@ -48,7 +48,7 @@ interface SuccessMetric {
 })
 export class HomeComponent implements OnInit, OnDestroy {
   // Propriétés personnelles
-  developerName = 'Votre Nom';
+  developerName = 'Emmanuel Deko W.';
   experience = 5;
   // profileImage = '/api/placeholder/600/600';
   profileImage = '/IMG_20231221_082253_393~6.jpg';
