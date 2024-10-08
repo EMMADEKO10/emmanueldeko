@@ -1,116 +1,112 @@
-<header #headerElement
-  [@headerAnimation]="isHeaderCollapsed ? 'collapsed' : 'expanded'"
-  class="fixed top-0 left-0 right-0 w-full z-50 transition-colors duration-300">
-  
-  <!-- Backdrop blur et bordure -->
-  <div class="absolute inset-0 bg-gray-900/95 backdrop-blur-md border-b border-white/10"></div>
-  
-  <!-- Contenu du header -->
-  <nav class="relative mx-auto px-4 lg:px-8 max-w-7xl">
-    <div class="flex items-center justify-between h-16">
-      
-      <!-- Logo et nom -->
-      <button (click)="scrollToTop()" 
-              class="group flex items-center space-x-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1">
-        <div class="relative w-10 h-10">
-          <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg transform transition-all duration-300 group-hover:scale-110"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <span class="text-2xl font-bold text-white">D</span>
-          </div>
-        </div>
-        
-        <div class="hidden sm:block">
-          <h1 class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-            Emmanuel Deko
-          </h1>
-          <p class="text-xs text-gray-400">Développeur Full Stack</p>
-        </div>
-      </button>
-
-      <!-- Navigation Desktop -->
-      <div class="hidden lg:flex items-center space-x-2">
-        <ng-container *ngFor="let item of navItems">
-          <div class="relative group" 
-               (mouseenter)="setHoveredItem(item)"
-               (mouseleave)="setHoveredItem(null)">
-            
-            <button [routerLink]="[item.path]"
-                    class="px-4 py-2.5 rounded-full flex items-center space-x-2 transition-all duration-200 hover:bg-white/10"
-                    [class.text-white]="isActive(item.path)"
-                    [class.text-gray-400]="!isActive(item.path)">
-              <mat-icon class="text-[20px]">{{item.icon}}</mat-icon>
-              <span class="font-medium">{{item.label}}</span>
-            </button>
-            
-            <div *ngIf="hoveredItem === item"
-                 [@fadeInOut]
-                 class="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-gray-800 text-white text-sm rounded-lg shadow-xl whitespace-nowrap z-50 border border-white/10">
-              {{item.description}}
-              <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45 border-l border-t border-white/10"></div>
-            </div>
-          </div>
-        </ng-container>
-
-        <button routerLink="/contact"
-                class="ml-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center space-x-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-          <mat-icon>send</mat-icon>
-          <span>Contact</span>
-        </button>
-      </div>
-
-      <!-- Bouton Menu Mobile -->
-      <button (click)="toggleMobileMenu($event)"
-              class="mobile-menu-button lg:hidden relative w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
-              [class.active]="isMobileMenuOpen">
-        <div class="relative w-6 h-5">
-          <span class="absolute w-full h-0.5 bg-white transform transition-all duration-300"
-                [class.rotate-45]="isMobileMenuOpen"
-                [class.translate-y-2]="isMobileMenuOpen"
-                style="top: 0;"></span>
-          <span class="absolute w-full h-0.5 bg-white transform transition-all duration-300"
-                [class.opacity-0]="isMobileMenuOpen"
-                style="top: 50%; transform: translateY(-50%);"></span>
-          <span class="absolute w-full h-0.5 bg-white transform transition-all duration-300"
-                [class.-rotate-45]="isMobileMenuOpen"
-                [class.-translate-y-2]="isMobileMenuOpen"
-                style="bottom: 0;"></span>
-        </div>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Menu Mobile -->
-  <div *ngIf="isMobileMenuOpen"
-       [@mobileMenu]
-       class="mobile-menu-content fixed inset-0 top-16 z-40 bg-gray-900/98 backdrop-blur-xl lg:hidden">
-    <nav class="h-full overflow-y-auto">
-      <div class="container mx-auto px-4 py-6">
-        <div class="flex flex-col space-y-3 max-w-lg mx-auto">
-          <ng-container *ngFor="let item of navItems">
-            <button (click)="navigateAndClose(item.path)"
-                    class="group flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    [class.bg-white]="isActive(item.path)">
-              <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-600/10 to-purple-600/10 group-hover:from-blue-600/20 group-hover:to-purple-600/20 transition-all duration-300">
-                <mat-icon class="text-white transform group-hover:scale-110 transition-transform duration-300">{{item.icon}}</mat-icon>
-              </div>
-              <div class="flex-1 text-left">
-                <div class="font-medium text-white group-hover:text-blue-400 transition-colors duration-300">{{item.label}}</div>
-                <div class="text-sm text-gray-400">{{item.description}}</div>
-              </div>
-            </button>
-          </ng-container>
-
-          <button routerLink="/contact"
-                  (click)="closeMobileMenu()"
-                  class="mt-4 p-4 w-full rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-            <mat-icon>send</mat-icon>
-            <span class="font-medium">Contactez-moi</span>
-          </button>
-        </div>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<!-- Espaceur pour compenser la hauteur du header fixed -->
-<div class="h-16" aria-hidden="true"></div>
+<header class="fixed top-0 left-0 right-0 w-full z-50">
+   <!-- Backdrop blur et bordure -->
+   <div class="absolute inset-0 bg-gray-900/95 backdrop-blur-md border-b border-white/10"></div>
+   
+   <!-- Contenu du header -->
+   <nav class="relative mx-auto px-4 lg:px-8 max-w-7xl">
+     <div class="flex items-center justify-between h-16">
+       
+       <!-- Logo et nom -->
+       <button (click)="scrollToTop()" 
+               class="group flex items-center space-x-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1">
+         <div class="relative w-10 h-10">
+           <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg transform transition-all duration-300 group-hover:scale-110"></div>
+           <div class="absolute inset-0 flex items-center justify-center">
+             <span class="text-2xl font-bold text-white">D</span>
+           </div>
+         </div>
+         
+         <div class="hidden sm:block">
+           <h1 class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+             Emmanuel Deko
+           </h1>
+           <p class="text-xs text-gray-400">Développeur Full Stack</p>
+         </div>
+       </button>
+ 
+       <!-- Navigation Desktop -->
+       <div class="hidden lg:flex items-center space-x-2">
+         <ng-container *ngFor="let item of navItems">
+           <div class="relative group" 
+                (mouseenter)="setHoveredItem(item)"
+                (mouseleave)="setHoveredItem(null)">
+             
+             <button [routerLink]="[item.path]"
+                     class="px-4 py-2.5 rounded-full flex items-center space-x-2 transition-all duration-200 hover:bg-white/10"
+                     [class.text-white]="isActive(item.path)"
+                     [class.text-gray-400]="!isActive(item.path)">
+               <mat-icon class="text-[20px]">{{item.icon}}</mat-icon>
+               <span class="font-medium">{{item.label}}</span>
+             </button>
+             
+             <div *ngIf="hoveredItem === item"
+                  [@fadeInOut]
+                  class="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-gray-800 text-white text-sm rounded-lg shadow-xl whitespace-nowrap z-50 border border-white/10">
+               {{item.description}}
+               <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45 border-l border-t border-white/10"></div>
+             </div>
+           </div>
+         </ng-container>
+ 
+         <button routerLink="/contact"
+                 class="ml-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center space-x-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+           <mat-icon>send</mat-icon>
+           <span>Contact</span>
+         </button>
+       </div>
+ 
+       <!-- Bouton Menu Mobile -->
+       <button (click)="toggleMenu()"
+               class="lg:hidden relative w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+         <div class="relative w-6 h-5">
+           <span class="absolute w-full h-0.5 bg-white transform transition-all duration-300"
+                 [class.rotate-45]="isMenuOpen"
+                 [class.translate-y-2]="isMenuOpen"
+                 style="top: 0;"></span>
+           <span class="absolute w-full h-0.5 bg-white transform transition-all duration-300"
+                 [class.opacity-0]="isMenuOpen"
+                 style="top: 50%; transform: translateY(-50%);"></span>
+           <span class="absolute w-full h-0.5 bg-white transform transition-all duration-300"
+                 [class.-rotate-45]="isMenuOpen"
+                 [class.-translate-y-2]="isMenuOpen"
+                 style="bottom: 0;"></span>
+         </div>
+       </button>
+     </div>
+   </nav>
+ 
+   <!-- Menu Mobile -->
+   <div *ngIf="isMenuOpen"
+        [@mobileMenu]
+        class="fixed inset-0 top-16 z-40 bg-gray-900/98 backdrop-blur-xl lg:hidden">
+     <nav class="h-full overflow-y-auto">
+       <div class="container mx-auto px-4 py-6">
+         <div class="flex flex-col space-y-3 max-w-lg mx-auto">
+           <ng-container *ngFor="let item of navItems">
+             <button (click)="navigateAndClose(item.path)"
+                     class="group flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                     [class.bg-white]="isActive(item.path)">
+               <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-600/10 to-purple-600/10 group-hover:from-blue-600/20 group-hover:to-purple-600/20 transition-all duration-300">
+                 <mat-icon class="text-white transform group-hover:scale-110 transition-transform duration-300">{{item.icon}}</mat-icon>
+               </div>
+               <div class="flex-1 text-left">
+                 <div class="font-medium text-white group-hover:text-blue-400 transition-colors duration-300">{{item.label}}</div>
+                 <div class="text-sm text-gray-400">{{item.description}}</div>
+               </div>
+             </button>
+           </ng-container>
+ 
+           <button routerLink="/contact"
+                   (click)="isMenuOpen = false"
+                   class="mt-4 p-4 w-full rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+             <mat-icon>send</mat-icon>
+             <span class="font-medium">Contactez-moi</span>
+           </button>
+         </div>
+       </div>
+     </nav>
+   </div>
+ </header>
+ 
+ <!-- Espaceur pour compenser la hauteur du header fixed -->
+ <div class="h-16" aria-hidden="true"></div>
