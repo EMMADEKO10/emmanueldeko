@@ -2,8 +2,8 @@
         [@headerAnimation]="isHeaderCollapsed ? 'collapsed' : 'expanded'"
         class="fixed top-5 left-0 right-0 z-50 transition-all duration-200">
   
-  <nav class="relative mx-auto px-4 lg:px-8 max-w-7xl">
-    <div class="flex items-center justify-between h-full">
+  <nav class="relative mx-auto px-4 lg:px-8 max-w-7xl backdrop-blur-md bg-gray-900/90 rounded-2xl">
+    <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <button (click)="scrollToTop()" 
               class="group flex items-center space-x-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1">
@@ -69,34 +69,36 @@
   <!-- Mobile Navigation Menu -->
   <div *ngIf="isMobileMenuOpen"
        @mobileMenu
-       class="lg:hidden fixed inset-x-0 top-[4rem] bottom-0 bg-gray-900/95 backdrop-blur-lg">
-    <nav class="h-full overflow-y-auto px-4 py-6">
-      <div class="flex flex-col space-y-2 max-w-lg mx-auto">
-        <ng-container *ngFor="let item of navItems">
-          <button (click)="navigateAndClose(item.path)"
-                  class="flex items-center space-x-4 p-4 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  [class.bg-white]="isActive(item.path)">
-            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-white/5">
-              <mat-icon>{{item.icon}}</mat-icon>
-            </div>
-            <div class="flex-1 text-left">
-              <div class="font-medium text-white">{{item.label}}</div>
-              <div class="text-sm text-gray-400">{{item.description}}</div>
-            </div>
-          </button>
-        </ng-container>
+       class="lg:hidden fixed inset-0 top-28 z-40 bg-gray-900/95 backdrop-blur-lg">
+    <nav class="h-full overflow-y-auto">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col space-y-2 max-w-lg mx-auto">
+          <ng-container *ngFor="let item of navItems">
+            <button (click)="navigateAndClose(item.path)"
+                    class="flex items-center space-x-4 p-4 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-white/5"
+                    [class.bg-black]="isActive(item.path)">
+              <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-white/5">
+                <mat-icon class="text-white">{{item.icon}}</mat-icon>
+              </div>
+              <div class="flex-1 text-left">
+                <div class="font-medium text-white">{{item.label}}</div>
+                <div class="text-sm text-gray-400">{{item.description}}</div>
+              </div>
+            </button>
+          </ng-container>
 
-        <!-- Mobile Contact Button -->
-        <button routerLink="/contact"
-                (click)="closeMobileMenu()"
-                class="mt-4 p-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-          <mat-icon>send</mat-icon>
-          <span class="font-medium">Contactez-moi</span>
-        </button>
+          <!-- Mobile Contact Button -->
+          <button routerLink="/contact"
+                  (click)="closeMobileMenu()"
+                  class="mt-4 p-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+            <mat-icon>send</mat-icon>
+            <span class="font-medium">Contactez-moi</span>
+          </button>
+        </div>
       </div>
     </nav>
   </div>
 </header>
 
 <!-- Spacer -->
-<div [style.height]="isHeaderCollapsed ? '4rem' : '4.5rem'" aria-hidden="true"></div>
+<div class="h-28" aria-hidden="true"></div>
