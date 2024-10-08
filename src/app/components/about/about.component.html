@@ -1,1 +1,164 @@
-<p>about works!</p>
+<section class="relative min-h-screen bg-gray-900 overflow-hidden">
+    <!-- Hero Section -->
+    <div class="relative py-20 lg:py-32">
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-purple-600/10"></div>
+      
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center" @fadeInUp>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Développeur Full Stack Passionné
+          </h1>
+          <p class="text-xl text-gray-300 mb-8">
+            Créant des expériences web innovantes et performantes
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <button class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+              Voir mes projets
+            </button>
+            <button class="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+              Télécharger CV
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Skills Section -->
+    <div class="py-20 bg-gray-900/50">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-12 text-center" @fadeInUp>
+            Compétences & Technologies
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ng-container *ngFor="let category of skillCategories; let i = index">
+              <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm border border-white/5"
+                   @fadeInUp [style.animation-delay]="i * 100 + 'ms'">
+                <div class="flex items-center space-x-4 mb-6">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                    <!-- <mat-icon class="text-white">{{category.icon}}</mat-icon> -->
+                    <div class="text-white">{{category.icon}}</div>
+
+                  </div>
+                  <h3 class="text-xl font-semibold text-white">{{category.name}}</h3>
+                </div>
+                
+                <div class="space-y-4">
+                  <div *ngFor="let skill of category.skills" 
+                       class="relative">
+                    <div class="flex justify-between mb-1">
+                      <span class="text-gray-300">{{skill.name}}</span>
+                      <span class="text-gray-400">{{skill.level}}%</span>
+                    </div>
+                    <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div class="h-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-full transition-all duration-1000"
+                           [style.width.%]="skill.level"
+                           @progressBar></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Experience Section -->
+    <div class="py-20">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-12 text-center" @fadeInUp>
+            Parcours Professionnel
+          </h2>
+  
+          <div class="relative">
+            <!-- Timeline Line -->
+            <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-600 to-purple-600"></div>
+  
+            <!-- Timeline Items -->
+            <div class="space-y-12">
+              <ng-container *ngFor="let experience of experiences; let i = index">
+                <div class="relative flex flex-col md:flex-row items-center md:justify-between group"
+                     [class.md:flex-row-reverse]="i % 2 === 0"
+                     @slideIn [style.animation-delay]="i * 200 + 'ms'">
+                  
+                  <!-- Timeline Dot -->
+                  <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-gray-900 z-10"></div>
+  
+                  <!-- Content Card -->
+                  <div class="w-full md:w-5/12 bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm border border-white/5 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-gray-800/70">
+                    <div class="flex items-center justify-between mb-4">
+                      <h3 class="text-xl font-semibold text-white">{{experience.role}}</h3>
+                      <span class="px-3 py-1 text-sm bg-blue-600/20 text-blue-400 rounded-full">
+                        {{experience.period}}
+                      </span>
+                    </div>
+                    <h4 class="text-lg text-gray-300 mb-2">{{experience.company}}</h4>
+                    <p class="text-gray-400">{{experience.description}}</p>
+                    
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      <span *ngFor="let tech of experience.technologies"
+                            class="px-3 py-1 text-sm bg-gray-700/50 text-gray-300 rounded-full">
+                        {{tech}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Education Section -->
+    <div class="py-20 bg-gray-900/50">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-12 text-center" @fadeInUp>
+            Formation
+          </h2>
+  
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <ng-container *ngFor="let education of educationList; let i = index">
+              <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm border border-white/5 transition-all duration-300 hover:transform hover:scale-[1.02]"
+                   @fadeInUp [style.animation-delay]="i * 100 + 'ms'">
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0">
+                    <!-- <mat-icon class="text-white">school</mat-icon> -->
+                    <div class="text-white">school</div> 
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold text-white mb-2">{{education.degree}}</h3>
+                    <h4 class="text-lg text-gray-300 mb-1">{{education.school}}</h4>
+                    <p class="text-gray-400 mb-3">{{education.period}}</p>
+                    <p class="text-gray-400">{{education.description}}</p>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Contact CTA -->
+    <div class="py-20">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center" @fadeInUp>
+          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
+            Intéressé par une collaboration ?
+          </h2>
+          <p class="text-xl text-gray-300 mb-8">
+            N'hésitez pas à me contacter pour discuter de vos projets
+          </p>
+          <button routerLink="/contact"
+                  class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+            Contactez-moi
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
