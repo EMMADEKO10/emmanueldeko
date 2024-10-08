@@ -34,17 +34,14 @@
                (mouseenter)="setHoveredItem(item)"
                (mouseleave)="setHoveredItem(null)">
             
-            <!-- Bouton de navigation -->
             <button [routerLink]="[item.path]"
                     class="px-4 py-2.5 rounded-full flex items-center space-x-2 transition-all duration-200 hover:bg-white/10"
                     [class.text-white]="isActive(item.path)"
                     [class.text-gray-400]="!isActive(item.path)">
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <mat-icon class="text-[20px]">{{item.icon}}</mat-icon>
               <span class="font-medium">{{item.label}}</span>
             </button>
             
-            <!-- Tooltip -->
             <div *ngIf="hoveredItem === item"
                  [@fadeInOut]
                  class="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-gray-800 text-white text-sm rounded-lg shadow-xl whitespace-nowrap z-50 border border-white/10">
@@ -54,7 +51,6 @@
           </div>
         </ng-container>
 
-        <!-- Bouton Contact -->
         <button routerLink="/contact"
                 class="ml-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center space-x-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
           <mat-icon>send</mat-icon>
@@ -63,8 +59,8 @@
       </div>
 
       <!-- Bouton Menu Mobile -->
-      <button (click)="toggleMobileMenu()"
-              class="lg:hidden relative w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+      <button (click)="toggleMobileMenu($event)"
+              class="mobile-menu-button lg:hidden relative w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
               [class.active]="isMobileMenuOpen">
         <div class="relative w-6 h-5">
           <span class="absolute w-full h-0.5 bg-white transform transition-all duration-300"
@@ -86,12 +82,11 @@
   <!-- Menu Mobile -->
   <div *ngIf="isMobileMenuOpen"
        [@mobileMenu]
-       class="fixed inset-0 top-16 z-40 bg-gray-900/98 backdrop-blur-xl lg:hidden">
+       class="mobile-menu-content fixed inset-0 top-16 z-40 bg-gray-900/98 backdrop-blur-xl lg:hidden">
     <nav class="h-full overflow-y-auto">
       <div class="container mx-auto px-4 py-6">
         <div class="flex flex-col space-y-3 max-w-lg mx-auto">
           <ng-container *ngFor="let item of navItems">
-            <!-- Boutons de navigation mobile -->
             <button (click)="navigateAndClose(item.path)"
                     class="group flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     [class.bg-white]="isActive(item.path)">
@@ -105,7 +100,6 @@
             </button>
           </ng-container>
 
-          <!-- Bouton Contact Mobile -->
           <button routerLink="/contact"
                   (click)="closeMobileMenu()"
                   class="mt-4 p-4 w-full rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center space-x-2 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">

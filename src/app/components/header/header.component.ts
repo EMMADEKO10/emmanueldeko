@@ -55,7 +55,6 @@ export class HeaderComponent implements AfterViewInit {
   private router = inject(Router);
   isHeaderCollapsed = false;
   isMobileMenuOpen = false;
-  lastScrollPosition = 0;
   hoveredItem: NavItem | null = null;
 
   readonly navItems: NavItem[] = [
@@ -95,11 +94,6 @@ export class HeaderComponent implements AfterViewInit {
   onWindowScroll(): void {
     const scrollPosition = window.scrollY;
     this.isHeaderCollapsed = scrollPosition > 20;
-    this.lastScrollPosition = scrollPosition;
-
-    if (this.isMobileMenuOpen) {
-      this.closeMobileMenu();
-    }
   }
 
   @HostListener('window:resize')
@@ -116,6 +110,22 @@ export class HeaderComponent implements AfterViewInit {
     }
   }
 
+  // Ajout d'un listener pour fermer le menu au clic en dehors
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const menuButton = document.querySelector('.mobile-menu-button');
+    const menuContent = document.querySelector('.mobile-menu-content');
+
+    if (this.isMobileMenuOpen && 
+        menuButton && 
+        menuContent && 
+        !menuButton.contains(target) && 
+        !menuContent.contains(target)) {
+      this.closeMobileMenu();
+    }
+  }
+
   ngAfterViewInit(): void {
     this.initScrollBehavior();
   }
@@ -128,23 +138,32 @@ export class HeaderComponent implements AfterViewInit {
 
     const scrollHandler = () => {
       const currentScroll = window.scrollY;
-      const shouldHide = currentScroll > lastScroll && currentScroll > 100;
+      const scrollingDown = currentScroll > lastScroll;
       
-      header.style.transform = shouldHide ? 'translateY(-100%)' : 'translateY(0)';
+      // Seulement cacher le header si on scroll vers le bas et qu'on est plus bas que 100px
+      if (scrollingDown && currentScroll > 100) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = 'translateY(0)';
+      }
+      
       lastScroll = currentScroll;
     };
 
     window.addEventListener('scroll', scrollHandler, { passive: true });
   }
 
-  toggleMobileMenu(): void {
+  toggleMobileMenu(event: Event): void {
+    event.stopPropagation(); // Empêcher la propagation du clic
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
     document.body.style.overflow = this.isMobileMenuOpen ? 'hidden' : '';
   }
 
   closeMobileMenu(): void {
-    this.isMobileMenuOpen = false;
-    document.body.style.overflow = '';
+    if (this.isMobileMenuOpen) {
+      this.isMobileMenuOpen = false;
+      document.body.style.overflow = '';
+    }
   }
 
   isActive(path: string): boolean {
@@ -164,6 +183,3 @@ export class HeaderComponent implements AfterViewInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
-
-
-
