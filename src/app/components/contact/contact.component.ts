@@ -39,8 +39,8 @@ export class ContactComponent {
     {
       icon: 'facebook',
       label: 'Facebook',
-      value: 'Mon profil Facebook',
-      link: 'https://www.facebook.com/votre-profil', // Remplacez par votre URL Facebook
+      value: 'Votre Nom Facebook',
+      link: 'https://www.facebook.com/votre-profil',
       color: 'text-blue-600'
     },
     {

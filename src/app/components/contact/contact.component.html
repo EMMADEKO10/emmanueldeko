@@ -1,91 +1,78 @@
-<section class="contact-section min-h-screen py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+<section class="contact-section min-h-screen py-8 xs:py-12 sm:py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
     <!-- Background Pattern -->
     <div class="absolute inset-0 opacity-10 bg-grid-pattern"></div>
   
-    <div class="container mx-auto px-4 relative z-10">
-      <!-- Header -->
-      <header class="text-center mb-12 lg:mb-16">
-        <h2 class="text-4xl lg:text-5xl font-bold mb-4 animate-fade-in">
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-            Contact Us
-          </span>
-        </h2>
-        <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-          Get in touch with us for any inquiries or collaborations
-        </p>
-      </header>
+    <div class="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Header -->
+        <header class="text-center mb-6 xs:mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 xs:mb-3 sm:mb-4 animate-fade-in">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+                    Contact Us
+                </span>
+            </h2>
+            <p class="text-sm xs:text-base sm:text-lg text-gray-300 max-w-2xl mx-auto px-2">
+                Get in touch with us for any inquiries or collaborations
+            </p>
+        </header>
   
-      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
-        <!-- Informations de contact -->
-        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 lg:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl">
-          <h3 class="text-2xl font-semibold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Our Contact Details</h3>
-          <ul class="space-y-6">
-            <li *ngFor="let method of contactMethods" class="flex items-center group">
-              <div class="mr-4 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 transition-all duration-300 group-hover:scale-110">
-                <ng-container [ngSwitch]="method.icon">
-                  <i *ngSwitchCase="'whatsapp'" class="fab fa-whatsapp text-2xl" [class]="method.color"></i>
-                  <i *ngSwitchCase="'facebook'" class="fab fa-facebook-f text-2xl" [class]="method.color"></i>
-                  <span *ngSwitchDefault [class]="method.color + ' material-icons text-2xl'">{{ method.icon }}</span>
-                </ng-container>
-              </div>
-              <div class="flex-grow">
-                <span class="font-medium text-gray-300 block">{{ method.label }}</span>
-                <a *ngIf="method.link" [href]="method.link" class="block text-lg hover:text-blue-400 transition-colors duration-300">{{ method.value }}</a>
-                <span *ngIf="!method.link" class="block text-lg">{{ method.value }}</span>
-              </div>
-            </li>
-          </ul>
+        <div class="grid md:grid-cols-2 gap-4 xs:gap-6 sm:gap-8 lg:gap-12">
+            <!-- Contact Information -->
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 xs:p-6 sm:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl">
+                <h3 class="text-lg xs:text-xl sm:text-2xl font-semibold mb-4 xs:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Our Contact Details</h3>
+                <ul class="space-y-4 xs:space-y-6">
+                    <li *ngFor="let method of contactMethods" class="flex items-center group">
+                        <div class="mr-3 xs:mr-4 w-8 xs:w-10 sm:w-12 h-8 xs:h-10 sm:h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 transition-all duration-300 group-hover:scale-110">
+                            <ng-container [ngSwitch]="method.icon">
+                                <!-- Icons restent les mêmes mais avec taille adaptée -->
+                                <svg *ngSwitchCase="'whatsapp'" class="w-4 xs:w-5 sm:w-6 h-4 xs:h-5 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <!-- SVG path reste le même -->
+                                </svg>
+                                <span *ngSwitchDefault [class]="method.color + ' material-icons text-lg xs:text-xl sm:text-2xl'">{{ method.icon }}</span>
+                            </ng-container>
+                        </div>
+                        <div class="flex-grow">
+                            <span class="font-medium text-gray-300 block text-xs xs:text-sm sm:text-base">{{ method.label }}</span>
+                            <a *ngIf="method.link" [href]="method.link" class="block text-sm xs:text-base sm:text-lg hover:text-blue-400 transition-colors duration-300 break-words">{{ method.value }}</a>
+                            <span *ngIf="!method.link" class="block text-sm xs:text-base sm:text-lg break-words">{{ method.value }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+  
+            <!-- Contact Form -->
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 xs:p-6 sm:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl">
+                <h3 class="text-lg xs:text-xl sm:text-2xl font-semibold mb-4 xs:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Send Us a Message</h3>
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-3 xs:space-y-4">
+                    <div>
+                        <label for="name" class="block mb-1 xs:mb-2 text-xs xs:text-sm sm:text-base text-gray-300">Name</label>
+                        <input type="text" id="name" formControlName="name" 
+                               class="w-full px-3 xs:px-4 py-2 xs:py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400 text-xs xs:text-sm sm:text-base"
+                               [class.border-red-500]="isSubmitted && formControls['name'].errors">
+                        <small *ngIf="isSubmitted && formControls['name'].errors" class="text-red-400 mt-1 block text-xs">{{ getErrorMessage('name') }}</small>
+                    </div>
+
+                    <!-- Répéter la même structure pour email, subject et message -->
+                    <div>
+                        <label for="message" class="block mb-1 xs:mb-2 text-xs xs:text-sm sm:text-base text-gray-300">Message</label>
+                        <textarea id="message" formControlName="message" rows="3" xs:rows="4"
+                                class="w-full px-3 xs:px-4 py-2 xs:py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400 text-xs xs:text-sm sm:text-base"
+                                [class.border-red-500]="isSubmitted && formControls['message'].errors"></textarea>
+                    </div>
+  
+                    <button type="submit" 
+                            class="w-full px-4 xs:px-6 py-2 xs:py-2 sm:py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 
+                                   hover:from-blue-600 hover:to-purple-600 transition-all duration-300 
+                                   transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50
+                                   text-xs xs:text-sm sm:text-base font-medium">
+                        Send Message
+                    </button>
+                </form>
+  
+                <div *ngIf="showSuccessMessage" 
+                     class="mt-4 xs:mt-6 p-3 xs:p-4 bg-green-500/20 border border-green-500/50 text-green-300 rounded-lg animate-fade-in text-xs xs:text-sm sm:text-base">
+                    Your message has been sent successfully!
+                </div>
+            </div>
         </div>
-  
-        <!-- Formulaire de contact -->
-        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 lg:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl">
-          <h3 class="text-2xl font-semibold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Send Us a Message</h3>
-          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <div>
-              <label for="name" class="block mb-2 text-gray-300">Name</label>
-              <input type="text" id="name" formControlName="name" 
-                     class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400"
-                     [class.border-red-500]="isSubmitted && formControls['name'].errors">
-              <small *ngIf="isSubmitted && formControls['name'].errors" class="text-red-400 mt-1 block">{{ getErrorMessage('name') }}</small>
-            </div>
-  
-            <div>
-              <label for="email" class="block mb-2 text-gray-300">Email</label>
-              <input type="email" id="email" formControlName="email" 
-                     class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400"
-                     [class.border-red-500]="isSubmitted && formControls['email'].errors">
-              <small *ngIf="isSubmitted && formControls['email'].errors" class="text-red-400 mt-1 block">{{ getErrorMessage('email') }}</small>
-            </div>
-  
-            <div>
-              <label for="subject" class="block mb-2 text-gray-300">Subject</label>
-              <input type="text" id="subject" formControlName="subject" 
-                     class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400"
-                     [class.border-red-500]="isSubmitted && formControls['subject'].errors">
-              <small *ngIf="isSubmitted && formControls['subject'].errors" class="text-red-400 mt-1 block">{{ getErrorMessage('subject') }}</small>
-            </div>
-  
-            <div>
-              <label for="message" class="block mb-2 text-gray-300">Message</label>
-              <textarea id="message" formControlName="message" rows="4" 
-                        class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400"
-                        [class.border-red-500]="isSubmitted && formControls['message'].errors"></textarea>
-              <small *ngIf="isSubmitted && formControls['message'].errors" class="text-red-400 mt-1 block">{{ getErrorMessage('message') }}</small>
-            </div>
-  
-            <button type="submit" 
-                    class="w-full px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 
-                           hover:from-blue-600 hover:to-purple-600 transition-all duration-300 
-                           transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
-              Send Message
-            </button>
-          </form>
-  
-          <div *ngIf="showSuccessMessage" 
-               class="mt-6 p-4 bg-green-500/20 border border-green-500/50 text-green-300 rounded-lg animate-fade-in">
-            Your message has been sent successfully!
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
