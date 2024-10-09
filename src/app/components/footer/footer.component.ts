@@ -61,8 +61,8 @@ export class FooterComponent {
   readonly socialLinks: SocialLink[] = [
     { platform: 'GitHub', url: 'https://github.com/EMMADEKO10', icon: 'code' },
     // { platform: 'LinkedIn', url: 'https://linkedin.com/', icon: 'business' },
-    { platform: 'LinkedIn', url: 'https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile', icon: 'business' },
-    { platform: 'Twitter', url: 'https://twitter.com/', icon: 'thumb_up' }
+    { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/emmanuel-deko-0581561a0/', icon: 'business' },
+    { platform: 'Twitter', url: 'https://x.com/DekoEmmanuel09', icon: 'thumb_up' }
   ];
 
   scrollToTop(): void {

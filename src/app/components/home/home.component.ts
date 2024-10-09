@@ -110,14 +110,38 @@ export class HomeComponent implements OnInit, OnDestroy {
       rotation: 8,
       dotColor: 'bg-orange-400',
       position: { bottom: '10%', right: '2%' }
-    }
+    },
+    {
+      name: 'Machine Learning',
+      level: 'Intermediate',
+      rotation: 0,
+      dotColor: 'bg-pink-400',
+      position: { top: '50%', right: '50%' }
+    },
+
+    {
+      name: 'Data Analytics',
+      level: 'Novice',
+      rotation: 15,
+      dotColor: 'bg-yellow-400',
+      position: { bottom: '75%', left: '2%' }
+    },
+
+    {
+      name: 'Cloud Computing',
+      level: 'Novice',
+      rotation: -10,
+      dotColor: 'bg-teal-400',
+      position: { bottom: '50%', left: '75%' }
+    },
+
   ];
 
 
   // Métriques de succès
   successMetrics: SuccessMetric[] = [
-    { value: '50+', label: 'Projets Réalisés' },
-    { value: '99%', label: 'Clients Satisfaits' },
+    { value: '8+', label: 'Projets Réalisés' },
+    { value: '95%', label: 'Clients Satisfaits' },
     { value: '24/7', label: 'Support' },
     { value: '100%', label: 'Engagement' }
   ];
