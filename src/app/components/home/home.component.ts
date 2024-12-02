@@ -176,35 +176,39 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Initialise les animations des particules et des lignes
    */
   private initializeAnimations(): void {
-    // Animation des particules
-    this.particleInterval = window.setInterval(() => {
-      this.particles = this.particles.map(particle => ({
-        ...particle,
-        x: (particle.x + (Math.random() * 2 - 1) + 100) % 100,
-        y: (particle.y + (Math.random() * 2 - 1) + 100) % 100
-      }));
-    }, 3000);
+    // Vérifiez que window est disponible
+    if (typeof window !== 'undefined') {
+      this.particleInterval = window.setInterval(() => {
+        this.particles = this.particles.map(particle => ({
+          ...particle,
+          x: (particle.x + (Math.random() * 2 - 1) + 100) % 100,
+          y: (particle.y + (Math.random() * 2 - 1) + 100) % 100
+        }));
+      }, 3000);
 
-    // Animation des lignes
-    this.lineInterval = window.setInterval(() => {
-      this.connectingLines = this.connectingLines.map(line => ({
-        ...line,
-        rotation: (line.rotation + 1) % 360
-      }));
-    }, 50);
+      this.lineInterval = window.setInterval(() => {
+        this.connectingLines = this.connectingLines.map(line => ({
+          ...line,
+          rotation: (line.rotation + 1) % 360
+        }));
+      }, 50);
+    }
+  }
+
+  private cleanupAnimations(): void {
+    if (typeof window !== 'undefined') {
+      if (this.particleInterval) {
+        window.clearInterval(this.particleInterval);
+      }
+      if (this.lineInterval) {
+        window.clearInterval(this.lineInterval);
+      }
+    }
   }
 
   /**
    * Nettoie les intervalles d'animation
    */
-  private cleanupAnimations(): void {
-    if (this.particleInterval) {
-      clearInterval(this.particleInterval);
-    }
-    if (this.lineInterval) {
-      clearInterval(this.lineInterval);
-    }
-  }
 
   /**
    * Défilement vers la section projets
@@ -219,8 +223,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-   // Nouvelle méthode pour générer des classes de couleurs aléatoires pour les technologies
-   getRandomColorClass(): string {
+  //  // Nouvelle méthode pour générer des classes de couleurs aléatoires pour les technologies
+  //  getRandomColorClass(): string {
+  //   const colors = ['text-blue-400', 'text-green-400', 'text-yellow-400', 'text-red-400', 'text-purple-400'];
+  //   return colors[Math.floor(Math.random() * colors.length)];
+  // }
+   // Modifiez dans le template
+  // [ngClass]="technologyColors[tech.name]"
+  getRandomColorClass(): string {
     const colors = ['text-blue-400', 'text-green-400', 'text-yellow-400', 'text-red-400', 'text-purple-400'];
     return colors[Math.floor(Math.random() * colors.length)];
   }

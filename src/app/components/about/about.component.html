@@ -1,164 +1,152 @@
-<section class="relative min-h-screen bg-gray-900 overflow-hidden">
-    <!-- Hero Section -->
-    <div class="relative py-20 lg:py-32">
-      <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-purple-600/10"></div>
-      
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center" @fadeInUp>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Développeur Full Stack Passionné
-          </h1>
-          <p class="text-xl text-gray-300 mb-8">
-            Créant des expériences web innovantes et performantes
-          </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <button class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-              Voir mes projets
-            </button>
-            <button class="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-              Télécharger CV
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Skills Section -->
-    <div class="py-20 bg-gray-900/50">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-12 text-center" @fadeInUp>
-            Compétences & Technologies
-          </h2>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ng-container *ngFor="let category of skillCategories; let i = index">
-              <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm border border-white/5"
-                   @fadeInUp [style.animation-delay]="i * 100 + 'ms'">
-                <div class="flex items-center space-x-4 mb-6">
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
-                    <!-- <mat-icon class="text-white">{{category.icon}}</mat-icon> -->
-                    <div class="text-white">{{category.icon}}</div>
+<section class="relative min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-10 bg-grid-pattern"></div>
 
-                  </div>
-                  <h3 class="text-xl font-semibold text-white">{{category.name}}</h3>
-                </div>
-                
-                <div class="space-y-4">
-                  <div *ngFor="let skill of category.skills" 
-                       class="relative">
-                    <div class="flex justify-between mb-1">
-                      <span class="text-gray-300">{{skill.name}}</span>
-                      <span class="text-gray-400">{{skill.level}}%</span>
-                    </div>
-                    <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                      <div class="h-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-full transition-all duration-1000"
-                           [style.width.%]="skill.level"
-                           @progressBar></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
+  <!-- Hero Section -->
+  <div class="relative py-20 lg:py-32">
+    <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-purple-600/10"></div>
+    
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center" @fadeInUp>
+        <div class="w-32 h-32 mx-auto mb-8 rounded-full overflow-hidden border-4 border-blue-500 hover:scale-105 transition-all duration-300">
+          <img src="assets/profile.jpg" alt="Profile" class="w-full h-full object-cover">
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+            Développeur Full Stack & Architecte Logiciel
+          </span>
+        </h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Passionné par l'innovation technologique et l'architecture des systèmes complexes. 
+          Expert en développement web moderne et solutions cloud.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <button routerLink="/projects" 
+                  class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <i class="fas fa-code mr-2"></i>Explorer mes réalisations
+          </button>
+          <a href="assets/cv.pdf" download 
+             class="px-8 py-3 bg-white/10 backdrop-blur-sm text-white rounded-full transition-all duration-300 transform hover:scale-105 hover:bg-white/20">
+            <i class="fas fa-download mr-2"></i>Mon CV
+          </a>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="flex justify-center gap-6 mt-8">
+          <a href="https://github.com/devpro" target="_blank" 
+             class="text-gray-400 hover:text-white transition-colors transform hover:scale-110">
+            <i class="fab fa-github text-2xl"></i>
+          </a>
+          <a href="https://linkedin.com/in/devpro" target="_blank"
+             class="text-gray-400 hover:text-white transition-colors transform hover:scale-110">
+            <i class="fab fa-linkedin text-2xl"></i>
+          </a>
+          <a href="https://twitter.com/devpro" target="_blank"
+             class="text-gray-400 hover:text-white transition-colors transform hover:scale-110">
+            <i class="fab fa-twitter text-2xl"></i>
+          </a>
         </div>
       </div>
     </div>
-  
-    <!-- Experience Section -->
-    <div class="py-20">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-12 text-center" @fadeInUp>
-            Parcours Professionnel
-          </h2>
-  
-          <div class="relative">
-            <!-- Timeline Line -->
-            <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-600 to-purple-600"></div>
-  
-            <!-- Timeline Items -->
-            <div class="space-y-12">
-              <ng-container *ngFor="let experience of experiences; let i = index">
-                <div class="relative flex flex-col md:flex-row items-center md:justify-between group"
-                     [class.md:flex-row-reverse]="i % 2 === 0"
-                     @slideIn [style.animation-delay]="i * 200 + 'ms'">
-                  
-                  <!-- Timeline Dot -->
-                  <div class="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-gray-900 z-10"></div>
-  
-                  <!-- Content Card -->
-                  <div class="w-full md:w-5/12 bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm border border-white/5 transition-all duration-300 hover:transform hover:scale-[1.02] hover:bg-gray-800/70">
-                    <div class="flex items-center justify-between mb-4">
-                      <h3 class="text-xl font-semibold text-white">{{experience.role}}</h3>
-                      <span class="px-3 py-1 text-sm bg-blue-600/20 text-blue-400 rounded-full">
-                        {{experience.period}}
-                      </span>
-                    </div>
-                    <h4 class="text-lg text-gray-300 mb-2">{{experience.company}}</h4>
-                    <p class="text-gray-400">{{experience.description}}</p>
-                    
-                    <div class="mt-4 flex flex-wrap gap-2">
-                      <span *ngFor="let tech of experience.technologies"
-                            class="px-3 py-1 text-sm bg-gray-700/50 text-gray-300 rounded-full">
-                        {{tech}}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
+  </div>
+
+ <!-- Skills Section -->
+<div class="py-20 bg-black/30 backdrop-blur-sm">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-12 text-center">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+          Expertise Technique
+        </span>
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let category of skillCategories" class="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+          <div class="flex items-center space-x-4 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+              <i [class]="'fas fa-' + category.icon + ' text-xl text-white'"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white">{{category.name}}</h3>
+          </div>
+          
+          <div class="space-y-4">
+            <div *ngFor="let skill of category.skills" class="relative">
+              <div class="flex justify-between mb-1">
+                <span class="text-gray-300">{{skill.name}}</span>
+                <span class="text-gray-400">{{skill.level}}%</span>
+              </div>
+              <div class="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+                     [style.width.%]="skill.level"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Education Section -->
-    <div class="py-20 bg-gray-900/50">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-12 text-center" @fadeInUp>
-            Formation
-          </h2>
-  
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <ng-container *ngFor="let education of educationList; let i = index">
-              <div class="bg-gray-800/50 rounded-2xl p-6 backdrop-blur-sm border border-white/5 transition-all duration-300 hover:transform hover:scale-[1.02]"
-                   @fadeInUp [style.animation-delay]="i * 100 + 'ms'">
-                <div class="flex items-start space-x-4">
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0">
-                    <!-- <mat-icon class="text-white">school</mat-icon> -->
-                    <div class="text-white">school</div> 
-                  </div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-white mb-2">{{education.degree}}</h3>
-                    <h4 class="text-lg text-gray-300 mb-1">{{education.school}}</h4>
-                    <p class="text-gray-400 mb-3">{{education.period}}</p>
-                    <p class="text-gray-400">{{education.description}}</p>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
+  </div>
+</div>
+
+<!-- Experience Section -->
+<div class="py-20">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-12 text-center">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+          Expérience Professionnelle
+        </span>
+      </h2>
+
+      <div class="space-y-8">
+        <div *ngFor="let exp of experiences" class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-semibold text-white">{{exp.role}}</h3>
+            <span class="px-3 py-1 text-sm bg-blue-600/20 text-blue-400 rounded-full">
+              {{exp.period}}
+            </span>
+          </div>
+          <h4 class="text-lg text-gray-300 mb-2">{{exp.company}}</h4>
+          <p class="text-gray-400">{{exp.description}}</p>
+          
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span *ngFor="let tech of exp.technologies"
+                  class="px-3 py-1 text-sm bg-white/5 text-gray-300 rounded-full border border-white/10">
+              {{tech}}
+            </span>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Contact CTA -->
-    <div class="py-20">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center" @fadeInUp>
-          <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
-            Intéressé par une collaboration ?
-          </h2>
-          <p class="text-xl text-gray-300 mb-8">
-            N'hésitez pas à me contacter pour discuter de vos projets
-          </p>
-          <button routerLink="/contact"
-                  class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-            Contactez-moi
-          </button>
+  </div>
+</div>
+
+<!-- Education Section -->
+<div class="py-20 bg-black/30 backdrop-blur-sm">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-12 text-center">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+          Parcours Académique
+        </span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div *ngFor="let edu of educationList" 
+             class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-graduation-cap text-xl text-white"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-white mb-2">{{edu.degree}}</h3>
+              <h4 class="text-lg text-gray-300 mb-1">{{edu.school}}</h4>
+              <p class="text-gray-400 mb-3">{{edu.period}}</p>
+              <p class="text-gray-400">{{edu.description}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
+</section>
