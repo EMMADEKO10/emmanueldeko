@@ -39,35 +39,69 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
   @ViewChild('projectsContainer') projectsContainer!: ElementRef;
 
   projects: Project[] = [
+   
     {
       id: 1,
-      title: "E-commerce Platform",
-      description: "A full-stack e-commerce solution with real-time inventory management.",
-      imageUrl: "/top-view-vegetables-colorful-spices-vegetables-lentil-min.webp",
-      technologies: ["Angular", "Node.js", "MongoDB", "Socket.io"],
-      githubUrl: "https://github.com/yourusername/ecommerce-platform",
-      liveUrl: "https://sotradons.vercel.app",
-      featured: true
-    },
-    {
-      id: 2,
-      title: "AI-powered Chatbot",
-      description: "An intelligent chatbot using natural language processing for customer support.",
-      imageUrl: "/arton59.jpeg",
-      technologies: ["Python", "TensorFlow", "Flask", "React"],
-      githubUrl: "https://github.com/yourusername/ai-chatbot",
+      title: "Diasporium",
+      description: "En tant que developpeur fullStack, j'ai eu à réaliser une application complete front/back-end pour la structure Diasporium, pour l'integration, et l'accompagment de la diaspora au congo.",
+      imageUrl: "/Identité Visuels copie A.png",
+      technologies: ["figma", "NextJS", "NodeJS", "webSoketIO", "Cloudinary", "firebase"],
+      githubUrl: "https://github.com/EMMADEKO10",
       liveUrl: "https://diasporium.vercel.app",
       featured: true
     },
 
     {
       id: 2,
-      title: "AI-powered Chatbot",
-      description: "An intelligent chatbot using natural language processing for customer support.",
-      imageUrl: "/arton55.jpeg",
-      technologies: ["Python", "TensorFlow", "Flask", "React"],
-      githubUrl: "https://github.com/yourusername/ai-chatbot",
-      liveUrl: "https://poulex.vercel.app",
+      title: "Cellule interministerielle pour la gestion des Bourses",
+      description: "J'ai réalisé un projet, pour la gestion, le suivi, des bourses d'études pour la cellule interministerielle de gestion des bourses en république démocratique du congo ",
+      imageUrl: "/logo cellule interminiterielle nicky.jpg",
+      technologies: ["WordPress"],
+      githubUrl: "https://github.com/EMMADEKO10",
+      liveUrl: "https://celbe-rdc.cd",
+      featured: true
+    },
+
+    {
+      id: 3,
+      title: "Sotradons",
+      description: "J'ai réalisé l'application front/back-end, pour la structure Sotradons, une plateforme qui permet de mettre les projects en lumière et qui permet la sponsorisation ",
+      imageUrl: "/Capture d’écran 2024-07-03 163849A.PNG",
+      technologies: ["React", "NodeJS", "Cloudinary", "figma"],
+      githubUrl: "https://github.com/EMMADEKO10",
+      liveUrl: "https://sotradons.vercel.app",
+      featured: true
+    },
+
+    {
+      id: 4,
+      title: "Brievents",
+      description: "J'ai réalisé un projet brievent, pour la gestion des évenements",
+      imageUrl: "/DALL·E 2024-12-02 12.59.24 - Create a professional and sleek logo-style image with the text 'Brievent'. Use a modern font and incorporate a palette of blue, white, and black. The .webp",
+      technologies: ["React", "NodeJS", "Cloudinary", "JavaScript", "TailWind UI"],
+      githubUrl: "https://github.com/EMMADEKO10",
+      liveUrl: "https://brievents.vercel.app",
+      featured: true
+    },
+
+    {
+      id: 5,
+      title: "Mon Portefolio",
+      description: "J'ai réalisé mon portefolio, le site qui me presente, qui presente ce que je fais ",
+      imageUrl: "/DALL·E 2024-12-02 13.07.03 - Design a professional portfolio-style image featuring a person in the foreground (center-left), with the name 'Emmanuel Deko' and the title 'Codeur' p.webp",
+      technologies: ["Angular", "Tailwind"],
+      githubUrl: "https://github.com/EMMADEKO10",
+      liveUrl: "https://emmanueldeko.vercel.app",
+      featured: true
+    },
+    {
+      id: 1,
+      title: "Festival des poulets",
+      description: "En tant que developper Back-end, j'ai contribué à la réalisation du site poulex, pour le festival des poulets",
+      imageUrl: "/DALL·E 2024-12-02 13.23.03 - Create a vibrant and celebratory poster for a chicken-themed festival. The design should feature chickens and roosters in a lively, colorful setting w.webp",
+      technologies: ["Node JS","JavasCript"],
+      githubUrl: "https://github.com/EMMADEKO10",
+      liveUrl: "https://festival-du-poulet.vercel.app",
       featured: true
     },
     // Add more projects here...

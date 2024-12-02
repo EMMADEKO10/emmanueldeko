@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'; // Importez Router
 
 // Interfaces
 interface Particle {
@@ -46,6 +47,8 @@ interface SuccessMetric {
   standalone: true,
   imports: [CommonModule]
 })
+
+
 export class HomeComponent implements OnInit, OnDestroy {
   // Propriétés personnelles
   developerName = 'Emmanuel Deko W.';
@@ -150,10 +153,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   private particleInterval?: number;
   private lineInterval?: number;
 
-  constructor() {}
+  // constructor() {}
+  constructor(private router: Router) {} // Injectez le Router
+
 
   ngOnInit(): void {
     this.initializeAnimations();
+  }
+
+
+  // Modifiez ces méthodes
+  scrollToProjects(): void {
+    this.router.navigate(['/projects']);
+  }
+
+  scrollToContact(): void {
+    this.router.navigate(['/contact']);
   }
 
   ngOnDestroy(): void {
@@ -213,21 +228,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**
    * Défilement vers la section projets
    */
-  scrollToProjects(): void {
-    const projectsSection = document.getElementById('projects');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  }
-
-  //  // Nouvelle méthode pour générer des classes de couleurs aléatoires pour les technologies
-  //  getRandomColorClass(): string {
-  //   const colors = ['text-blue-400', 'text-green-400', 'text-yellow-400', 'text-red-400', 'text-purple-400'];
-  //   return colors[Math.floor(Math.random() * colors.length)];
+  // scrollToProjects(): void {
+  //   const projectsSection = document.getElementById('projects');
+  //   if (projectsSection) {
+  //     projectsSection.scrollIntoView({ 
+  //       behavior: 'smooth',
+  //       block: 'start'
+  //     });
+  //   }
   // }
+
    // Modifiez dans le template
   // [ngClass]="technologyColors[tech.name]"
   getRandomColorClass(): string {
@@ -237,13 +247,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**
    * Défilement vers la section contact
    */
-  scrollToContact(): void {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  }
-}
+//   scrollToContact(): void {
+//     const contactSection = document.getElementById('contact');
+//     if (contactSection) {
+//       contactSection.scrollIntoView({ 
+//         behavior: 'smooth',
+//         block: 'start'
+//       });
+//     }
+//   }
+ }

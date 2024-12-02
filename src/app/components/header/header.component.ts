@@ -1,87 +1,88 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { animate, style, transition, trigger } from '@angular/animations';
-
-interface NavItem {
-  label: string;
-  path: string;
-  icon: string;
-  description?: string;
-}
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   animations: [
-    trigger('mobileMenu', [
+    trigger('fadeInOut', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-16px)' }),
-        animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+        style({ opacity: 0 }),
+        animate('200ms', style({ opacity: 1 }))
       ]),
       transition(':leave', [
-        animate('200ms ease-in', style({ opacity: 0, transform: 'translateY(-16px)' }))
+        animate('200ms', style({ opacity: 0 }))
+      ])
+    ]),
+    trigger('mobileMenu', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('200ms', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+      transition(':leave', [
+        animate('200ms', style({ opacity: 0, transform: 'translateY(-10px)' }))
       ])
     ])
   ]
 })
 export class HeaderComponent {
-  private router = inject(Router);
   isMenuOpen = false;
-  hoveredItem: NavItem | null = null;
+  hoveredItem: any = null;
 
-  readonly navItems: NavItem[] = [
+  navItems = [
     { 
-      label: 'Accueil', 
-      path: 'home', 
+      path: '/', 
+      label: 'Accueil',
       icon: 'home',
       description: 'Retour à la page d\'accueil'
     },
     { 
-      label: 'Projets', 
-      path: 'projects', 
-      icon: 'work',
-      description: 'Découvrez mes réalisations'
-    },
-    { 
-      label: 'Compétences', 
-      path: 'skills', 
-      icon: 'code',
-      description: 'Mes expertises techniques'
-    },
-    { 
-      label: 'À propos', 
-      path: 'about', 
+      path: '/about', 
+      label: 'À propos',
       icon: 'person',
       description: 'En savoir plus sur moi'
     },
     { 
-      label: 'Contact', 
-      path: 'contact', 
-      icon: 'mail',
-      description: 'Prenons contact'
+      path: '/projects', 
+      label: 'Projets',
+      icon: 'code',
+      description: 'Découvrez mes réalisations'
+    },
+    { 
+      path: '/skills', 
+      label: 'Compétences',
+      icon: 'build',
+      description: 'Mes compétences techniques'
     }
   ];
+
+  constructor(private router: Router) {}
+
+  isActive(path: string): boolean {
+    return this.router.isActive(path, {
+      paths: 'exact',
+      queryParams: 'exact',
+      fragment: 'ignored',
+      matrixParams: 'ignored'
+    });
+  }
+
+  setHoveredItem(item: any): void {
+    this.hoveredItem = item;
+  }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  isActive(path: string): boolean {
-    return this.router.url.includes(path);
-  }
-
   navigateAndClose(path: string): void {
     this.router.navigate([path]);
     this.isMenuOpen = false;
-  }
-
-  setHoveredItem(item: NavItem | null): void {
-    this.hoveredItem = item;
   }
 
   scrollToTop(): void {

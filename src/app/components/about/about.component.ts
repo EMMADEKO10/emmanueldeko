@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 interface Skill {
   name: string;
@@ -54,7 +55,10 @@ interface Education {
     ])
   ],
   standalone: true,
-  imports: [NgFor]
+  imports: [
+    RouterLink,
+    NgFor
+  ]
 })
 export class AboutComponent implements OnInit {
   skillCategories: SkillCategory[] = [
