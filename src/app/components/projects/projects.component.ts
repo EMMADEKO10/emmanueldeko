@@ -83,25 +83,25 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       liveUrl: "https://brievents.vercel.app",
       featured: true
     },
-
     {
       id: 5,
-      title: "Mon Portefolio",
-      description: "J'ai réalisé mon portefolio, le site qui me presente, qui presente ce que je fais ",
-      imageUrl: "/DALL·E 2024-12-02 13.07.03 - Design a professional portfolio-style image featuring a person in the foreground (center-left), with the name 'Emmanuel Deko' and the title 'Codeur' p.webp",
-      technologies: ["Angular", "Tailwind"],
-      githubUrl: "https://github.com/EMMADEKO10",
-      liveUrl: "https://emmanueldeko.vercel.app",
-      featured: true
-    },
-    {
-      id: 1,
       title: "Festival des poulets",
       description: "En tant que developper Back-end, j'ai contribué à la réalisation du site poulex, pour le festival des poulets",
       imageUrl: "/DALL·E 2024-12-02 13.23.03 - Create a vibrant and celebratory poster for a chicken-themed festival. The design should feature chickens and roosters in a lively, colorful setting w.webp",
       technologies: ["Node JS","JavasCript"],
       githubUrl: "https://github.com/EMMADEKO10",
       liveUrl: "https://festival-du-poulet.vercel.app",
+      featured: true
+    },
+
+    {
+      id: 6,
+      title: "Mon Portefolio",
+      description: "J'ai réalisé mon portefolio, le site qui me presente, qui presente ce que je fais ",
+      imageUrl: "/DALL·E 2024-12-02 13.07.03 - Design a professional portfolio-style image featuring a person in the foreground (center-left), with the name 'Emmanuel Deko' and the title 'Codeur' p.webp",
+      technologies: ["Angular", "Tailwind UI"],
+      githubUrl: "https://github.com/EMMADEKO10",
+      liveUrl: "https://emmanueldeko.vercel.app",
       featured: true
     },
     // Add more projects here...
