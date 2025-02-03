@@ -35,8 +35,13 @@
                      class="px-4 py-2.5 rounded-full flex items-center space-x-2 transition-all duration-200 hover:bg-white/10"
                      [class.text-white]="isActive(item.path)"
                      [class.text-gray-400]="!isActive(item.path)">
-               <mat-icon class="text-[20px]">{{item.icon}}</mat-icon>
+               <mat-icon class="text-[20px]" [class.animate-pulse-slow]="item.path === '/actualite'">{{item.icon}}</mat-icon>
                <span class="font-medium">{{item.label}}</span>
+               <span *ngIf="item.path === '/actualite'" 
+                     class="flex h-2 w-2 relative">
+                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75"></span>
+                 <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-500"></span>
+               </span>
              </button>
              
              <div *ngIf="hoveredItem === item"

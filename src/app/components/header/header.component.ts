@@ -42,6 +42,12 @@ export class HeaderComponent {
       description: 'Retour à la page d\'accueil'
     },
     { 
+      path: '/actualite', 
+      label: 'Actualités',
+      icon: 'newspaper',
+      description: 'Dernières actualités et articles'
+    },
+    { 
       path: '/about', 
       label: 'À propos',
       icon: 'person',
