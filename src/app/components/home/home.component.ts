@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router'; // Importez Router
 
@@ -49,13 +49,16 @@ interface SuccessMetric {
 })
 
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   // Propriétés personnelles
   developerName = 'Emmanuel Deko W.';
   experience = 5;
   // profileImage = '/api/placeholder/600/600';
   profileImage = '/IMG_20231221_082253_393~6.jpg';
 
+  private initialColor = 'text-blue-400';
+
+  textColor$ = Promise.resolve(this.initialColor);
 
   // Animations et éléments visuels
   particles: Particle[] = Array(30).fill(null).map(() => ({
@@ -154,13 +157,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   private lineInterval?: number;
 
   // constructor() {}
-  constructor(private router: Router) {} // Injectez le Router
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {} // Injectez le Router
 
 
   ngOnInit(): void {
     this.initializeAnimations();
   }
 
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
 
   // Modifiez ces méthodes
   scrollToProjects(): void {
@@ -256,4 +262,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 //       });
 //     }
 //   }
- }
+
+  getTextColor(): string {
+    return this.initialColor;
+  }
+
+  updateTextColor() {
+    // Faites vos changements
+    // Puis forcez la détection des changements
+    this.cdr.detectChanges();
+  }
+}
