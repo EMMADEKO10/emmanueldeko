@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
-import { environment } from '../../environments/environment.prod';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export interface Article {
   source: {
@@ -21,7 +23,7 @@ export interface Article {
   providedIn: 'root'
 })
 export class NewsService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = process.env['API_URL'] || 'http://127.0.0.1:5000/api/news';
 
   constructor(private http: HttpClient) {}
 
