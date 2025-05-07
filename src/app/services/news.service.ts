@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 export interface Article {
   source: {
@@ -20,7 +21,7 @@ export interface Article {
   providedIn: 'root'
 })
 export class NewsService {
-  private apiUrl = 'http://127.0.0.1:5000/api/news';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
