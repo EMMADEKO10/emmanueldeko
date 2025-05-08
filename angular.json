@@ -44,7 +44,16 @@
             "allowedCommonJsDependencies": [
               "path",
               "os",
-              "crypto"
+              "crypto",
+              "fs",
+              "url"
+            ],
+            "externalDependencies": [
+              "path",
+              "os",
+              "crypto",
+              "fs",
+              "url"
             ]
           },
           "configurations": {

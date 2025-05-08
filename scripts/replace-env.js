@@ -1,12 +1,16 @@
-const fs = require('fs');
-const path = require('path');
+import { readFileSync, writeFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const indexPath = path.join(__dirname, '../dist/mon-portfolio/browser/index.html');
-let content = fs.readFileSync(indexPath, 'utf8');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const indexPath = join(__dirname, '../dist/mon-portfolio/browser/index.html');
+let content = readFileSync(indexPath, 'utf8');
 
 // Remplacer les variables d'environnement
 content = content.replace(/\${([^}]+)}/g, (match, key) => {
   return process.env[key] || '';
 });
 
-fs.writeFileSync(indexPath, content); 
+writeFileSync(indexPath, content); 
