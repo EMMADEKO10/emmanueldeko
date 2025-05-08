@@ -54,7 +54,9 @@
               "crypto",
               "fs",
               "url"
-            ]
+            ],
+            "optimization": false,
+            "sourceMap": true
           },
           "configurations": {
             "production": {
