@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
+import { EnvironmentService } from './environment.service';
 
 export interface Article {
   source: {
@@ -23,9 +21,14 @@ export interface Article {
   providedIn: 'root'
 })
 export class NewsService {
-  private apiUrl = process.env['API_URL'] || 'http://127.0.0.1:5000/api/news';
+  private apiUrl: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private envService: EnvironmentService
+  ) {
+    this.apiUrl = this.envService.getValue('API_URL') || 'http://127.0.0.1:5000/api/news';
+  }
 
   getNews(): Observable<Article[]> {
     const headers = new HttpHeaders({

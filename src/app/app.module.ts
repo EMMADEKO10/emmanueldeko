@@ -5,21 +5,19 @@ import { CommonModule } from '@angular/common';
 import { routes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-
-// Importez vos composants ici
+import { EnvironmentService } from './services/environment.service';
+import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
-  declarations: [
-    AboutComponent, // Ajoutez le composant dans declarations
-  ],
   imports: [
     BrowserModule,
     SharedModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AppComponent,
+    AboutComponent
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [EnvironmentService]
 })
 export class AppModule { }
