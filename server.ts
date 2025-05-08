@@ -35,7 +35,10 @@ export function app(): express.Express {
         documentFilePath: indexHtml,
         url: `${protocol}://${headers.host}${originalUrl}`,
         publicPath: browserDistFolder,
-        providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+        providers: [
+          { provide: APP_BASE_HREF, useValue: baseUrl },
+          { provide: 'ENV_CONFIG', useValue: process.env }
+        ],
       })
       .then((html) => res.send(html))
       .catch((err) => next(err));
