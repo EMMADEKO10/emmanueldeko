@@ -155,17 +155,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private particleInterval?: number;
   private lineInterval?: number;
 
-  // constructor() {}
   constructor(private router: Router, private cdr: ChangeDetectorRef) {} // Injectez le Router
 
 
   ngOnInit(): void {
     this.initializeAnimations();
-    this.updateTextColor();
   }
 
   ngAfterViewInit() {
-    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.updateTextColor();
+      this.cdr.detectChanges();
+    });
   }
 
   // Modifiez ces méthodes
@@ -271,6 +272,5 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     const colors = ['text-blue-400', 'text-red-400', 'text-green-400', 'text-purple-400'];
     const randomIndex = Math.floor(Math.random() * colors.length);
     this.textColor = colors[randomIndex];
-    this.cdr.detectChanges();
   }
 }
