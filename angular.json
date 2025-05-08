@@ -33,14 +33,19 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles"
-              ]},
+              ]
+            },
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            }
-           
+            },
+            "allowedCommonJsDependencies": [
+              "path",
+              "os",
+              "crypto"
+            ]
           },
           "configurations": {
             "production": {
