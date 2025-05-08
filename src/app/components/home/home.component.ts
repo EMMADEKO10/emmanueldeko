@@ -57,8 +57,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   profileImage = '/IMG_20231221_082253_393~6.jpg';
 
   private initialColor = 'text-blue-400';
-
-  textColor$ = Promise.resolve(this.initialColor);
+  textColor = this.initialColor;
 
   // Animations et éléments visuels
   particles: Particle[] = Array(30).fill(null).map(() => ({
@@ -162,6 +161,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.initializeAnimations();
+    this.updateTextColor();
   }
 
   ngAfterViewInit() {
@@ -264,12 +264,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 //   }
 
   getTextColor(): string {
-    return this.initialColor;
+    return this.textColor;
   }
 
   updateTextColor() {
-    // Faites vos changements
-    // Puis forcez la détection des changements
+    const colors = ['text-blue-400', 'text-red-400', 'text-green-400', 'text-purple-400'];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    this.textColor = colors[randomIndex];
     this.cdr.detectChanges();
   }
 }

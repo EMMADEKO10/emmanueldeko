@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { EnvironmentService } from './environment.service';
 
 export interface Article {
@@ -40,7 +40,8 @@ export class NewsService {
       .pipe(
         catchError(error => {
           console.error('Erreur détaillée:', error);
-          return throwError(() => new Error('Erreur lors de la récupération des actualités'));
+          // Retourner un tableau vide en cas d'erreur
+          return of([]);
         })
       );
   }

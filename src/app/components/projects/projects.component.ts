@@ -1,6 +1,6 @@
 // projects.component.ts
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
 
@@ -66,7 +66,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       id: 3,
       title: "Sotradons",
       description: "J'ai réalisé l'application front/back-end, pour la structure Sotradons, une plateforme qui permet de mettre les projects en lumière et qui permet la sponsorisation ",
-      imageUrl: "/Capture d’écran 2024-07-03 163849A.PNG",
+      imageUrl: "/Capture d'écran 2024-07-03 163849A.PNG",
       technologies: ["React", "NodeJS", "Cloudinary", "figma"],
       githubUrl: "https://github.com/EMMADEKO10",
       liveUrl: "https://sotradons.vercel.app",
@@ -114,18 +114,26 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
   technologies: string[] = [];
   isLoading: boolean = true;
   isMobile: boolean = false;
+  private isBrowser: boolean;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.checkScreenSize();
+    if (this.isBrowser) {
+      this.checkScreenSize();
+    }
   }
 
-  constructor() {
-    this.checkScreenSize();
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+    if (this.isBrowser) {
+      this.checkScreenSize();
+    }
   }
 
   private checkScreenSize() {
-    this.isMobile = window.innerWidth < 768;
+    if (this.isBrowser) {
+      this.isMobile = window.innerWidth < 768;
+    }
   }
 
   ngOnInit() {
@@ -137,7 +145,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (!this.isMobile) {
+    if (this.isBrowser && !this.isMobile) {
       this.initializeParallaxEffect();
     }
   }
@@ -160,6 +168,8 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
   }
 
   private initializeParallaxEffect() {
+    if (!this.isBrowser) return;
+
     const container = this.projectsContainer.nativeElement;
     let cards: HTMLElement[] = [];
     
