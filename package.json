@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --optimization=false && node scripts/replace-env.js",
+    "build": "ng build --configuration production --optimization=true --aot=true --build-optimizer=true",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:mon-portfolio": "node dist/mon-portfolio/server/server.mjs",
