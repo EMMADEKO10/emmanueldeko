@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router'; // Importez Router
 
@@ -155,7 +155,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private particleInterval?: number;
   private lineInterval?: number;
 
-  constructor(private router: Router, private cdr: ChangeDetectorRef) {} // Injectez le Router
+  constructor(
+    private router: Router, 
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone
+  ) {}
 
 
   ngOnInit(): void {
@@ -269,8 +273,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   updateTextColor() {
-    const colors = ['text-blue-400', 'text-red-400', 'text-green-400', 'text-purple-400'];
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    this.textColor = colors[randomIndex];
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => {
+        const colors = ['text-blue-400', 'text-red-400', 'text-green-400', 'text-purple-400'];
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        this.ngZone.run(() => {
+          this.textColor = colors[randomIndex];
+          this.cdr.detectChanges();
+        });
+      });
+    });
   }
 }
