@@ -43,5 +43,9 @@ RUN adduser -D -H -u 101 -s /sbin/nologin nginx || true
 # Expose port 80
 EXPOSE 80
 
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1
+
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"] 
