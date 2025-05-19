@@ -58,6 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private initialColor = 'text-blue-400';
   textColor = this.initialColor;
+  private colorChangeInterval: any;
 
   // Animations et éléments visuels
   particles: Particle[] = Array(30).fill(null).map(() => ({
@@ -164,13 +165,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.initializeAnimations();
+    this.initializeColorChange();
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.updateTextColor();
-      this.cdr.detectChanges();
-    });
+    this.cdr.detectChanges();
   }
 
   // Modifiez ces méthodes
@@ -184,6 +183,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.cleanupAnimations();
+    if (this.colorChangeInterval) {
+      clearInterval(this.colorChangeInterval);
+    }
   }
 
    // Add a new method to handle image loading
@@ -251,10 +253,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
    // Modifiez dans le template
   // [ngClass]="technologyColors[tech.name]"
-  getRandomColorClass(): string {
-    const colors = ['text-blue-400', 'text-green-400', 'text-yellow-400', 'text-red-400', 'text-purple-400'];
+  private getRandomColorClass(): string {
+    const colors = [
+      'text-blue-400',
+      'text-purple-400',
+      'text-yellow-400',
+      'text-green-400',
+      'text-red-400',
+      'text-pink-400'
+    ];
     return colors[Math.floor(Math.random() * colors.length)];
   }
+
   /**
    * Défilement vers la section contact
    */
@@ -268,20 +278,14 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 //     }
 //   }
 
-  getTextColor(): string {
-    return this.textColor;
-  }
-
-  updateTextColor() {
+  private initializeColorChange(): void {
     this.ngZone.runOutsideAngular(() => {
-      setTimeout(() => {
-        const colors = ['text-blue-400', 'text-red-400', 'text-green-400', 'text-purple-400'];
-        const randomIndex = Math.floor(Math.random() * colors.length);
+      this.colorChangeInterval = setInterval(() => {
         this.ngZone.run(() => {
-          this.textColor = colors[randomIndex];
+          this.textColor = this.getRandomColorClass();
           this.cdr.detectChanges();
         });
-      });
+      }, 3000); // Change la couleur toutes les 3 secondes
     });
   }
 }
