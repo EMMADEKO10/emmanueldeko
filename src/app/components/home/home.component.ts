@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private initialColor = 'text-blue-400';
   textColor = this.initialColor;
   private colorChangeInterval: any;
+  private technologyColors: { [key: string]: string } = {};
 
   // Animations et éléments visuels
   particles: Particle[] = Array(30).fill(null).map(() => ({
@@ -160,7 +161,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router, 
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone
-  ) {}
+  ) {
+    // Initialize technology colors
+    this.technologies.forEach(tech => {
+      this.technologyColors[tech.name] = this.getRandomColorClass();
+    });
+  }
 
 
   ngOnInit(): void {
@@ -283,9 +289,21 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.colorChangeInterval = setInterval(() => {
         this.ngZone.run(() => {
           this.textColor = this.getRandomColorClass();
+          // Update technology colors
+          this.technologies.forEach(tech => {
+            this.technologyColors[tech.name] = this.getRandomColorClass();
+          });
           this.cdr.detectChanges();
         });
-      }, 3000); // Change la couleur toutes les 3 secondes
+      }, 3000);
     });
+  }
+
+  // Public method to get color for a technology
+  getTechnologyColor(techName: string): string {
+    if (!this.technologyColors[techName]) {
+      this.technologyColors[techName] = this.getRandomColorClass();
+    }
+    return this.technologyColors[techName];
   }
 }
