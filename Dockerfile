@@ -21,9 +21,10 @@ RUN npm run build
 # Stage 2: Serve
 FROM nginx:alpine
 
-# Create directory for logs
+# Create directory for logs and set permissions
 RUN mkdir -p /var/log/nginx && \
-    chown -R nginx:nginx /var/log/nginx
+    chown -R nginx:nginx /var/log/nginx && \
+    chmod -R 755 /var/log/nginx
 
 # Copy built assets from builder stage
 COPY --from=builder /app/dist/mon-portfolio/browser /usr/share/nginx/html
@@ -33,7 +34,11 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Set proper permissions
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
-    chmod -R 755 /usr/share/nginx/html
+    chmod -R 755 /usr/share/nginx/html && \
+    chmod 644 /etc/nginx/conf.d/default.conf
+
+# Create a non-root user to run the server
+RUN adduser -D -H -u 101 -s /sbin/nologin nginx || true
 
 # Expose port 80
 EXPOSE 80
