@@ -40,12 +40,13 @@ RUN chown -R nginx:nginx /usr/share/nginx/html && \
 # Create a non-root user to run the server
 RUN adduser -D -H -u 101 -s /sbin/nologin nginx || true
 
-# Expose port 80
+# Expose both ports for flexibility
 EXPOSE 80
+EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT:-80}/ || exit 1
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"] 
+# Start nginx with environment variable support
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;' 
