@@ -13,7 +13,7 @@ export class AboutComponent implements OnInit {
 
   // Informations personnelles avec mots-clés SEO
   personalInfo = {
-    fullName: 'Emmanuel Deko Wembolwa',
+    fullName: 'Emmanuel Deko W.',
     nicknames: ['Belcheck', 'Belcheck Atwood'],
     title: 'Développeur Full Stack Expert',
     location: 'Kinshasa, République Démocratique du Congo',

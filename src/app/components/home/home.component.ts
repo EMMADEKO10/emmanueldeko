@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   
   experience = 5;
   
-  profileImage = '/IMG_20241124_211024_033~2.jpg';
+  profileImage = '/IMG_20231221_082253_393~6.jpg';
 
   // Technologies avec descriptions SEO
   technologies = [
