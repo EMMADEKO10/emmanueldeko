@@ -32,16 +32,16 @@ RUN npm install dotenv
 
 # Copy built application from builder
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/server.ts ./server.ts
 
-# Copy API files
+# Copy API files (source needed for runtime)
 COPY --from=builder /app/src/api ./src/api
 
 # Create a simple startup script
 RUN echo '#!/bin/sh' > start.sh && \
     echo 'echo "Starting server with OpenAI support..."' >> start.sh && \
     echo 'echo "OPENAI_API_KEY configured: $([ -n "$OPENAI_API_KEY" ] && echo "Yes" || echo "No")"' >> start.sh && \
-    echo 'node server.ts' >> start.sh && \
+    echo 'echo "Starting Node.js server..."' >> start.sh && \
+    echo 'node dist/mon-portfolio/server/server.mjs' >> start.sh && \
     chmod +x start.sh
 
 # Expose port 30 (matching Coolify configuration)
