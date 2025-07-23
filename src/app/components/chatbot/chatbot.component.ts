@@ -1,8 +1,18 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { trigger, transition, style, animate } from '@angular/animations';
-import { ChatbotService, ChatMessage } from '../../services/chatbot.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
+import { ChatbotService } from '../../services/chatbot.service';
+import { environment } from '../../../environments/environment';
+
+interface Message {
+  content: string;
+  isUser: boolean;
+  timestamp: Date;
+  source?: string;
+  sourceIcon?: string;
+}
 
 @Component({
   selector: 'app-chatbot',
@@ -32,7 +42,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   
   isOpen = false;
-  messages: ChatMessage[] = [];
+  messages: Message[] = [];
   currentMessage = '';
   isTyping = false;
   
@@ -55,53 +65,76 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     this.isOpen = !this.isOpen;
   }
   
-  async sendMessage() {
-    if (!this.currentMessage.trim()) return;
-    
+  sendMessage() {
+    if (!this.currentMessage.trim()) {
+      return;
+    }
+
     // Ajouter le message de l'utilisateur
     this.messages.push({
       content: this.currentMessage,
       isUser: true,
       timestamp: new Date()
     });
-    
+
     const userMessage = this.currentMessage;
     this.currentMessage = '';
     this.isTyping = true;
-    
-    try {
-      // Tentative d'appel à l'API
-      this.chatbotService.sendMessage(userMessage).subscribe({
-        next: (response) => {
-          this.messages.push({
-            content: response.response,
-            isUser: false,
-            timestamp: new Date()
-          });
-          this.isTyping = false;
-        },
-        error: (error) => {
-          // En cas d'erreur, utiliser la réponse de fallback
-          console.log('API non disponible, utilisation du fallback:', error);
-          const fallbackResponse = this.chatbotService.getFallbackResponse(userMessage);
-          this.messages.push({
-            content: fallbackResponse,
-            isUser: false,
-            timestamp: new Date()
-          });
-          this.isTyping = false;
+
+    console.log('🗣️ User message:', userMessage);
+
+    // Appel au service amélioré
+    this.chatbotService.sendMessage(userMessage).subscribe({
+      next: (response) => {
+        console.log('📨 Response received:', response);
+        
+        // Déterminer l'icône selon la source
+        let sourceIcon = '🤖';
+        let sourceText = '';
+        
+        if (response.source === 'openai') {
+          sourceIcon = '🧠';
+          sourceText = ' (Réponse IA OpenAI)';
+        } else if (response.source === 'predefined') {
+          sourceIcon = '📋';
+          sourceText = ' (Analyse sémantique)';
+        } else if (response.source === 'frontend_fallback') {
+          sourceIcon = '⚡';
+          sourceText = ' (Mode fallback)';
+        } else if (response.source === 'error_fallback') {
+          sourceIcon = '🔧';
+          sourceText = ' (Fallback d\'erreur)';
         }
-      });
-    } catch (error) {
-      // Fallback en cas d'erreur
-      const fallbackResponse = this.chatbotService.getFallbackResponse(userMessage);
-      this.messages.push({
-        content: fallbackResponse,
-        isUser: false,
-        timestamp: new Date()
-      });
-      this.isTyping = false;
-    }
+
+        this.messages.push({
+          content: response.response,
+          isUser: false,
+          timestamp: new Date(),
+          source: response.source,
+          sourceIcon: sourceIcon
+        });
+        
+        this.isTyping = false;
+        
+        // Log pour debug en développement
+        if (!environment.production) {
+          console.log(`${sourceIcon} Response source: ${response.source}${sourceText}`);
+        }
+      },
+      error: (error) => {
+        console.error('❌ Complete failure, using emergency fallback:', error);
+        
+        this.messages.push({
+          content: this.chatbotService.getFallbackResponse(userMessage),
+          isUser: false,
+          timestamp: new Date(),
+          source: 'emergency_fallback',
+          sourceIcon: '🆘'
+        });
+        
+        this.isTyping = false;
+      }
+    });
   }
   
   private scrollToBottom(): void {

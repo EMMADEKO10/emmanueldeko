@@ -152,79 +152,163 @@ async function callOpenAI(message: string, context: string): Promise<string> {
   if (!openaiApiKey) {
     throw new Error('OpenAI API key not configured');
   }
-  
-  const systemPrompt = `Tu es l'assistant IA professionnel du portfolio d'Emmanuel Deko. ${context}
-  
-  Instructions:
-  - Réponds en français de manière amicale et professionnelle
-  - Concentre-toi sur les informations fournies sur Emmanuel
-  - Si la question sort du contexte professionnel, redirige poliment vers le portfolio
-  - Sois concis (maximum 2-3 phrases)
-  - Encourage les visiteurs à explorer le portfolio ou à contacter Emmanuel`;
-  
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${openaiApiKey}`
-    },
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: message }
-      ],
-      max_tokens: 150,
-      temperature: 0.7
-    })
-  });
-  
-  if (!response.ok) {
-    throw new Error('OpenAI API call failed');
+
+  // Prompt système personnalisé pour Emmanuel
+  const systemPrompt = `Tu es l'assistant IA personnel d'Emmanuel Deko, un développeur fullstack talentueux et passionné. 
+
+INFORMATIONS SUR EMMANUEL :
+👨‍💻 Profil : Développeur fullstack avec plus de 5 années d'expérience
+🚀 Spécialités : Angular, React, NextJS, NodeJS, Python, TypeScript
+💼 Expertise : Applications web complètes, architecture moderne, UX/UI
+🌟 Projets phares :
+  - Diasporium : Plateforme diaspora congolaise (NextJS, NodeJS, WebSocket, Firebase) - https://diasporium.vercel.app
+  - Système de bourses RDC : Gestion bourses gouvernementales (WordPress) - https://celbe-rdc.cd
+  - Portfolio personnel : Site vitrine moderne (Angular 18, SSR)
+
+🛠️ Stack technique complète :
+  Frontend: Angular, React, NextJS, TypeScript, HTML5, CSS3, Tailwind CSS, Material Design
+  Backend: NodeJS, Express, Python, REST API, WebSocket, API GraphQL
+  Bases de données: MongoDB, MySQL, PostgreSQL, Firebase Firestore
+  Cloud & DevOps: Docker, Git, CI/CD, Vercel, Hostinger, Coolify, Nginx
+  Design: Figma, Adobe Creative Suite, UI/UX Design
+
+🎯 Vision : Créer des expériences numériques exceptionnelles qui combinent innovation technique et design élégant
+💡 Approche : Développement moderne avec bonnes pratiques, code propre, performances optimisées
+🌍 Passion : Technologies émergentes, communauté open-source, solutions pour l'Afrique
+
+INSTRUCTIONS DE CONVERSATION :
+- Sois enthousiaste et professionnel en parlant d'Emmanuel
+- Mets en valeur ses compétences techniques et sa créativité
+- Utilise des emojis appropriés pour rendre la conversation vivante
+- Donne des exemples concrets de ses projets et technologies
+- Encourage les visiteurs à explorer son portfolio et le contacter
+- Reste authentique et évite l'exagération
+- Réponds en français sauf si on te parle en anglais
+- Si on demande des détails techniques, sois précis et informatif
+- Oriente vers ses projets concrets comme Diasporium et le système RDC
+- Encourage les collaborations et opportunités professionnelles
+
+Réponds toujours comme si tu connaissais parfaitement Emmanuel et son travail, avec passion et précision.`;
+
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${openaiApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: message
+          }
+        ],
+        max_tokens: 500,
+        temperature: 0.7,
+        frequency_penalty: 0.3,
+        presence_penalty: 0.3
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('OpenAI API error:', errorData);
+      throw new Error(`OpenAI API error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
+    }
+
+    const data = await response.json();
+    
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error('Invalid response structure from OpenAI');
+    }
+
+    const aiResponse = data.choices[0].message.content.trim();
+    console.log('OpenAI response generated successfully');
+    return aiResponse;
+
+  } catch (error) {
+    console.error('Error calling OpenAI:', error);
+    throw error;
   }
-  
-  const data = await response.json();
-  return data.choices[0].message.content;
 }
 
-export default async function handler(req: Request, res: Response): Promise<void> {
+export default async function handler(req: any, res: any): Promise<void> {
+  // Configuration CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
     return;
   }
-  
+
   try {
-    const { message, context }: ChatRequest = req.body;
-    
+    const { message } = req.body;
+
     if (!message || typeof message !== 'string') {
-      res.status(400).json({ error: 'Message is required' });
+      res.status(400).json({ error: 'Message is required and must be a string' });
       return;
     }
-    
+
+    console.log('📥 Incoming message:', message);
+
     let response: string;
+
+    // 🔥 PRIORITÉ 1: OpenAI (si clé API disponible)
+    const openaiApiKey = process.env['OPENAI_API_KEY'];
     
-    try {
-      // Tentative d'utilisation d'OpenAI
-      response = await callOpenAI(message, context || '');
-      console.log('Used OpenAI for response');
-    } catch (error) {
-      // Fallback vers les réponses prédéfinies
-      response = analyzeMessage(message);
-      console.log('Used predefined responses (OpenAI not available)');
+    if (openaiApiKey && openaiApiKey.trim() !== '') {
+      console.log('🤖 Using OpenAI GPT for intelligent response...');
+      try {
+        response = await callOpenAI(message, '');
+        console.log('✅ OpenAI response generated successfully');
+        
+        res.status(200).json({
+          response,
+          source: 'openai',
+          timestamp: new Date().toISOString()
+        });
+        return;
+        
+      } catch (error) {
+        console.warn('⚠️ OpenAI failed, falling back to predefined responses:', error);
+        // Continue vers le fallback
+      }
+    } else {
+      console.log('ℹ️ OpenAI API key not configured, using predefined responses');
     }
+
+    // 🔥 PRIORITÉ 2: Analyse sémantique avec réponses prédéfinies
+    console.log('📋 Using semantic analysis with predefined responses...');
+    response = analyzeMessage(message);
     
-    const chatResponse: ChatResponse = {
-      response: response
-    };
-    
-    res.status(200).json(chatResponse);
+    res.status(200).json({
+      response,
+      source: 'predefined',
+      timestamp: new Date().toISOString()
+    });
     return;
-    
+
   } catch (error) {
-    console.error('Chat API error:', error);
-    res.status(500).json({ 
-      error: 'Internal server error',
-      response: "Désolé, je rencontre un problème technique. Pouvez-vous réessayer dans un moment ?"
+    console.error('❌ API Error:', error);
+    
+    // 🔥 FALLBACK ULTIME
+    res.status(500).json({
+      response: "Je suis désolé, je rencontre actuellement des difficultés techniques. 😔 Mais je peux vous dire qu'Emmanuel est un excellent développeur fullstack ! N'hésitez pas à explorer son portfolio ou à utiliser le formulaire de contact pour le joindre directement.",
+      source: 'error_fallback',
+      timestamp: new Date().toISOString()
     });
     return;
   }

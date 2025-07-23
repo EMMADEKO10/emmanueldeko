@@ -1,65 +1,63 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, timeout } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
-export interface ChatMessage {
-  content: string;
-  isUser: boolean;
-  timestamp: Date;
-}
-
-export interface ChatResponse {
+// Interface pour la réponse de l'API
+interface ChatResponse {
   response: string;
-  error?: string;
+  source?: 'openai' | 'predefined' | 'error_fallback' | 'frontend_fallback' | 'ultimate_fallback' | 'emergency_fallback';
+  timestamp?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatbotService {
-  private readonly apiUrl = '/api/chat'; // URL du backend
-
-  // Informations sur Emmanuel pour le contexte du chatbot
-  private readonly emmanuelContext = `
-    Emmanuel Deko est un développeur fullstack passionné avec plusieurs années d'expérience.
-    
-    COMPÉTENCES TECHNIQUES:
-    - Frontend: Angular, React, NextJS, TypeScript, HTML5, CSS3, Tailwind CSS
-    - Backend: NodeJS, Express, Python, REST API, WebSocket
-    - Base de données: MongoDB, MySQL, PostgreSQL, Firebase
-    - DevOps: Docker, Git, CI/CD
-    - Cloud: Vercel, Hostinger, Coolify
-    
-    PROJETS PRINCIPAUX:
-    1. Diasporium - Plateforme complète front/back-end pour l'intégration et l'accompagnement de la diaspora au Congo
-       - Technologies: NextJS, NodeJS, WebSocketIO, Cloudinary, Firebase
-       - URL: https://diasporium.vercel.app
-    
-    2. Système de gestion des bourses - Application pour la cellule interministérielle de gestion des bourses en RDC
-       - Technologies: WordPress
-       - URL: https://celbe-rdc.cd
-    
-    FORMATION ET EXPÉRIENCE:
-    - Développeur fullstack avec expertise en technologies modernes
-    - Passionné par l'innovation et les nouvelles technologies
-    - Expérience en développement d'applications web complètes
-    - Maîtrise des bonnes pratiques de développement
-    
-    CONTACT:
-    - GitHub: https://github.com/EMMADEKO10
-    - Portfolio: https://www.emmanueldeko.com
-  `;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
+  // Service principal avec gestion intelligente des erreurs
   sendMessage(message: string): Observable<ChatResponse> {
-    const body = {
-      message: message,
-      context: this.emmanuelContext
-    };
+    const body = { message };
     
-    return this.http.post<ChatResponse>(this.apiUrl, body);
+    console.log(`🚀 Sending to API (OpenAI: ${environment.openaiEnabled ? 'enabled' : 'disabled'}):`, message);
+
+    return this.http.post<ChatResponse>(this.apiUrl, body)
+      .pipe(
+        timeout(15000), // 15 secondes timeout pour OpenAI
+        catchError((error: HttpErrorResponse) => {
+          console.log('❌ API call failed, using frontend fallback:', error.message);
+          
+          // Fallback intelligent avec la même logique que le backend
+          const fallbackResponse = this.getFallbackResponse(message);
+          
+          return of({
+            response: fallbackResponse,
+            source: 'frontend_fallback' as const,
+            timestamp: new Date().toISOString()
+          } as ChatResponse);
+        })
+      );
+  }
+
+  // Méthode publique pour obtenir des informations sur le chatbot
+  getChatbotInfo() {
+    return {
+      name: environment.chatbot?.name || 'Assistant IA Emmanuel',
+      version: environment.chatbot?.version || '2.0',
+      features: environment.chatbot?.features || ['semantic-analysis'],
+      openaiEnabled: environment.openaiEnabled,
+      capabilities: [
+        '🤖 Intelligence artificielle OpenAI',
+        '🧠 Analyse sémantique avancée',
+        '🌍 Support multilingue (FR/EN)',
+        '⚡ Réponses contextuelles',
+        '🎯 Expertise Emmanuel Deko'
+      ]
+    };
   }
 
   // Version de fallback avec réponses prédéfinies si l'API n'est pas disponible

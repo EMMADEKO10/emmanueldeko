@@ -1,213 +1,202 @@
-# MonPortfolio
+# 🚀 Portfolio d'Emmanuel Deko
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+Un portfolio moderne et interactif développé avec Angular 18, présentant les compétences et projets d'Emmanuel Deko, développeur fullstack passionné.
 
-## 🤖 Chatbot IA Intégré
+## ✨ Fonctionnalités
 
-Le portfolio inclut un chatbot IA intelligent qui peut répondre aux questions sur Emmanuel Deko, ses compétences, ses projets et son parcours professionnel.
+- 📱 **Design Responsive** : Interface moderne adaptée à tous les écrans
+- ⚡ **Angular SSR** : Rendu côté serveur pour de meilleures performances SEO
+- 🤖 **Chatbot IA Intelligent** : Assistant personnel avec OpenAI GPT-3.5-turbo
+- 🎨 **Animations Fluides** : Transitions et micro-interactions élégantes
+- 🌐 **Multilingue** : Support français et anglais
+- 🐳 **Docker Ready** : Déploiement containerisé avec Nginx
+- 📊 **Analytics** : Suivi des interactions et performances
 
-### Fonctionnalités du Chatbot :
-- **Réponses intelligentes** sur les compétences techniques d'Emmanuel
-- **Informations détaillées** sur ses projets (Diasporium, système de bourses RDC)
-- **Guidance de contact** pour les opportunités professionnelles
-- **Interface moderne** avec animations fluides
-- **Responsive design** qui s'adapte à tous les écrans
+## 🤖 Configuration du Chatbot IA
 
-### Configuration OpenAI (Optionnelle) :
-Pour utiliser l'IA OpenAI au lieu des réponses prédéfinies :
-1. Ajouter `OPENAI_API_KEY` dans les variables d'environnement
-2. Le chatbot basculera automatiquement vers OpenAI si configuré
-3. Sinon, il utilise un système de réponses prédéfinies intelligent
+### **Intelligence Artificielle OpenAI**
 
-### Technologies du Chatbot :
-- **Frontend** : Angular 18, TypeScript, Animations CSS
-- **Backend** : Express.js, API REST
-- **IA** : OpenAI GPT-3.5-turbo (optionnel) + Réponses prédéfinies
+Le chatbot utilise GPT-3.5-turbo d'OpenAI pour des réponses dynamiques et contextuelles.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
+#### **1. Obtenir une Clé API OpenAI :**
+```bash
+# Rendez-vous sur https://platform.openai.com/api-keys
+# Créez une nouvelle clé API
+# Copiez la clé (elle commence par sk-...)
 ```
-mon-portfolio
-├─ .angular
-├─ .editorconfig
-├─ .git
-│  ├─ COMMIT_EDITMSG
-│  ├─ config
-│  ├─ description
-│  ├─ FETCH_HEAD
-│  ├─ HEAD
-│  ├─ hooks
-│  │  ├─ applypatch-msg.sample
-│  │  ├─ commit-msg.sample
-│  │  ├─ fsmonitor-watchman.sample
-│  │  ├─ post-update.sample
-│  │  ├─ pre-applypatch.sample
-│  │  ├─ pre-commit.sample
-│  │  ├─ pre-merge-commit.sample
-│  │  ├─ pre-push.sample
-│  │  ├─ pre-rebase.sample
-│  │  ├─ pre-receive.sample
-│  │  ├─ prepare-commit-msg.sample
-│  │  ├─ push-to-checkout.sample
-│  │  ├─ sendemail-validate.sample
-│  │  └─ update.sample
-│  ├─ index
-│  ├─ info
-│  │  └─ exclude
-│  ├─ logs
-│  │  ├─ HEAD
-│  │  └─ refs
-│  │     └─ heads
-│  │        └─ master
-│  ├─ objects
-│  │  ├─ 04
-│  │  │  └─ 495eaece82188ece2b9293aaadeac1ce951a18
-│  │  ├─ 06
-│  │  │  └─ c1d704ed8806af710a98d05068d22adbee3aed
-│  │  ├─ 08
-│  │  │  ├─ d3fe1e0333af545d5990b777f7a2bedcba6e34
-│  │  │  └─ dabd812bba52ff5a1893961453d9d11b00a3f7
-│  │  ├─ 10
-│  │  │  └─ d066f35a22aa8094b8d517242f3434a174f868
-│  │  ├─ 1a
-│  │  │  └─ 0df5e067814f87ff8c313574f79c63ac17d3b1
-│  │  ├─ 33
-│  │  │  └─ aaeb9f5819d05046624ca73fce01372f1c952c
-│  │  ├─ 35
-│  │  │  └─ b00f3463311f2afe0fd0d9d5f696dbb992dff5
-│  │  ├─ 36
-│  │  │  └─ 093e1879779624f181733152bb55d71a711d3b
-│  │  ├─ 4b
-│  │  │  └─ 9d4d1545c1ab47af505ed30db385044f56df16
-│  │  ├─ 51
-│  │  │  └─ 8bd4d6009c9e59b2fd1c661225b09d488cc93f
-│  │  ├─ 52
-│  │  │  └─ cd710c6c090668c4ee8282b3bc68f5870f7476
-│  │  ├─ 57
-│  │  │  └─ 614f9c967596fad0a3989bec2b1deff33034f6
-│  │  ├─ 59
-│  │  │  └─ d9a3a3e73ffc640517ef488f6f89d6270195d1
-│  │  ├─ 5f
-│  │  │  └─ b748d9207a99686549d6ef1415527dc544dd0f
-│  │  ├─ 66
-│  │  │  └─ 3f8d81d5ae55c0e1d1a1aa8a53b87ff3d86eb7
-│  │  ├─ 77
-│  │  │  └─ b374577de83b86d846eadda2dd17532d7dabaa
-│  │  ├─ 7f
-│  │  │  └─ ac1e36beb23280274d3d553178f1947a487df5
-│  │  ├─ 88
-│  │  │  └─ 6852b87a706f6df693444125b8d71106679353
-│  │  ├─ 90
-│  │  │  └─ d4ee0072ce3fc41812f8af910219f9eea3c3de
-│  │  ├─ 92
-│  │  │  └─ 5af837050a4abe679c5fea0df7e41faf6fc011
-│  │  ├─ a2
-│  │  │  └─ 98b5bd8796ac377fe9ed64caa249e24c7ec3b6
-│  │  ├─ b3
-│  │  │  └─ f1ecf44a54372bf90afbb60491417242b8769c
-│  │  ├─ b4
-│  │  │  └─ d57c94235f8af487a209ce944e62ffdfdac8c2
-│  │  ├─ cc
-│  │  │  └─ 7b141350ffde43afce3ec16ea4d7b5007cde2b
-│  │  ├─ cd
-│  │  │  └─ c0b287f5dcddd808e55e1729efd6742fc621b6
-│  │  ├─ d3
-│  │  │  └─ dbc4a2dd116ddac645f9dae2fb11103ff5c683
-│  │  ├─ dc
-│  │  │  ├─ 39edb5f23a35f788cba146dd7337127ba6c5ab
-│  │  │  └─ e225f342456ef607793f89d4af7a5aa329cb38
-│  │  ├─ e1
-│  │  │  └─ 9d34fa0e0bc9292281dbe2dfe3d37499bed5c5
-│  │  ├─ e6
-│  │  │  └─ 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
-│  │  ├─ info
-│  │  └─ pack
-│  └─ refs
-│     ├─ heads
-│     │  └─ master
-│     └─ tags
-├─ .gitignore
-├─ angular.json
-├─ package-lock.json
-├─ package.json
-├─ public
-│  └─ favicon.ico
-├─ README.md
-├─ server.ts
-├─ src
-│  ├─ app
-│  │  ├─ app.component.css
-│  │  ├─ app.component.html
-│  │  ├─ app.component.spec.ts
-│  │  ├─ app.component.ts
-│  │  ├─ app.config.server.ts
-│  │  ├─ app.config.ts
-│  │  ├─ app.module.ts
-│  │  ├─ app.routes.ts
-│  │  └─ components
-│  │     ├─ about
-│  │     │  ├─ about.component.css
-│  │     │  ├─ about.component.html
-│  │     │  ├─ about.component.spec.ts
-│  │     │  └─ about.component.ts
-│  │     ├─ contact
-│  │     │  ├─ contact.component.css
-│  │     │  ├─ contact.component.html
-│  │     │  ├─ contact.component.spec.ts
-│  │     │  └─ contact.component.ts
-│  │     ├─ footer
-│  │     │  ├─ footer.component.css
-│  │     │  ├─ footer.component.html
-│  │     │  ├─ footer.component.spec.ts
-│  │     │  └─ footer.component.ts
-│  │     ├─ header
-│  │     │  ├─ header.component.css
-│  │     │  ├─ header.component.html
-│  │     │  ├─ header.component.spec.ts
-│  │     │  └─ header.component.ts
-│  │     ├─ home
-│  │     │  ├─ home.component.css
-│  │     │  ├─ home.component.html
-│  │     │  ├─ home.component.spec.ts
-│  │     │  └─ home.component.ts
-│  │     └─ projects
-│  │        ├─ projects.component.css
-│  │        ├─ projects.component.html
-│  │        ├─ projects.component.spec.ts
-│  │        └─ projects.component.ts
-│  ├─ asset
-│  ├─ environment
-│  ├─ index.html
-│  ├─ main.server.ts
-│  ├─ main.ts
-│  ├─ style
-│  │  └─ _typography.css
-│  └─ styles.css
-├─ tailwind.config.js
-├─ tsconfig.app.json
-├─ tsconfig.json
-└─ tsconfig.spec.json
 
+#### **2. Configuration Locale :**
+```bash
+# Créer le fichier .env à la racine
+cp .env.example .env
+
+# Éditer et ajouter votre clé
+OPENAI_API_KEY=sk-votre_cle_openai_ici
 ```
+
+#### **3. Configuration Coolify/Production :**
+```bash
+# Dans Coolify, aller dans Environment Variables
+# Ajouter :
+OPENAI_API_KEY=sk-votre_cle_openai_ici
+```
+
+### **Fonctionnalités du Chatbot :**
+
+#### **🧠 Intelligence Multi-Niveaux :**
+1. **OpenAI GPT-3.5** (priorité 1) : Réponses dynamiques et contextuelles
+2. **Analyse Sémantique** (priorité 2) : Réponses prédéfinies intelligentes  
+3. **Fallback Robuste** (priorité 3) : Réponses d'urgence
+
+#### **🎯 Expertise Spécialisée :**
+- Connaissances approfondies sur Emmanuel et ses projets
+- Détails techniques sur Diasporium et le système de bourses RDC
+- Recommandations de collaboration et contact professionnel
+- Support multilingue (français/anglais)
+
+#### **⚡ Fonctionnalités Techniques :**
+```typescript
+// Types de réponses supportés
+- 'openai': Réponse IA OpenAI GPT-3.5
+- 'predefined': Analyse sémantique avec réponses prédéfinies
+- 'frontend_fallback': Fallback côté client
+- 'error_fallback': Fallback en cas d'erreur serveur
+```
+
+#### **🔍 Questions Supportées :**
+```bash
+👤 "Qui est Emmanuel deko ?"
+💻 "Quelles sont ses compétences ?"
+🚀 "Parle-moi de ses projets"
+🌍 "Qu'est-ce que Diasporium ?"
+📧 "Comment le contacter ?"
+⚡ "Son expérience professionnelle ?"
+```
+
+## 🛠️ Installation et Développement
+
+### **Prérequis :**
+- Node.js 18+
+- npm ou yarn
+- Docker (optionnel)
+- Clé API OpenAI (optionnel mais recommandé)
+
+### **Installation :**
+```bash
+# Cloner le repository
+git clone https://github.com/EMMADEKO10/mon-portfolio.git
+cd mon-portfolio
+
+# Installer les dépendances
+npm install
+
+# Configurer les variables d'environnement
+cp .env.example .env
+# Éditer .env avec votre clé OpenAI
+
+# Lancer en développement
+npm start
+```
+
+### **Build de Production :**
+```bash
+# Build optimisé
+npm run build
+
+# Test local avec serveur de production
+npm run serve:ssr:mon-portfolio
+```
+
+## 🐳 Déploiement Docker
+
+### **Build et Run Local :**
+```bash
+# Build de l'image
+docker build -t mon-portfolio .
+
+# Lancer le conteneur
+docker run -p 30:30 -e OPENAI_API_KEY=votre_cle_ici mon-portfolio
+```
+
+### **Déploiement Coolify :**
+```bash
+# Dans Coolify :
+# 1. Source: GitHub repository
+# 2. Branch: main  
+# 3. Port: 30
+# 4. Environment Variables:
+#    OPENAI_API_KEY=sk-votre_cle_openai_ici
+```
+
+## 📊 Monitoring et Debug
+
+### **Logs du Chatbot :**
+```bash
+# En développement, vérifiez la console :
+🚀 Sending to API (OpenAI: enabled): message
+🤖 Using OpenAI GPT for intelligent response...
+✅ OpenAI response generated successfully
+🧠 Response source: openai (Réponse IA OpenAI)
+```
+
+### **Test de l'API :**
+```bash
+# Test direct de l'endpoint
+curl -X POST http://localhost:4200/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Qui est Emmanuel deko ?"}'
+```
+
+## 🌟 Projets Présentés
+
+### **🌍 Diasporium**
+- **Technologies :** NextJS, NodeJS, WebSocket, Firebase
+- **Description :** Plateforme complète pour la diaspora congolaise
+- **URL :** [https://diasporium.vercel.app](https://diasporium.vercel.app)
+
+### **🎓 Système de Bourses RDC**
+- **Technologies :** WordPress, PHP, MySQL
+- **Description :** Gestion des bourses gouvernementales
+- **URL :** [https://celbe-rdc.cd](https://celbe-rdc.cd)
+
+## 🎨 Stack Technique
+
+### **Frontend :**
+- Angular 18 avec SSR
+- TypeScript, HTML5, CSS3
+- Tailwind CSS pour le styling
+- Animations Angular
+
+### **Backend :**
+- Node.js avec Express
+- API RESTful
+- Intégration OpenAI GPT-3.5
+
+### **DevOps :**
+- Docker avec multi-stage builds
+- Nginx pour le serving
+- CI/CD avec Git
+- Déploiement Coolify
+
+## 👨‍💻 À Propos d'Emmanuel
+
+Emmanuel Deko est un développeur fullstack passionné avec plus de 5 années d'expérience dans le développement web moderne. Il se spécialise dans la création d'applications complètes et performantes, combinant expertise technique et vision créative.
+
+### **Compétences Clés :**
+- **Frontend :** Angular, React, NextJS, TypeScript
+- **Backend :** NodeJS, Express, Python
+- **Bases de données :** MongoDB, MySQL, PostgreSQL, Firebase
+- **DevOps :** Docker, Git, CI/CD, Cloud deployment
+
+### **Contact :**
+- **GitHub :** [https://github.com/EMMADEKO10](https://github.com/EMMADEKO10)
+- **Portfolio :** [https://emmanueldeko.com](https://emmanueldeko.com)
+- **Email :** Via le formulaire de contact du site
+
+## 📄 License
+
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+---
+
+💡 **Développé avec passion par Emmanuel Deko** 🚀
