@@ -1,13 +1,18 @@
-import { Request, Response } from 'express';
+import * as dotenv from 'dotenv';
 
+// Charger les variables d'environnement
+dotenv.config();
+
+// Interfaces
 interface ChatRequest {
   message: string;
-  context: string;
+  context?: string;
 }
 
 interface ChatResponse {
   response: string;
-  error?: string;
+  source?: string;
+  timestamp?: string;
 }
 
 // Réponses prédéfinies basées sur le contenu du portfolio d'Emmanuel
