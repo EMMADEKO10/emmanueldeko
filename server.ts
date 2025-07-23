@@ -1,3 +1,7 @@
+// Configuration des variables d'environnement
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import express from 'express';
@@ -73,6 +77,7 @@ function run(): void {
   const server = app();
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`OpenAI API Key configured: ${process.env['OPENAI_API_KEY'] ? 'Yes' : 'No'}`);
   });
 }
 
