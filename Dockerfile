@@ -37,9 +37,6 @@ COPY --from=builder /app/server.ts ./server.ts
 # Copy API files
 COPY --from=builder /app/src/api ./src/api
 
-# Copy environment files
-COPY --from=builder /app/src/environments ./src/environments
-
 # Create a simple startup script
 RUN echo '#!/bin/sh' > start.sh && \
     echo 'echo "Starting server with OpenAI support..."' >> start.sh && \
