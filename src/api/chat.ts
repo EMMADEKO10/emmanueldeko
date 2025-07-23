@@ -12,30 +12,40 @@ interface ChatResponse {
 
 // Réponses prédéfinies basées sur le contenu du portfolio d'Emmanuel
 const predefinedResponses = {
+  emmanuel: [
+    "Emmanuel Deko est un développeur fullstack passionné ! 👨‍💻 Il a plusieurs années d'expérience dans le développement web moderne, avec une expertise particulière en Angular, React, et NodeJS. Il est très orienté innovation et toujours à l'affût des nouvelles technologies.",
+    "Emmanuel est un architecte du numérique ! 🚀 Il excelle dans la création d'applications web complètes, de la conception à la mise en production. Son approche combine expertise technique et vision créative pour livrer des solutions élégantes et performantes.",
+    "C'est un développeur fullstack très talentueux ! Emmanuel maîtrise aussi bien le frontend (Angular, React) que le backend (NodeJS, Python). Il a une approche professionnelle du développement et une passion pour créer des expériences utilisateur exceptionnelles."
+  ],
   competences: [
-    "Emmanuel maîtrise un large éventail de technologies modernes ! Il excelle en Angular, React, et NextJS pour le frontend, avec une solide expertise en NodeJS et Python pour le backend. Il utilise aussi Docker, Firebase, MongoDB, et d'autres outils DevOps.",
-    "Côté technique, Emmanuel est fort en développement fullstack : TypeScript, HTML5, CSS3, Tailwind CSS, Express, REST API, WebSocket, bases de données (MongoDB, MySQL, PostgreSQL), et cloud (Vercel, Hostinger)."
+    "Emmanuel maîtrise un large éventail de technologies modernes ! 💻 Frontend : Angular, React, NextJS, TypeScript, HTML5, CSS3, Tailwind CSS. Backend : NodeJS, Express, Python, REST API, WebSocket. DevOps : Docker, Git, CI/CD. Bases de données : MongoDB, MySQL, PostgreSQL, Firebase.",
+    "Côté technique, Emmanuel est un expert fullstack ! ⚡ Il excelle en développement frontend avec Angular et React, maîtrise le backend NodeJS et Python, utilise Docker pour le déploiement, et travaille avec des bases de données modernes. Une vraie polyvalence !",
+    "Les compétences d'Emmanuel couvrent toute la stack web ! 🌟 Développement : Angular, React, NodeJS, TypeScript, Python. Design : UI/UX, Tailwind CSS. Cloud : Firebase, Vercel, Hostinger. Outils : Docker, Git, WebSocket. Il combine technique et créativité parfaitement !"
   ],
   projets: [
-    "Emmanuel a réalisé des projets impressionnants ! Diasporium est sa fierté - une plateforme complète pour la diaspora congolaise avec NextJS, NodeJS, et WebSocket (https://diasporium.vercel.app). Il a aussi développé un système de gestion des bourses pour la RDC.",
-    "Ses projets principaux incluent Diasporium (plateforme diaspora avec tech moderne) et le système de bourses pour la cellule interministérielle RDC. Tous montrent son expertise fullstack et sa capacité à livrer des solutions complètes."
+    "Emmanuel a réalisé des projets impressionnants ! 🌟 Son projet phare est Diasporium, une plateforme complète pour la diaspora congolaise (NextJS, NodeJS, WebSocket, Firebase) sur https://diasporium.vercel.app. Il a aussi créé un système de gestion des bourses pour la RDC sur https://celbe-rdc.cd.",
+    "Ses réalisations sont vraiment remarquables ! 🚀 Diasporium montre toute son expertise : architecture moderne, real-time avec WebSocket, interface élégante. Le système de bourses RDC démontre sa capacité à créer des solutions pour des organismes officiels. Tous ses projets reflètent un haut niveau de qualité !",
+    "Les projets d'Emmanuel révèlent son talent ! 💼 Diasporium est une plateforme sophistiquée avec technologies modernes, le système de bourses RDC est une solution complète pour une institution gouvernementale. Chaque projet montre sa maîtrise technique et son sens du détail."
   ],
   experience: [
-    "Emmanuel est un développeur fullstack passionné avec plusieurs années d'expérience. Il a une approche moderne du développement, maîtrise les bonnes pratiques, et est toujours à l'affût des nouvelles technologies.",
-    "Son parcours montre une expertise solide en développement web moderne. Il crée des applications complètes de A à Z, avec une attention particulière à l'expérience utilisateur et aux performances."
+    "Emmanuel a plus de 5 années d'expérience en développement web ! 📈 Il a une approche moderne et maîtrise les bonnes pratiques du développement. Son parcours montre une évolution constante et une passion pour l'innovation technologique.",
+    "Son expérience est solide et diversifiée ! 💪 Emmanuel a travaillé sur des projets variés, de la diaspora congolaise aux systèmes gouvernementaux. Il combine expertise technique, créativité, et capacité à livrer des solutions complètes et fonctionnelles.",
+    "Le parcours d'Emmanuel reflète un développeur accompli ! 🎯 Plus de 5 ans d'expérience, projets concrets comme Diasporium et le système RDC, maîtrise des technologies modernes, et une approche professionnelle du développement web."
   ],
   contact: [
-    "Vous pouvez contacter Emmanuel directement via ce site dans la section contact ! Son GitHub est aussi actif : https://github.com/EMMADEKO10. Il est ouvert aux collaborations et nouveaux projets.",
-    "Pour le joindre, utilisez le formulaire de contact sur ce site ou consultez son profil GitHub (EMMADEKO10). Il répond généralement rapidement aux messages professionnels."
+    "Vous pouvez contacter Emmanuel facilement ! 📧 Utilisez le formulaire de contact sur ce site web, ou consultez son GitHub très actif : https://github.com/EMMADEKO10. Il est ouvert aux collaborations, projets freelance, et opportunités professionnelles !",
+    "Pour joindre Emmanuel, plusieurs options ! 💬 Formulaire de contact sur le site, profil GitHub (EMMADEKO10), ou explorez son portfolio. Il répond rapidement et est toujours intéressé par de nouveaux défis techniques et collaborations créatives.",
+    "Contactez Emmanuel via ce portfolio ! 🌐 Section contact du site, GitHub (EMMADEKO10), ou découvrez d'abord ses projets. Il est disponible pour discussions professionnelles, conseils techniques, ou collaborations sur des projets innovants."
   ],
   diasporium: [
-    "Diasporium est le projet phare d'Emmanuel ! C'est une plateforme moderne pour l'intégration de la diaspora congolaise, développée avec NextJS, NodeJS, WebSocket, Cloudinary et Firebase. Vraiment impressionnant : https://diasporium.vercel.app",
-    "Cette plateforme Diasporium montre toute l'expertise d'Emmanuel : architecture moderne, real-time avec WebSocket, gestion cloud avec Firebase. C'est un excellent exemple de son travail fullstack."
+    "Diasporium est le projet phare d'Emmanuel ! 🌍 Une plateforme moderne et complète pour l'intégration de la diaspora congolaise. Technologies utilisées : NextJS, NodeJS, WebSocket pour le real-time, Cloudinary, Firebase. C'est vraiment impressionnant : https://diasporium.vercel.app",
+    "Cette plateforme Diasporium montre tout le talent d'Emmanuel ! ⚡ Architecture moderne, fonctionnalités real-time avec WebSocket, interface utilisateur élégante, intégration cloud complète. Un excellent exemple de développement fullstack professionnel et innovant.",
+    "Diasporium démontre l'expertise d'Emmanuel ! 🚀 Plateforme complexe avec NextJS pour le frontend, NodeJS pour l'API, WebSocket pour la communication temps réel, intégrations cloud avancées. C'est un projet qui impressionne les recruteurs et clients !"
   ],
   default: [
-    "Je suis ravi de vous parler d'Emmanuel ! Il est développeur fullstack avec une passion pour les technologies modernes. Que souhaitez-vous savoir sur ses compétences, projets, ou expérience ?",
-    "Excellent choix de me poser cette question ! Emmanuel est un développeur très talentueux. Voulez-vous en savoir plus sur ses projets comme Diasporium, ses compétences techniques, ou son parcours ?",
-    "Emmanuel serait ravi de discuter avec vous ! N'hésitez pas à explorer son portfolio ou à me poser des questions spécifiques sur son travail. Que vous intéresse le plus ?"
+    "Je suis ravi de vous parler d'Emmanuel ! 😊 Il est développeur fullstack avec plus de 5 ans d'expérience et une passion pour les technologies modernes. Que souhaitez-vous savoir : ses compétences, ses projets comme Diasporium, ou son parcours ?",
+    "Excellente question ! 👍 Emmanuel est un développeur très talentueux spécialisé en Angular, React, et NodeJS. Voulez-vous en savoir plus sur ses compétences techniques, ses réalisations comme Diasporium, ou comment le contacter ?",
+    "Emmanuel serait ravi de discuter avec vous ! 💼 C'est un expert fullstack avec des projets impressionnants. Je peux vous parler de ses compétences (Angular, React, NodeJS), ses projets (Diasporium, système RDC), ou vous guider vers son contact !"
   ]
 };
 
@@ -44,39 +54,94 @@ function getRandomResponse(responses: string[]): string {
 }
 
 function analyzeMessage(message: string): string {
-  const lowerMessage = message.toLowerCase();
+  const lowerMessage = message.toLowerCase().trim();
+  console.log('Analyzing message:', lowerMessage); // Log pour debug
   
-  // Analyser le message pour déterminer le type de réponse
-  if (lowerMessage.includes('compétence') || lowerMessage.includes('skill') || lowerMessage.includes('technologie') || lowerMessage.includes('stack')) {
+  // Questions sur Emmanuel personnellement
+  if (lowerMessage.includes('qui est') || lowerMessage.includes('qui') || lowerMessage.includes('emmanuel') || 
+      lowerMessage.includes('deko') || lowerMessage.includes('présent') || lowerMessage.includes('about') || 
+      lowerMessage.includes('développeur') || lowerMessage.includes('personne')) {
+    console.log('Detected: About Emmanuel');
+    return getRandomResponse(predefinedResponses.emmanuel);
+  }
+  
+  // Compétences et technologies - détection améliorée
+  if (lowerMessage.includes('compétence') || lowerMessage.includes('competence') || lowerMessage.includes('skill') || 
+      lowerMessage.includes('technologie') || lowerMessage.includes('stack') || lowerMessage.includes('maîtrise') || 
+      lowerMessage.includes('sait') || lowerMessage.includes('peut') || lowerMessage.includes('capable') || 
+      lowerMessage.includes('programming') || lowerMessage.includes('développement') || lowerMessage.includes('language')) {
+    console.log('Detected: Skills/Technologies');
     return getRandomResponse(predefinedResponses.competences);
   }
   
-  if (lowerMessage.includes('projet') || lowerMessage.includes('réalisation') || lowerMessage.includes('portfolio') || lowerMessage.includes('travail')) {
+  // Projets et réalisations
+  if (lowerMessage.includes('projet') || lowerMessage.includes('réalisation') || lowerMessage.includes('portfolio') || 
+      lowerMessage.includes('travail') || lowerMessage.includes('créé') || lowerMessage.includes('développé') || 
+      lowerMessage.includes('fait') || lowerMessage.includes('construit') || lowerMessage.includes('application')) {
+    console.log('Detected: Projects');
     return getRandomResponse(predefinedResponses.projets);
   }
   
-  if (lowerMessage.includes('expérience') || lowerMessage.includes('parcours') || lowerMessage.includes('carrière') || lowerMessage.includes('profil')) {
+  // Expérience et parcours
+  if (lowerMessage.includes('expérience') || lowerMessage.includes('parcours') || lowerMessage.includes('carrière') || 
+      lowerMessage.includes('profil') || lowerMessage.includes('background') || lowerMessage.includes('formation') || 
+      lowerMessage.includes('étude') || lowerMessage.includes('diplôme') || lowerMessage.includes('cursus')) {
+    console.log('Detected: Experience');
     return getRandomResponse(predefinedResponses.experience);
   }
   
-  if (lowerMessage.includes('contact') || lowerMessage.includes('contacter') || lowerMessage.includes('joindre') || lowerMessage.includes('email')) {
+  // Contact et communication
+  if (lowerMessage.includes('contact') || lowerMessage.includes('contacter') || lowerMessage.includes('joindre') || 
+      lowerMessage.includes('email') || lowerMessage.includes('téléphone') || lowerMessage.includes('message') || 
+      lowerMessage.includes('collaboration') || lowerMessage.includes('embauche') || lowerMessage.includes('recrut')) {
+    console.log('Detected: Contact');
     return getRandomResponse(predefinedResponses.contact);
   }
   
+  // Projet spécifique Diasporium
   if (lowerMessage.includes('diasporium')) {
+    console.log('Detected: Diasporium');
     return getRandomResponse(predefinedResponses.diasporium);
   }
   
-  // Réponses pour les salutations
-  if (lowerMessage.includes('bonjour') || lowerMessage.includes('salut') || lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+  // Système de bourses
+  if (lowerMessage.includes('bourse') || lowerMessage.includes('celbe') || lowerMessage.includes('rdc') || lowerMessage.includes('congo')) {
+    console.log('Detected: Scholarship system');
+    return "Emmanuel a développé un système complet de gestion des bourses pour la cellule interministérielle de la République Démocratique du Congo. C'est un projet web utilisant WordPress pour faciliter le suivi et la gestion des bourses d'études. Vous pouvez le consulter sur https://celbe-rdc.cd";
+  }
+  
+  // Salutations
+  if (lowerMessage.includes('bonjour') || lowerMessage.includes('salut') || lowerMessage.includes('hello') || 
+      lowerMessage.includes('hi') || lowerMessage.includes('hey') || lowerMessage.includes('bonsoir')) {
+    console.log('Detected: Greeting');
     return "Bonjour ! 👋 Ravi de vous rencontrer ! Je suis l'assistant IA d'Emmanuel. Comment puis-je vous aider à découvrir son travail et ses compétences ?";
   }
   
-  // Réponses pour les remerciements
+  // Remerciements
   if (lowerMessage.includes('merci') || lowerMessage.includes('thank')) {
+    console.log('Detected: Thanks');
     return "De rien ! 😊 Je suis là pour vous aider à découvrir le travail d'Emmanuel. N'hésitez pas si vous avez d'autres questions !";
   }
   
+  // Questions générales ou mots interrogatifs
+  if (lowerMessage.includes('quoi') || lowerMessage.includes('que') || lowerMessage.includes('comment') || 
+      lowerMessage.includes('pourquoi') || lowerMessage.includes('what') || lowerMessage.includes('how') || 
+      lowerMessage.includes('?')) {
+    console.log('Detected: General question - checking for specific topics');
+    
+    // Re-check for specific topics in questions
+    if (lowerMessage.includes('compétence') || lowerMessage.includes('competence')) {
+      return getRandomResponse(predefinedResponses.competences);
+    }
+    if (lowerMessage.includes('projet')) {
+      return getRandomResponse(predefinedResponses.projets);
+    }
+    if (lowerMessage.includes('emmanuel') || lowerMessage.includes('deko')) {
+      return getRandomResponse(predefinedResponses.emmanuel);
+    }
+  }
+  
+  console.log('Using default response');
   return getRandomResponse(predefinedResponses.default);
 }
 
