@@ -1,0 +1,9 @@
+Contact: https://emmanueldeko.com/contact
+Preferred-Languages: fr, en
+Canonical: https://emmanueldeko.com/.well-known/security.txt
+Policy: https://emmanueldeko.com/security-policy
+Acknowledgments: https://emmanueldeko.com/security-acknowledgments
+
+# Site Portfolio de Emmanuel Deko Wembolwa (Belcheck)
+# Développeur Full Stack Expert
+# Créateur de Diasporium et système de bourses RDC 

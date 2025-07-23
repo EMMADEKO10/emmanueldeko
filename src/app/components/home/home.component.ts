@@ -1,310 +1,170 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router'; // Importez Router
-import { ChatbotComponent } from '../chatbot/chatbot.component';
-
-// Interfaces
-interface Particle {
-  x: number;
-  y: number;
-  size: number;
-  delay: number;
-}
-
-interface ConnectingLine {
-  x: number;
-  y: number;
-  width: number;
-  rotation: number;
-}
-
-interface Technology {
-  name: string;
-  rotation: number;
-}
-
-interface FloatingSkill {
-  name: string;
-  level: string;
-  rotation: number;
-  dotColor: string;
-  position: {
-    top?: string;
-    right?: string;
-    bottom?: string;
-    left?: string;
-  };
-}
-
-interface SuccessMetric {
-  value: string;
-  label: string;
-}
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [CommonModule, ChatbotComponent]
+  imports: [CommonModule, RouterModule],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
+export class HomeComponent implements OnInit, AfterViewChecked {
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
-
-export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
-  // Propriétés personnelles
-  developerName = 'Emmanuel Deko W.';
+  // Nom optimisé pour SEO
+  developerName = 'Emmanuel Deko Wembolwa (Belcheck)';
+  
+  // Description enrichie avec mots-clés
+  profileDescription = 'Emmanuel Deko Wembolwa, connu sous le nom de Belcheck ou Belcheck Atwood, développeur full stack expert basé à Kinshasa. Créateur de Diasporium et du système de bourses RDC.';
+  
   experience = 5;
-  // profileImage = '/api/placeholder/600/600';
-  profileImage = '/IMG_20231221_082253_393~6.jpg';
+  
+  profileImage = '/IMG_20241124_211024_033~2.jpg';
 
-  private initialColor = 'text-blue-400';
-  textColor = this.initialColor;
-  private colorChangeInterval: any;
-  private technologyColors: { [key: string]: string } = {};
-
-  // Animations et éléments visuels
-  particles: Particle[] = Array(30).fill(null).map(() => ({
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 2,
-    delay: Math.random() * 5
-  }));
-
-  connectingLines: ConnectingLine[] = Array(15).fill(null).map(() => ({
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    width: Math.random() * 100 + 50,
-    rotation: Math.random() * 360
-  }));
-
- // Updated technologies array
- technologies: Technology[] = [
-  { name: 'Angular', rotation: -15 },
-  { name: 'React', rotation: 5 },
-  { name: 'Vue.js', rotation: -8 },
-  { name: 'Node.js', rotation: 10 },
-  { name: 'TypeScript', rotation: -5 },
-  { name: 'Python', rotation: 8 },
-  { name: 'UI/UX', rotation: -12 },
-  { name: 'DevOps', rotation: 6 }
-];
-
-  // Updated floating skills with adjusted positions
-  floatingSkills: FloatingSkill[] = [
-    {
-      name: 'Frontend Master',
-      level: 'Expert',
-      rotation: -15,
-      dotColor: 'bg-green-400',
-      position: { top: '5%', right: '2%' }
-    },
-    {
-      name: 'Backend Pro',
-      level: 'Advanced',
-      rotation: 10,
-      dotColor: 'bg-blue-400',
-      position: { bottom: '25%', left: '2%' }
-    },
-    {
-      name: 'UI/UX Designer',
-      level: 'Creative',
-      rotation: -5,
-      dotColor: 'bg-purple-400',
-      position: { top: '30%', left: '2%' }
-    },
-    {
-      name: 'DevOps Engineer',
-      level: 'Skilled',
-      rotation: 8,
-      dotColor: 'bg-orange-400',
-      position: { bottom: '10%', right: '2%' }
-    },
-    {
-      name: 'Machine Learning',
-      level: 'Intermediate',
-      rotation: 0,
-      dotColor: 'bg-pink-400',
-      position: { top: '50%', right: '50%' }
-    },
-
-    {
-      name: 'Data Analytics',
-      level: 'Novice',
-      rotation: 15,
-      dotColor: 'bg-yellow-400',
-      position: { bottom: '75%', left: '2%' }
-    },
-
-    {
-      name: 'Cloud Computing',
-      level: 'Novice',
-      rotation: -10,
-      dotColor: 'bg-teal-400',
-      position: { bottom: '50%', left: '75%' }
-    },
-
+  // Technologies avec descriptions SEO
+  technologies = [
+    { name: 'Angular', rotation: 2, description: 'Framework principal pour Diasporium' },
+    { name: 'React', rotation: -1, description: 'Interface moderne et réactive' },
+    { name: 'Node.js', rotation: 1, description: 'Backend du système de bourses RDC' },
+    { name: 'TypeScript', rotation: -2, description: 'Développement scalable' },
+    { name: 'Python', rotation: 0, description: 'Analyse de données et IA' },
+    { name: 'Docker', rotation: 3, description: 'Déploiement professionnel' },
+    { name: 'MongoDB', rotation: -1, description: 'Base de données NoSQL' },
+    { name: 'Firebase', rotation: 1, description: 'Backend-as-a-Service' }
   ];
 
-
-  // Métriques de succès
-  successMetrics: SuccessMetric[] = [
-    { value: '8+', label: 'Projets Réalisés' },
-    { value: '95%', label: 'Clients Satisfaits' },
-    { value: '24/7', label: 'Support' },
-    { value: '100%', label: 'Engagement' }
+  // Projets avec mots-clés pour SEO
+  featuredProjects = [
+    {
+      name: 'Diasporium',
+      description: 'Plateforme innovante pour la diaspora congolaise développée par Emmanuel Deko (Belcheck)',
+      url: 'https://diasporium.vercel.app',
+      technologies: ['NextJS', 'NodeJS', 'WebSocket', 'Firebase']
+    },
+    {
+      name: 'Système de Bourses RDC', 
+      description: 'Solution de gestion des bourses pour la République Démocratique du Congo par Belcheck Atwood',
+      url: 'https://celbe-rdc.cd',
+      technologies: ['WordPress', 'PHP', 'MySQL']
+    }
   ];
 
-  // Intervalles pour les animations
-  private particleInterval?: number;
-  private lineInterval?: number;
+  // Compétences avec contexte SEO
+  floatingSkills = [
+    { name: 'Full Stack', level: 'Expert', dotColor: 'bg-blue-500', rotation: 2 },
+    { name: 'UI/UX Design', level: 'Avancé', dotColor: 'bg-purple-500', rotation: -1 },
+    { name: 'DevOps', level: 'Intermédiaire', dotColor: 'bg-green-500', rotation: 1 },
+    { name: 'Data Analysis', level: 'Avancé', dotColor: 'bg-yellow-500', rotation: -2 }
+  ];
 
-  constructor(
-    private router: Router, 
-    private cdr: ChangeDetectorRef,
-    private ngZone: NgZone
-  ) {
-    // Initialize technology colors
-    this.technologies.forEach(tech => {
-      this.technologyColors[tech.name] = this.getRandomColorClass();
+  // Métriques de succès avec projets spécifiques
+  successMetrics = [
+    { value: '20+', label: 'Projets réalisés' },
+    { value: '2K+', label: 'Utilisateurs Diasporium' },
+    { value: '100%', label: 'Clients satisfaits' },
+    { value: '5+', label: 'Années d\'expérience' }
+  ];
+
+  particles: any[] = [];
+  connectingLines: any[] = [];
+
+  constructor() {
+    // Particules d'animation
+    this.generateParticles();
+    this.generateConnectingLines();
+  }
+
+  ngOnInit() {
+    // Animation d'entrée optimisée
+    setTimeout(() => {
+      this.animateElements();
+    }, 100);
+  }
+
+  ngAfterViewChecked() {
+    // Optimisations post-rendu
+  }
+
+  private generateParticles() {
+    for (let i = 0; i < 50; i++) {
+      this.particles.push({
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 3 + 1,
+        delay: Math.random() * 2
+      });
+    }
+  }
+
+  private generateConnectingLines() {
+    for (let i = 0; i < 20; i++) {
+      this.connectingLines.push({
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        width: Math.random() * 100 + 50,
+        rotation: Math.random() * 360
+      });
+    }
+  }
+
+  private animateElements() {
+    // Animations fluides pour l'expérience utilisateur
+    const elements = document.querySelectorAll('.animate-slideFromLeft, .animate-slideUp, .animate-fadeIn');
+    elements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('animated');
+      }, index * 200);
     });
   }
 
-
-  ngOnInit(): void {
-    this.initializeAnimations();
-    this.initializeColorChange();
+  getTechnologyColor(tech: string): string {
+    const colors: { [key: string]: string } = {
+      'Angular': 'text-red-400',
+      'React': 'text-blue-400', 
+      'Node.js': 'text-green-400',
+      'TypeScript': 'text-blue-300',
+      'Python': 'text-yellow-400',
+      'Docker': 'text-cyan-400',
+      'MongoDB': 'text-green-500',
+      'Firebase': 'text-orange-400'
+    };
+    return colors[tech] || 'text-white';
   }
 
-  ngAfterViewInit() {
-    this.cdr.detectChanges();
-  }
-
-  // Modifiez ces méthodes
-  scrollToProjects(): void {
-    this.router.navigate(['/projects']);
-  }
-
-  scrollToContact(): void {
-    this.router.navigate(['/contact']);
-  }
-
-  ngOnDestroy(): void {
-    this.cleanupAnimations();
-    if (this.colorChangeInterval) {
-      clearInterval(this.colorChangeInterval);
+  scrollToProjects() {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-   // Add a new method to handle image loading
-   onImageLoad(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    if (img.naturalHeight > img.naturalWidth) {
-      img.style.width = '100%';
-      img.style.height = 'auto';
-    } else {
-      img.style.width = 'auto';
-      img.style.height = '100%';
+  scrollToContact() {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  /**
-   * Initialise les animations des particules et des lignes
-   */
-  private initializeAnimations(): void {
-    // Vérifiez que window est disponible
-    if (typeof window !== 'undefined') {
-      this.particleInterval = window.setInterval(() => {
-        this.particles = this.particles.map(particle => ({
-          ...particle,
-          x: (particle.x + (Math.random() * 2 - 1) + 100) % 100,
-          y: (particle.y + (Math.random() * 2 - 1) + 100) % 100
-        }));
-      }, 3000);
-
-      this.lineInterval = window.setInterval(() => {
-        this.connectingLines = this.connectingLines.map(line => ({
-          ...line,
-          rotation: (line.rotation + 1) % 360
-        }));
-      }, 50);
-    }
+  // Méthodes pour améliorer l'accessibilité et le SEO
+  getAriaLabel(): string {
+    return `Emmanuel Deko Wembolwa, also known as Belcheck or Belcheck Atwood, Full Stack Developer Portfolio`;
   }
 
-  private cleanupAnimations(): void {
-    if (typeof window !== 'undefined') {
-      if (this.particleInterval) {
-        window.clearInterval(this.particleInterval);
-      }
-      if (this.lineInterval) {
-        window.clearInterval(this.lineInterval);
-      }
-    }
-  }
-
-  /**
-   * Nettoie les intervalles d'animation
-   */
-
-  /**
-   * Défilement vers la section projets
-   */
-  // scrollToProjects(): void {
-  //   const projectsSection = document.getElementById('projects');
-  //   if (projectsSection) {
-  //     projectsSection.scrollIntoView({ 
-  //       behavior: 'smooth',
-  //       block: 'start'
-  //     });
-  //   }
-  // }
-
-   // Modifiez dans le template
-  // [ngClass]="technologyColors[tech.name]"
-  private getRandomColorClass(): string {
-    const colors = [
-      'text-blue-400',
-      'text-purple-400',
-      'text-yellow-400',
-      'text-green-400',
-      'text-red-400',
-      'text-pink-400'
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-
-  /**
-   * Défilement vers la section contact
-   */
-//   scrollToContact(): void {
-//     const contactSection = document.getElementById('contact');
-//     if (contactSection) {
-//       contactSection.scrollIntoView({ 
-//         behavior: 'smooth',
-//         block: 'start'
-//       });
-//     }
-//   }
-
-  private initializeColorChange(): void {
-    this.ngZone.runOutsideAngular(() => {
-      this.colorChangeInterval = setInterval(() => {
-        this.ngZone.run(() => {
-          this.textColor = this.getRandomColorClass();
-          // Update technology colors
-          this.technologies.forEach(tech => {
-            this.technologyColors[tech.name] = this.getRandomColorClass();
-          });
-          this.cdr.detectChanges();
-        });
-      }, 3000);
-    });
-  }
-
-  // Public method to get color for a technology
-  getTechnologyColor(techName: string): string {
-    if (!this.technologyColors[techName]) {
-      this.technologyColors[techName] = this.getRandomColorClass();
-    }
-    return this.technologyColors[techName];
+  getSchemaData() {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Emmanuel Deko Wembolwa",
+      "alternateName": ["Belcheck", "Belcheck Atwood"],
+      "jobTitle": "Développeur Full Stack",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "description": this.profileDescription,
+      "url": "https://emmanueldeko.com",
+      "knowsAbout": this.technologies.map(tech => tech.name)
+    };
   }
 }

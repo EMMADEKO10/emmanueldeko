@@ -1,118 +1,282 @@
 <!-- projects.component.html -->
-<section class="projects-section min-h-screen py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 text-white relative">
-    <!-- Background Pattern -->
-    <div class="absolute inset-0 opacity-10 bg-grid-pattern"></div>
-    
-    <div class="container mx-auto px-4 relative z-10">
-      <!-- Header -->
-      <header class="text-center mb-16">
-        <h2 class="text-5xl font-bold mb-4 animate-fade-in">
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-            My Projects
-          </span>
-        </h2>
-        <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-          Discover my latest works and personal projects
-        </p>
-      </header>
-  
-      <!-- Loading State -->
-      <div *ngIf="isLoading" class="flex justify-center items-center h-64">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+<section class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900">
+  <!-- En-tête de section avec mots-clés SEO -->
+  <div class="container mx-auto px-4 py-16">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+          Projets de Emmanuel Deko Wembolwa (Belcheck)
+        </span>
+      </h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Découvrez les créations innovantes de Belcheck Atwood : de Diasporium, la plateforme de la diaspora congolaise, 
+        au système de gestion des bourses RDC. Chaque projet reflète l'expertise full stack et la vision technique d'Emmanuel Deko.
+      </p>
+      
+      <!-- Mots-clés importants pour SEO -->
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <span class="px-4 py-2 bg-blue-600/20 text-blue-400 rounded-full text-sm">
+          Diasporium - Plateforme Diaspora
+        </span>
+        <span class="px-4 py-2 bg-green-600/20 text-green-400 rounded-full text-sm">
+          Système Bourses RDC
+        </span>
+        <span class="px-4 py-2 bg-purple-600/20 text-purple-400 rounded-full text-sm">
+          Emmanuel Deko Développeur
+        </span>
+        <span class="px-4 py-2 bg-orange-600/20 text-orange-400 rounded-full text-sm">
+          Belcheck Portfolio
+        </span>
       </div>
-  
-      <!-- Content -->
-      <div *ngIf="!isLoading" class="space-y-12">
-        <!-- Filters -->
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <div class="relative w-full sm:w-64">
-            <input
-              [(ngModel)]="searchTerm"
-              (ngModelChange)="filterProjects()"
-              placeholder="Search projects..."
-              class="w-full px-6 py-3 rounded-full bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400"
-            />
-            <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-              🔍
-            </span>
-          </div>
-  
-          <select
-            [(ngModel)]="selectedTechnology"
-            (ngModelChange)="filterProjects()"
-            class="w-full sm:w-48 px-6 py-3 rounded-full bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 appearance-none cursor-pointer"
-          >
-            <option value="">All Technologies</option>
-            <option *ngFor="let tech of technologies" [value]="tech">{{ tech }}</option>
-          </select>
-        </div>
-  
-        <!-- Projects Grid -->
-        <div #projectsContainer 
-             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
-             [@staggerAnimation]="filteredProjects.length">
-          <div *ngFor="let project of filteredProjects" 
-               class="project-card group transition-all duration-500 ease-out">
-            <div class="relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 shadow-xl">
-              <!-- Image Container -->
-              <div class="relative h-48 overflow-hidden">
-                <img [src]="project.imageUrl" 
-                     [alt]="project.title" 
-                     class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+    </div>
+
+    <!-- Projet Principal : Diasporium -->
+    <div class="mb-20">
+      <div class="bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-4">
+                <i class="fas fa-globe text-white text-xl"></i>
               </div>
-  
-              <!-- Content -->
-              <div class="p-6">
-                <h3 class="text-xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                  {{ project.title }}
-                </h3>
-                <p class="text-gray-300 text-sm mb-4">{{ project.description }}</p>
-  
-                <!-- Technologies -->
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span *ngFor="let tech of project.technologies" 
-                        class="px-3 py-1 text-xs font-medium rounded-full 
-                               bg-gradient-to-r from-blue-500/20 to-purple-500/20 
-                               border border-white/10">
-                    {{ tech }}
-                  </span>
-                </div>
-  
-                <!-- Actions -->
-                <div class="flex justify-between items-center">
-                  <a [href]="project.githubUrl" 
-                     target="_blank"
-                     class="inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                            bg-white/5 hover:bg-white/10 border border-white/10 
-                            transition-all duration-300">
-                    <i class="fab fa-github"></i>
-                    Code
-                  </a>
-                  <a [href]="project.liveUrl" 
-                     target="_blank"
-                     class="inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                            bg-gradient-to-r from-blue-500 to-purple-500 
-                            hover:from-blue-600 hover:to-purple-600 
-                            transition-all duration-300">
-                    <i class="fas fa-external-link-alt"></i>
-                    Live Demo
-                  </a>
-                </div>
+              <div>
+                <h2 class="text-3xl font-bold text-white">Diasporium</h2>
+                <p class="text-blue-400">Projet Phare d'Emmanuel Deko (Belcheck)</p>
+              </div>
+            </div>
+            
+            <p class="text-gray-300 text-lg mb-6">
+              <strong>Diasporium</strong> est la plateforme de référence créée par <strong>Emmanuel Deko Wembolwa (Belcheck)</strong> 
+              pour connecter et accompagner la diaspora congolaise dans le monde. Cette solution full-stack moderne utilise les 
+              dernières technologies web pour offrir une expérience utilisateur exceptionnelle.
+            </p>
+            
+            <!-- Fonctionnalités avec mots-clés -->
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-comments text-blue-400"></i>
+                <span class="text-gray-300">Chat temps réel WebSocket</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-users text-green-400"></i>
+                <span class="text-gray-300">Communauté diaspora active</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-calendar text-purple-400"></i>
+                <span class="text-gray-300">Événements culturels</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-share-alt text-orange-400"></i>
+                <span class="text-gray-300">Partage de ressources</span>
+              </div>
+            </div>
+            
+            <!-- Technologies avec contexte SEO -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-white mb-3">Stack Technique de Belcheck :</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-red-600/20 text-red-400 rounded-full text-sm">NextJS</span>
+                <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-sm">Node.js</span>
+                <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-sm">WebSocket</span>
+                <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-sm">Firebase</span>
+                <span class="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-sm">Cloudinary</span>
+                <span class="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded-full text-sm">TypeScript</span>
+              </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="https://diasporium.vercel.app" target="_blank" 
+                 class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:scale-105 transition-transform">
+                <i class="fas fa-external-link-alt mr-2"></i>
+                Visiter Diasporium
+              </a>
+              <button class="inline-flex items-center px-6 py-3 border border-blue-400 text-blue-400 rounded-full hover:bg-blue-400/10 transition-colors">
+                <i class="fab fa-github mr-2"></i>
+                Code Source (Privé)
+              </button>
+            </div>
+          </div>
+          
+          <!-- Capture d'écran ou mockup -->
+          <div class="relative">
+            <div class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl p-6 backdrop-blur-sm">
+              <img src="/Diasporium A Blanc.svg" alt="Diasporium Logo - Plateforme de Emmanuel Deko Belcheck" 
+                   class="w-full max-w-md mx-auto" loading="lazy">
+              <div class="mt-4 text-center">
+                <div class="text-2xl font-bold text-white">2000+</div>
+                <div class="text-gray-400">Utilisateurs actifs</div>
               </div>
             </div>
           </div>
         </div>
-  
-        <!-- No Results Message -->
-        <div *ngIf="filteredProjects.length === 0" 
-             class="text-center py-16 px-4 rounded-lg bg-white/5 backdrop-blur-sm">
-          <p class="text-xl text-gray-300">No projects found matching your criteria.</p>
-          <button (click)="searchTerm = ''; selectedTechnology = ''; filterProjects()" 
-                  class="mt-4 px-6 py-2 rounded-full bg-blue-500 hover:bg-blue-600 transition-colors">
-            Reset Filters
-          </button>
+      </div>
+    </div>
+
+    <!-- Projet Gouvernemental : Système de Bourses RDC -->
+    <div class="mb-20">
+      <div class="bg-gradient-to-r from-green-600/10 to-blue-600/10 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="order-2 lg:order-1">
+            <div class="bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-2xl p-6 backdrop-blur-sm">
+              <img src="/logo cellule interminiterielle nicky.jpg" 
+                   alt="Système Bourses RDC - Projet gouvernemental de Belcheck Atwood" 
+                   class="w-full max-w-md mx-auto rounded-lg" loading="lazy">
+              <div class="mt-4 text-center">
+                <div class="text-2xl font-bold text-white">Solution</div>
+                <div class="text-gray-400">Gouvernementale Officielle</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="order-1 lg:order-2">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center mr-4">
+                <i class="fas fa-university text-white text-xl"></i>
+              </div>
+              <div>
+                <h2 class="text-3xl font-bold text-white">Système de Bourses RDC</h2>
+                <p class="text-green-400">Solution Gouvernementale par Belcheck Atwood</p>
+              </div>
+            </div>
+            
+            <p class="text-gray-300 text-lg mb-6">
+              <strong>Belcheck Atwood (Emmanuel Deko)</strong> a développé une solution complète de gestion des bourses 
+              d'études pour la <strong>Cellule Interministérielle de la République Démocratique du Congo</strong>. 
+              Cette plateforme modernise entièrement le processus de gestion des bourses nationales.
+            </p>
+            
+            <!-- Impact et fonctionnalités -->
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-file-alt text-green-400"></i>
+                <span class="text-gray-300">Gestion des candidatures</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-tracking text-blue-400"></i>
+                <span class="text-gray-300">Suivi des dossiers</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-chart-bar text-purple-400"></i>
+                <span class="text-gray-300">Rapports statistiques</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-shield-alt text-orange-400"></i>
+                <span class="text-gray-300">Sécurité gouvernementale</span>
+              </div>
+            </div>
+            
+            <!-- Technologies gouvernementales -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-white mb-3">Technologies Entreprise :</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-sm">WordPress</span>
+                <span class="px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-sm">PHP</span>
+                <span class="px-3 py-1 bg-orange-600/20 text-orange-400 rounded-full text-sm">MySQL</span>
+                <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-sm">Custom Plugins</span>
+                <span class="px-3 py-1 bg-red-600/20 text-red-400 rounded-full text-sm">Admin Dashboard</span>
+              </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="https://celbe-rdc.cd" target="_blank" 
+                 class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-full hover:scale-105 transition-transform">
+                <i class="fas fa-external-link-alt mr-2"></i>
+                Visiter le Système RDC
+              </a>
+              <div class="inline-flex items-center px-6 py-3 border border-gray-500 text-gray-400 rounded-full">
+                <i class="fas fa-lock mr-2"></i>
+                Code Confidentiel
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+
+    <!-- Autres Projets de Emmanuel Deko (Belcheck) -->
+    <div class="mb-16">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+          Autres Réalisations de Belcheck
+        </span>
+      </h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Portfolio Personnel -->
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all">
+          <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-user text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Portfolio Personnel</h3>
+          <p class="text-gray-300 mb-4">
+            Site portfolio moderne d'Emmanuel Deko Wembolwa avec chatbot IA, développé avec Angular 18 et déployé sur Coolify.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-red-600/20 text-red-400 rounded text-xs">Angular</span>
+            <span class="px-2 py-1 bg-blue-600/20 text-blue-400 rounded text-xs">TypeScript</span>
+            <span class="px-2 py-1 bg-green-600/20 text-green-400 rounded text-xs">OpenAI</span>
+          </div>
+          <div class="text-sm text-blue-400">Vous êtes ici ! 🎉</div>
+        </div>
+
+        <!-- Applications Web sur Mesure -->
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all">
+          <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-laptop-code text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Applications Web Personnalisées</h3>
+          <p class="text-gray-300 mb-4">
+            Développement d'applications web sur mesure pour PME et startups, solutions e-commerce et plateformes métier.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-yellow-600/20 text-yellow-400 rounded text-xs">React</span>
+            <span class="px-2 py-1 bg-green-600/20 text-green-400 rounded text-xs">Node.js</span>
+            <span class="px-2 py-1 bg-orange-600/20 text-orange-400 rounded text-xs">MongoDB</span>
+          </div>
+          <div class="text-sm text-green-400">Projets clients privés</div>
+        </div>
+
+        <!-- Contributions Open Source -->
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all">
+          <div class="w-12 h-12 bg-gradient-to-r from-gray-500 to-black rounded-xl flex items-center justify-center mb-4">
+            <i class="fab fa-github text-white text-xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Open Source</h3>
+          <p class="text-gray-300 mb-4">
+            Contributions actives à l'écosystème open source et projets communautaires pour la tech africaine.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="px-2 py-1 bg-gray-600/20 text-gray-400 rounded text-xs">GitHub</span>
+            <span class="px-2 py-1 bg-purple-600/20 text-purple-400 rounded text-xs">Community</span>
+          </div>
+          <a href="https://github.com/EMMADEKO10" target="_blank" class="text-sm text-blue-400 hover:underline">
+            Voir sur GitHub →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-3xl p-12 backdrop-blur-sm border border-white/10">
+      <h2 class="text-3xl font-bold text-white mb-4">
+        Prêt à collaborer avec Emmanuel Deko (Belcheck) ?
+      </h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        Que vous souhaitiez développer une plateforme comme Diasporium, un système gouvernemental ou toute autre solution web, 
+        Belcheck Atwood met son expertise à votre service.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" 
+           class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:scale-105 transition-transform text-lg">
+          <i class="fas fa-envelope mr-3"></i>
+          Discuter de votre projet
+        </a>
+        <a href="/CV_2024-10-29_emmanuel_deko.pdf" download
+           class="inline-flex items-center px-8 py-4 border border-blue-400 text-blue-400 rounded-full hover:bg-blue-400/10 transition-colors text-lg">
+          <i class="fas fa-download mr-3"></i>
+          Télécharger mon CV
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

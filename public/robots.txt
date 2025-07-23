@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://emmanueldeko.com/sitemap.xml
+
+# Fichiers spécifiques
+Allow: /assets/
+Allow: /images/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.json
+
+# Disallow des fichiers sensibles
+Disallow: /api/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /angular.json
+Disallow: /package.json
+
+# Optimisation pour les moteurs de recherche
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1 

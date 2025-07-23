@@ -1,0 +1,40 @@
+{
+  "name": "Emmanuel Deko Wembolwa (Belcheck) - Portfolio Développeur Full Stack",
+  "short_name": "Belcheck Portfolio",
+  "description": "Portfolio professionnel d'Emmanuel Deko Wembolwa, connu sous le nom de Belcheck ou Belcheck Atwood. Développeur full stack expert, créateur de Diasporium et du système de bourses RDC.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a202c",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "lang": "fr",
+  "categories": ["portfolio", "developer", "full-stack", "web-development"],
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    }
+  ],
+  "author": {
+    "name": "Emmanuel Deko Wembolwa",
+    "email": "contact@emmanueldeko.com",
+    "url": "https://emmanueldeko.com"
+  },
+  "keywords": [
+    "Emmanuel Deko Wembolwa",
+    "Belcheck",
+    "Belcheck Atwood", 
+    "développeur full stack",
+    "portfolio",
+    "Diasporium",
+    "système bourses RDC",
+    "Angular",
+    "React",
+    "Node.js",
+    "développeur Congo",
+    "programmeur RDC",
+    "développeur web Kinshasa"
+  ]
+} 
