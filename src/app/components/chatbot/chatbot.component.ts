@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { ChatbotService } from '../../services/chatbot.service';
-import { environment } from '../../../environments/environment';
+
+// Configuration locale pour le debug
+const isProduction = typeof window !== 'undefined' && 
+  (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1');
 
 interface Message {
   content: string;
@@ -117,7 +120,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
         this.isTyping = false;
         
         // Log pour debug en développement
-        if (!environment.production) {
+        if (!isProduction) {
           console.log(`${sourceIcon} Response source: ${response.source}${sourceText}`);
         }
       },
