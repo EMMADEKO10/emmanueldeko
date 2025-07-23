@@ -5,6 +5,9 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
 
+// Import du handler chatbot
+import chatHandler from './src/api/chat';
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
@@ -16,6 +19,22 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
+
+  // Middleware pour parser le JSON
+  server.use(express.json());
+
+  // Route API pour le chatbot
+  server.post('/api/chat', async (req, res) => {
+    try {
+      await chatHandler(req, res);
+    } catch (error) {
+      console.error('Chatbot API error:', error);
+      res.status(500).json({ 
+        error: 'Internal server error',
+        response: "Désolé, je rencontre un problème technique. Pouvez-vous réessayer dans un moment ?"
+      });
+    }
+  });
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });

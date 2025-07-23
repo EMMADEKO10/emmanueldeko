@@ -1,0 +1,83 @@
+<!-- Bouton flottant pour ouvrir le chat -->
+<div class="chatbot-toggle" 
+     [class.active]="isOpen" 
+     (click)="toggleChat()"
+     [@fadeIn]>
+  <div class="chat-icon" *ngIf="!isOpen">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.39 14.99 3.1 16.26L2 22L7.74 20.9C9.01 21.61 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="currentColor"/>
+      <circle cx="8.5" cy="12" r="1.5" fill="white"/>
+      <circle cx="12" cy="12" r="1.5" fill="white"/>
+      <circle cx="15.5" cy="12" r="1.5" fill="white"/>
+    </svg>
+  </div>
+  <div class="close-icon" *ngIf="isOpen">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+
+<!-- Fenêtre de chat -->
+<div class="chatbot-container" *ngIf="isOpen" [@slideIn]>
+  <!-- En-tête -->
+  <div class="chat-header">
+    <div class="assistant-info">
+      <div class="avatar">🤖</div>
+      <div class="info">
+        <h3>Assistant IA</h3>
+        <span class="status">En ligne</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Messages -->
+  <div class="messages-container" #messagesContainer>
+    <div class="message" 
+         *ngFor="let message of messages" 
+         [class.user-message]="message.isUser"
+         [@fadeIn]>
+      <div class="message-content">
+        <div class="message-bubble">
+          {{ message.content }}
+        </div>
+        <div class="message-time">
+          {{ message.timestamp | date:'HH:mm' }}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Indicateur de frappe -->
+    <div class="message typing-indicator" *ngIf="isTyping" [@fadeIn]>
+      <div class="message-content">
+        <div class="message-bubble">
+          <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Zone de saisie -->
+  <div class="chat-input">
+    <div class="input-container">
+      <textarea 
+        [(ngModel)]="currentMessage"
+        (keypress)="onKeyPress($event)"
+        placeholder="Tapez votre message..."
+        rows="1"
+        maxlength="500"></textarea>
+      <button 
+        (click)="sendMessage()"
+        [disabled]="!currentMessage.trim() || isTyping"
+        class="send-button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div> 
