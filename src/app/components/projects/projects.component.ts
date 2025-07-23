@@ -47,7 +47,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       imageUrl: "/Identité Visuels copie A.png",
       technologies: ["figma", "NextJS", "NodeJS", "webSoketIO", "Cloudinary", "firebase"],
       githubUrl: "https://github.com/EMMADEKO10",
-      liveUrl: "https://diasporium.vercel.app",
+      liveUrl: "https://diasporium.cd",
       featured: true
     },
 
@@ -69,7 +69,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       imageUrl: "/Capture d'écran 2024-07-03 163849A.PNG",
       technologies: ["React", "NodeJS", "Cloudinary", "figma"],
       githubUrl: "https://github.com/EMMADEKO10",
-      liveUrl: "https://sotradons.vercel.app",
+      liveUrl: "https://sotradons.org",
       featured: true
     },
 
@@ -80,7 +80,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       imageUrl: "/DALL·E 2024-12-02 12.59.24 - Create a professional and sleek logo-style image with the text 'Brievent'. Use a modern font and incorporate a palette of blue, white, and black. The .webp",
       technologies: ["React", "NodeJS", "Cloudinary", "JavaScript", "TailWind UI"],
       githubUrl: "https://github.com/EMMADEKO10",
-      liveUrl: "https://brievents.vercel.app",
+      liveUrl: "https://brievents.com",
       featured: true
     },
     {
@@ -90,7 +90,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       imageUrl: "/DALL·E 2024-12-02 13.23.03 - Create a vibrant and celebratory poster for a chicken-themed festival. The design should feature chickens and roosters in a lively, colorful setting w.webp",
       technologies: ["Node JS","JavasCript"],
       githubUrl: "https://github.com/EMMADEKO10",
-      liveUrl: "https://festival-du-poulet.vercel.app",
+      liveUrl: "https://poulex.cd",
       featured: true
     },
 
@@ -101,7 +101,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
       imageUrl: "/DALL·E 2024-12-02 13.07.03 - Design a professional portfolio-style image featuring a person in the foreground (center-left), with the name 'Emmanuel Deko' and the title 'Codeur' p.webp",
       technologies: ["Angular", "Tailwind UI"],
       githubUrl: "https://github.com/EMMADEKO10",
-      liveUrl: "https://emmanueldeko.vercel.app",
+      liveUrl: "https://emmanueldeko.com",
       featured: true
     },
     // Add more projects here...
