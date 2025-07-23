@@ -31,12 +31,12 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html
 
-# Expose port 80
-EXPOSE 80
+# Expose port 30 (matching Coolify configuration)
+EXPOSE 30
 
-# Health check
+# Health check on port 30
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:30/ || exit 1
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"] 
