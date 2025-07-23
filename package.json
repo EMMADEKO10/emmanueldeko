@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production",
+    "build": "ng build --configuration production --optimization --build-optimizer --aot",
+    "build:docker": "ng build --configuration production --optimization --build-optimizer --aot --output-path=dist/mon-portfolio/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:mon-portfolio": "node dist/mon-portfolio/server/server.mjs",

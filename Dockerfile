@@ -6,25 +6,20 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with cache optimization
+RUN npm ci --only=production --no-audit --no-fund
 
 # Copy source code
 COPY . .
 
-# Update browserslist database
-RUN npx browserslist@latest --update-db
-
-# Build the application
-RUN npm run build
+# Build the application with memory optimization
+RUN NODE_OPTIONS="--max_old_space_size=1024" npm run build
 
 # Stage 2: Serve
 FROM nginx:alpine
 
-# Create directory for logs and set permissions
-RUN mkdir -p /var/log/nginx && \
-    chown -R nginx:nginx /var/log/nginx && \
-    chmod -R 755 /var/log/nginx
+# Install wget for health checks
+RUN apk add --no-cache wget
 
 # Copy built assets from builder stage
 COPY --from=builder /app/dist/mon-portfolio/browser /usr/share/nginx/html
@@ -34,19 +29,14 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Set proper permissions
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
-    chmod -R 755 /usr/share/nginx/html && \
-    chmod 644 /etc/nginx/conf.d/default.conf
+    chmod -R 755 /usr/share/nginx/html
 
-# Create a non-root user to run the server
-RUN adduser -D -H -u 101 -s /sbin/nologin nginx || true
-
-# Expose both ports for flexibility
+# Expose port 80
 EXPOSE 80
-EXPOSE 8080
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT:-80}/ || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
 
-# Start nginx with environment variable support
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;' 
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"] 
