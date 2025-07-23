@@ -270,36 +270,13 @@
       </h2>
       
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fas fa-project-diagram text-white text-2xl"></i>
+        <div *ngFor="let stat of statistics" class="text-center group">
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+               [ngClass]="'bg-gradient-to-r ' + stat.gradient">
+            <i [class]="stat.icon + ' text-white text-2xl'"></i>
           </div>
-          <div class="text-4xl font-bold text-blue-400 mb-2">50+</div>
-          <div class="text-gray-300">Projets Réalisés</div>
-        </div>
-        
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fas fa-handshake text-white text-2xl"></i>
-          </div>
-          <div class="text-4xl font-bold text-green-400 mb-2">30+</div>
-          <div class="text-gray-300">Clients Satisfaits</div>
-        </div>
-        
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fas fa-industry text-white text-2xl"></i>
-          </div>
-          <div class="text-4xl font-bold text-purple-400 mb-2">10+</div>
-          <div class="text-gray-300">Secteurs Couverts</div>
-        </div>
-        
-        <div class="text-center group">
-          <div class="w-20 h-20 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-            <i class="fas fa-award text-white text-2xl"></i>
-          </div>
-          <div class="text-4xl font-bold text-yellow-400 mb-2">100%</div>
-          <div class="text-gray-300">Satisfaction Client</div>
+          <div class="text-4xl font-bold mb-2" [ngClass]="stat.color">{{stat.value}}</div>
+          <div class="text-gray-300">{{stat.label}}</div>
         </div>
       </div>
     </div>
