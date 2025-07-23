@@ -2,16 +2,17 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ChatbotComponent } from './components/chatbot/chatbot.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, ChatbotComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   template: `
     <app-header></app-header>
-    <router-outlet></router-outlet>
-    <!-- <app-footer></app-footer> -->
+    <main class="relative w-[100%] min-h-screen overflow-x-hidden">
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
   `
 })
 export class AppComponent {}

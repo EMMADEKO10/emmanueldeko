@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router'; // Importez Router
+import { ChatbotComponent } from '../chatbot/chatbot.component';
 
 // Interfaces
 interface Particle {
@@ -45,7 +46,7 @@ interface SuccessMetric {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, ChatbotComponent]
 })
 
 
