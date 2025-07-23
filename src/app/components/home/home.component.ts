@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ChatbotComponent } from '../chatbot/chatbot.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ChatbotComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -109,6 +110,9 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   private animateElements() {
+    // Vérification SSR - seulement côté client
+    if (typeof document === 'undefined') return;
+    
     // Animations fluides pour l'expérience utilisateur
     const elements = document.querySelectorAll('.animate-slideFromLeft, .animate-slideUp, .animate-fadeIn');
     elements.forEach((el, index) => {
