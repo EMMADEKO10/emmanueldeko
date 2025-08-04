@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
 
 @Component({
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   particles: any[] = [];
   connectingLines: any[] = [];
 
-  constructor() {
+  constructor(private router: Router) {
     // Particules d'animation
     this.generateParticles();
     this.generateConnectingLines();
@@ -137,17 +137,13 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   scrollToProjects() {
-    const projectsSection = document.getElementById('projects');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Navigation vers la page projets
+    this.router.navigate(['/projects']);
   }
 
   scrollToContact() {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Navigation vers la page contact
+    this.router.navigate(['/contact']);
   }
 
   // Méthodes pour améliorer l'accessibilité et le SEO

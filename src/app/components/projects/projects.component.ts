@@ -176,14 +176,14 @@ export class ProjectsComponent implements OnInit {
   // Statistiques impressionnantes
   statistics = [
     {
-      value: '15',
+      value: '15+',
       label: 'Projets Réalisés',
       icon: 'fas fa-project-diagram',
       gradient: 'from-blue-500 to-cyan-500',
       color: 'text-blue-400'
     },
     {
-      value: '14',
+      value: '12+',
       label: 'Clients Satisfaits',
       icon: 'fas fa-handshake',
       gradient: 'from-green-500 to-emerald-500',
@@ -197,7 +197,7 @@ export class ProjectsComponent implements OnInit {
       color: 'text-purple-400'
     },
     {
-      value: '90%',
+      value: '85%',
       label: 'Satisfaction Client',
       icon: 'fas fa-award',
       gradient: 'from-yellow-500 to-orange-500',
