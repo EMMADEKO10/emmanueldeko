@@ -2,11 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
@@ -229,7 +230,19 @@ export class ProjectsComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  // UI state
+  selectedCategory: string = 'all';
+  searchTerm: string = '';
+
+  // Animations et particules
+  particles: any[] = [];
+  connectingLines: any[] = [];
+
+  constructor() { 
+    // Génération des particules et lignes d'animation
+    this.generateParticles();
+    this.generateConnectingLines();
+  }
 
   ngOnInit(): void {
     this.setPageMeta();
@@ -266,6 +279,65 @@ export class ProjectsComponent implements OnInit {
   // Méthodes utilitaires pour le template
   getProjectsByCategory(categoryId: string) {
     return this.projectCategories.find(cat => cat.id === categoryId);
+  }
+
+  get visibleCategories() {
+    const term = this.searchTerm.trim().toLowerCase();
+    let list = this.projectCategories.filter(cat => {
+      const matchesCategory = this.selectedCategory === 'all' || cat.id === this.selectedCategory;
+      if (!term) return matchesCategory;
+      const haystack = [
+        cat.name,
+        cat.description,
+        ...(cat.features || []),
+        ...(cat.clients || []),
+        ...(cat.tags || [])
+      ].join(' ').toLowerCase();
+      return matchesCategory && haystack.includes(term);
+    });
+
+    // Tri par nom par défaut
+    list = list.sort((a, b) => a.name.localeCompare(b.name));
+    return list;
+  }
+
+  setCategory(categoryId: string) {
+    this.selectedCategory = categoryId;
+  }
+
+  clearFilters() {
+    this.selectedCategory = 'all';
+    this.searchTerm = '';
+  }
+
+  trackByCategory = (_: number, item: any) => item.id;
+
+  // Génération des particules animées
+  private generateParticles() {
+    this.particles = [];
+    for (let i = 0; i < 15; i++) {
+      this.particles.push({
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 4 + 2,
+        delay: Math.random() * 5
+      });
+    }
+  }
+
+  // Génération des lignes de connexion
+  private generateConnectingLines() {
+    this.connectingLines = [];
+    for (let i = 0; i < 8; i++) {
+      const angle = Math.random() * 360;
+      this.connectingLines.push({
+        x1: Math.random() * 100,
+        y1: Math.random() * 100,
+        length: Math.random() * 150 + 50,
+        angle: angle,
+        delay: Math.random() * 3
+      });
+    }
   }
 
   // Données structurées pour SEO
