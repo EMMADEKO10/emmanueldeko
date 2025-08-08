@@ -7,18 +7,18 @@
         <header class="text-center mb-6 xs:mb-8 sm:mb-12 lg:mb-16">
             <h2 class="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 xs:mb-3 sm:mb-4 animate-fade-in">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-                    Contact Us
+                    Contactez-nous
                 </span>
             </h2>
             <p class="text-sm xs:text-base sm:text-lg text-gray-300 max-w-2xl mx-auto px-2">
-                Get in touch with us for any inquiries or collaborations
+                Contactez-nous pour toute question ou collaboration
             </p>
         </header>
   
         <div class="grid md:grid-cols-2 gap-4 xs:gap-6 sm:gap-8 lg:gap-12">
             <!-- Contact Information -->
             <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 xs:p-6 sm:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl">
-                <h3 class="text-lg xs:text-xl sm:text-2xl font-semibold mb-4 xs:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Our Contact Details</h3>
+                <h3 class="text-lg xs:text-xl sm:text-2xl font-semibold mb-4 xs:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Nos Coordonnées</h3>
                 <ul class="space-y-4 xs:space-y-6">
                     <li *ngFor="let method of contactMethods" class="flex items-center group">
                         <div class="mr-3 xs:mr-4 w-8 xs:w-10 sm:w-12 h-8 xs:h-10 sm:h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 transition-all duration-300 group-hover:scale-110">
@@ -41,22 +41,38 @@
   
             <!-- Contact Form -->
             <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 xs:p-6 sm:p-8 shadow-xl transition-all duration-300 hover:shadow-2xl">
-                <h3 class="text-lg xs:text-xl sm:text-2xl font-semibold mb-4 xs:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Send Us a Message</h3>
+                <h3 class="text-lg xs:text-xl sm:text-2xl font-semibold mb-4 xs:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Envoyez-nous un message</h3>
                 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-3 xs:space-y-4">
                     <div>
-                        <label for="name" class="block mb-1 xs:mb-2 text-xs xs:text-sm sm:text-base text-gray-300">Name</label>
+                        <label for="name" class="block mb-1 xs:mb-2 text-xs xs:text-sm sm:text-base text-gray-300">Nom</label>
                         <input type="text" id="name" formControlName="name" 
                                class="w-full px-3 xs:px-4 py-2 xs:py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400 text-xs xs:text-sm sm:text-base"
                                [class.border-red-500]="isSubmitted && formControls['name'].errors">
                         <small *ngIf="isSubmitted && formControls['name'].errors" class="text-red-400 mt-1 block text-xs">{{ getErrorMessage('name') }}</small>
                     </div>
 
-                    <!-- Répéter la même structure pour email, subject et message -->
+                    <div>
+                        <label for="email" class="block mb-1 xs:mb-2 text-xs xs:text-sm sm:text-base text-gray-300">Email</label>
+                        <input type="email" id="email" formControlName="email" 
+                               class="w-full px-3 xs:px-4 py-2 xs:py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400 text-xs xs:text-sm sm:text-base"
+                               [class.border-red-500]="isSubmitted && formControls['email'].errors">
+                        <small *ngIf="isSubmitted && formControls['email'].errors" class="text-red-400 mt-1 block text-xs">{{ getErrorMessage('email') }}</small>
+                    </div>
+
+                    <div>
+                        <label for="subject" class="block mb-1 xs:mb-2 text-xs xs:text-sm sm:text-base text-gray-300">Sujet</label>
+                        <input type="text" id="subject" formControlName="subject" 
+                               class="w-full px-3 xs:px-4 py-2 xs:py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400 text-xs xs:text-sm sm:text-base"
+                               [class.border-red-500]="isSubmitted && formControls['subject'].errors">
+                        <small *ngIf="isSubmitted && formControls['subject'].errors" class="text-red-400 mt-1 block text-xs">{{ getErrorMessage('subject') }}</small>
+                    </div>
+
                     <div>
                         <label for="message" class="block mb-1 xs:mb-2 text-xs xs:text-sm sm:text-base text-gray-300">Message</label>
                         <textarea id="message" formControlName="message" rows="3" xs:rows="4"
                                 class="w-full px-3 xs:px-4 py-2 xs:py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-gray-400 text-xs xs:text-sm sm:text-base"
                                 [class.border-red-500]="isSubmitted && formControls['message'].errors"></textarea>
+                        <small *ngIf="isSubmitted && formControls['message'].errors" class="text-red-400 mt-1 block text-xs">{{ getErrorMessage('message') }}</small>
                     </div>
   
                     <button type="submit" 
@@ -64,13 +80,13 @@
                                    hover:from-blue-600 hover:to-purple-600 transition-all duration-300 
                                    transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50
                                    text-xs xs:text-sm sm:text-base font-medium">
-                        Send Message
+                        Envoyer le message
                     </button>
                 </form>
   
                 <div *ngIf="showSuccessMessage" 
                      class="mt-4 xs:mt-6 p-3 xs:p-4 bg-green-500/20 border border-green-500/50 text-green-300 rounded-lg animate-fade-in text-xs xs:text-sm sm:text-base">
-                    Your message has been sent successfully!
+                    Votre message a été envoyé avec succès !
                 </div>
             </div>
         </div>

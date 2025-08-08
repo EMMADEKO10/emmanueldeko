@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
+import { ThemeService } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,10 @@ import { ChatbotComponent } from '../chatbot/chatbot.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit, AfterViewChecked {
+export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
+  isDarkMode = true;
+  private themeSubscription: Subscription;
 
   // Nom optimisé pour SEO
   developerName = 'Emmanuel Deko Wembolwa (Belcheck)';
@@ -70,13 +74,19 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   particles: any[] = [];
   connectingLines: any[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private themeService: ThemeService) {
+    this.themeSubscription = new Subscription();
     // Particules d'animation
     this.generateParticles();
     this.generateConnectingLines();
   }
 
   ngOnInit() {
+    // S'abonner au service de thème
+    this.themeSubscription = this.themeService.theme$.subscribe(theme => {
+      this.isDarkMode = theme === 'dark';
+    });
+    
     // Animation d'entrée optimisée
     setTimeout(() => {
       this.animateElements();
@@ -85,6 +95,12 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     // Optimisations post-rendu
+  }
+
+  ngOnDestroy() {
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
+    }
   }
 
   private generateParticles() {

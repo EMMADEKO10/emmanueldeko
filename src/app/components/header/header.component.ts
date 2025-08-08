@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
+import { ThemeService } from '../../services/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatIconModule, ThemeToggleComponent],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -30,9 +33,11 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
   hoveredItem: any = null;
+  isDarkMode = true;
+  private themeSubscription: Subscription;
 
   navItems = [
     { 
@@ -61,7 +66,9 @@ export class HeaderComponent {
     }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private themeService: ThemeService) {
+    this.themeSubscription = new Subscription();
+  }
 
   isActive(path: string): boolean {
     return this.router.isActive(path, {
@@ -83,6 +90,16 @@ export class HeaderComponent {
   navigateAndClose(path: string): void {
     this.router.navigate([path]);
     this.isMenuOpen = false;
+  }
+
+  ngOnInit(): void {
+    this.themeSubscription = this.themeService.theme$.subscribe(theme => {
+      this.isDarkMode = theme === 'dark';
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
   }
 
   scrollToTop(): void {

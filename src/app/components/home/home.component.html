@@ -1,9 +1,9 @@
 <!-- home.component.html -->
-<section class="relative top-0 left-0 right-0 min-h-screen w-full overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900">
+<section class="relative top-0 left-0 right-0 min-h-screen w-full overflow-hidden bg-gradient-to-br from-blue-50 via-white to-gray-100 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900">
   <!-- Éléments de fond animés -->
   <div class="absolute inset-0 pointer-events-none">
     <!-- Superposition de dégradé -->
-    <div class="absolute inset-0 bg-gradient-radial from-blue-500/10 via-transparent to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-blue-500/5 via-transparent to-transparent dark:from-blue-500/10 dark:via-transparent dark:to-transparent"></div>
     
     <!-- Particules animées -->
     <div class="particles-container hidden md:block">
@@ -37,33 +37,33 @@
   <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12 min-h-screen flex items-center relative z-10">
     <div class="w-full grid lg:grid-cols-12 gap-4 md:gap-8 items-center">
       <!-- Colonne gauche : Contenu textuel -->
-      <div class="lg:col-span-7 text-white space-y-4 md:space-y-8 animate-slideFromLeft order-2 lg:order-1">
+      <div class="lg:col-span-7 text-gray-900 dark:text-white space-y-4 md:space-y-8 animate-slideFromLeft order-2 lg:order-1">
         <!-- Bloc de code animé -->
-        <div class="code-block bg-gray-900/50 p-3 md:p-4 rounded-lg backdrop-blur-sm overflow-x-auto max-w-full">
+        <div class="code-block bg-gray-100/80 dark:bg-gray-900/50 p-3 md:p-4 rounded-lg backdrop-blur-sm overflow-x-auto max-w-full border border-gray-200 dark:border-gray-700">
           <div class="typing-animation text-sm md:text-base">
-              <span class="text-blue-400">const </span> 
-              <span class="text-green-400">developer</span> 
-              <span class="text-white">=</span> 
-              <span class="text-yellow-400">{{'{'}}</span>
+              <span class="text-blue-600 dark:text-blue-400">const </span> 
+              <span class="text-green-600 dark:text-green-400">developer</span> 
+              <span class="text-gray-900 dark:text-white">=</span> 
+              <span class="text-yellow-500 dark:text-yellow-400">{{'{'}}</span>
               <div class="ml-2 md:ml-4">
                 <div class="typing-line" style="--delay: 0.5s">
-                  <span class="text-purple-400">name:</span> 
-                  <span class="text-orange-400">"{{developerName}}"</span>,
+                  <span class="text-purple-600 dark:text-purple-400">name:</span> 
+                  <span class="text-orange-500 dark:text-orange-400">"{{developerName}}"</span>,
                 </div>
                 <div class="typing-line" style="--delay: 1s">
-                  <span class="text-purple-400">role:</span> 
-                  <span class="text-orange-400">"Full Stack Expert, Data Analyst, IT Support"</span>,
+                  <span class="text-purple-600 dark:text-purple-400">role:</span> 
+                  <span class="text-orange-500 dark:text-orange-400">"Full Stack Expert, Data Analyst, IT Support"</span>,
                 </div>
                 <div class="typing-line" style="--delay: 1.5s">
-                  <span class="text-purple-400">skills:</span> 
-                  <span class="text-orange-400">["UI/UX", "Frontend", "Backend", "Machine Learning", "Statistic"]</span>,
+                  <span class="text-purple-600 dark:text-purple-400">skills:</span> 
+                  <span class="text-orange-500 dark:text-orange-400">["UI/UX", "Frontend", "Backend", "Machine Learning", "Statistic"]</span>,
                 </div>
                 <div class="typing-line" style="--delay: 2s">
-                  <span class="text-purple-400">status:</span> 
-                  <span class="text-orange-400">"Ready for new challenges"</span>
+                  <span class="text-purple-600 dark:text-purple-400">status:</span> 
+                  <span class="text-orange-500 dark:text-orange-400">"Ready for new challenges"</span>
                 </div>
               </div>
-              <span class="text-yellow-400">{{'}'}}</span>
+              <span class="text-yellow-500 dark:text-yellow-400">{{'}'}}</span>
           </div>
         </div>
 
@@ -78,7 +78,7 @@
             </span>
           </h1>
           
-          <p class="text-base md:text-lg lg:text-xl text-gray-300 animate-fadeIn max-w-2xl" style="--delay: 1s">
+          <p class="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 animate-fadeIn max-w-2xl" style="--delay: 1s">
             Transformant des concepts complexes en solutions élégantes, 
             je combine expertise technique et design innovant pour créer 
             des expériences numériques exceptionnelles.
@@ -88,7 +88,7 @@
         <!-- Boutons CTA -->
         <div class="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fadeIn" style="--delay: 1.3s">
           <button (click)="scrollToProjects()" 
-                  class="w-full sm:w-auto group relative px-4 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full hover:scale-105 transition-all duration-300 overflow-hidden text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                  class="w-full sm:w-auto group relative px-4 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full hover:scale-105 transition-all duration-300 overflow-hidden text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900">
             <span class="relative z-10 flex items-center justify-center">
               Découvrir mes projets
               <svg class="w-4 h-4 md:w-5 md:h-5 ml-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,18 +99,18 @@
           </button>
           
           <button (click)="scrollToContact()" 
-                  class="w-full sm:w-auto group relative px-4 md:px-8 py-3 md:py-4 rounded-full hover:scale-105 transition-all duration-300 overflow-hidden border-2 border-blue-400 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                  class="w-full sm:w-auto group relative px-4 md:px-8 py-3 md:py-4 rounded-full hover:scale-105 transition-all duration-300 overflow-hidden border-2 border-blue-500 dark:border-blue-400 text-gray-900 dark:text-white text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900">
             <span class="relative z-10">Me contacter</span>
-            <div class="absolute inset-0 bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div class="absolute inset-0 bg-blue-400 dark:bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
           </button>
         </div>
 
         <!-- Stack technologique -->
         <div class="space-y-3 md:space-y-4 animate-fadeIn" style="--delay: 1.6s">
-          <h3 class="text-base md:text-lg font-semibold text-blue-400">Technologies maîtrisées</h3>
+          <h3 class="text-base md:text-lg font-semibold text-blue-600 dark:text-blue-400">Technologies maîtrisées</h3>
           <div class="flex flex-wrap gap-2 md:gap-3">
             <div *ngFor="let tech of technologies" 
-                 class="tech-badge group cursor-pointer px-2 md:px-3 py-1 rounded-full border border-blue-400/30 backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:bg-blue-400/10 text-sm md:text-base"
+                 class="tech-badge group cursor-pointer px-2 md:px-3 py-1 rounded-full border border-blue-400/50 dark:border-blue-400/30 backdrop-blur-sm transition-all duration-300 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-400/20 dark:hover:bg-blue-400/10 text-sm md:text-base"
                  [ngStyle]="{'transform': 'rotate(' + tech.rotation + 'deg)'}">
               <span class="relative z-10" [ngClass]="getTechnologyColor(tech.name)">{{tech.name}}</span>
             </div>
@@ -125,13 +125,13 @@
           <div class="relative z-20 animate-float">
             <div class="profile-image-container relative overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 backdrop-blur-lg w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 mx-auto">
               <img [src]="profileImage" alt="Profile" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-blue-200/40 dark:from-blue-900/50 to-transparent"></div>
               <div class="animated-border"></div>
             </div>
             
             <!-- Indicateur d'expérience -->
-            <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-md rounded-full px-3 md:px-4 py-1 md:py-2 text-white whitespace-nowrap text-sm md:text-base">
-              <span class="text-blue-400 font-bold">{{experience}}</span>+ années d'expérience
+            <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 text-gray-900 border border-gray-200 dark:bg-black/50 dark:text-white dark:border-gray-700 backdrop-blur-md rounded-full px-3 md:px-4 py-1 md:py-2 whitespace-nowrap text-sm md:text-base">
+              <span class="text-blue-600 dark:text-blue-400 font-bold">{{experience}}</span>+ années d'expérience
             </div>
           </div>
 
@@ -140,21 +140,21 @@
             <div *ngFor="let skill of floatingSkills; let i = index"
                 class="skill-card"
                 [ngStyle]="{'transform': 'rotate(' + skill.rotation + 'deg)'}">
-              <div class="bg-white/10 backdrop-blur-lg rounded-lg p-3 md:p-4 shadow-lg border border-white/20 transition-all duration-300 hover:bg-white/20">
+              <div class="bg-gray-100/80 dark:bg-white/10 border border-gray-200 dark:border-white/20 backdrop-blur-lg rounded-lg p-3 md:p-4 shadow-lg transition-all duration-300 hover:bg-gray-200/80 dark:hover:bg-white/20">
                 <div class="flex items-center space-x-2">
                   <span class="w-2 h-2 rounded-full" [ngClass]="skill.dotColor"></span>
-                  <span class="text-white font-medium text-sm md:text-base">{{skill.name}}</span>
+                  <span class="text-gray-900 dark:text-white font-medium text-sm md:text-base">{{skill.name}}</span>
                 </div>
-                <div class="mt-1 text-xs md:text-sm text-blue-300">{{skill.level}}</div>
+                <div class="mt-1 text-xs md:text-sm text-blue-600 dark:text-blue-300">{{skill.level}}</div>
               </div>
             </div>
           </div>
 
           <!-- Métriques de succès -->
-          <div class="mt-6 md:mt-8 bg-black/30 backdrop-blur-md rounded-lg p-3 md:p-4 animate-fadeIn" style="--delay: 2s">
-            <div class="grid grid-cols-2 gap-3 md:gap-4 text-white">
+          <div class="mt-6 md:mt-8 bg-white/80 dark:bg-black/30 border border-gray-200 dark:border-gray-700 backdrop-blur-md rounded-lg p-3 md:p-4 animate-fadeIn" style="--delay: 2s">
+            <div class="grid grid-cols-2 gap-3 md:gap-4 text-gray-900 dark:text-white">
               <div *ngFor="let metric of successMetrics" class="text-center">
-                <div class="text-xl md:text-2xl font-bold text-blue-400">{{metric.value}}</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">{{metric.value}}</div>
                 <div class="text-xs md:text-sm">{{metric.label}}</div>
               </div>
             </div>
@@ -175,9 +175,9 @@
     overflow-x: hidden;
   }
 
-  /* .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400;
-  } */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400;
+  }
 
   .profile-image-container {
     position: relative;
@@ -196,6 +196,31 @@
     border-image-slice: 1;
     animation: rotate 4s linear infinite;
     z-index: -1;
+  }
+
+  /* Styles pour les particules et lignes selon le thème */
+  .particle {
+    position: absolute;
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    animation: float-particle 6s ease-in-out infinite;
+  }
+
+  .connecting-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+    animation: pulse-line 4s ease-in-out infinite;
+  }
+
+  @keyframes float-particle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  @keyframes pulse-line {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
   }
 
   @keyframes rotate {

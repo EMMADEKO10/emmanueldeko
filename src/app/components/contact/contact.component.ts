@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ContactService, ContactFormData } from '../../services/contact.service';
 
 interface ContactMethod {
   icon: string;
@@ -14,7 +16,7 @@ interface ContactMethod {
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule]
 })
 export class ContactComponent {
   contactForm: FormGroup;
@@ -58,7 +60,10 @@ export class ContactComponent {
     }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private contactService: ContactService
+  ) {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
@@ -71,14 +76,26 @@ export class ContactComponent {
     this.isSubmitted = true;
 
     if (this.contactForm.valid) {
-      console.log('Form submitted:', this.contactForm.value);
-      this.showSuccessMessage = true;
-      this.contactForm.reset();
-      this.isSubmitted = false;
+      const formData: ContactFormData = this.contactForm.value;
+      
+      this.contactService.sendContactMessage(formData).subscribe({
+        next: (response) => {
+          console.log('Message envoyé avec succès:', response);
+          this.showSuccessMessage = true;
+          this.contactForm.reset();
+          this.isSubmitted = false;
 
-      setTimeout(() => {
-        this.showSuccessMessage = false;
-      }, 5000);
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 5000);
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'envoi du message:', error);
+          // Vous pouvez ajouter ici une gestion d'erreur plus sophistiquée
+          alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+          this.isSubmitted = false;
+        }
+      });
     }
   }
 

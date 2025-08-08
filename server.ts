@@ -31,11 +31,19 @@ console.log(`🌐 Server will listen on ${HOST}:${PORT}`);
  */
 // Import de l'API du chatbot
 import chatHandler from './src/api/chat.js';
+// Import de l'API de contact
+import contactHandler from './src/api/email.js';
 
 // Route API pour le chatbot
 app.post('/api/chat', (req, res) => {
   console.log('📨 Chat API request received');
   chatHandler(req, res);
+});
+
+// Route API pour le contact
+app.post('/api/contact', (req, res) => {
+  console.log('📨 Contact API request received');
+  contactHandler(req, res);
 });
 
 // Health check endpoint
