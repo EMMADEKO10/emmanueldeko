@@ -17,10 +17,9 @@ export class ThemeService {
   private initializeTheme(): void {
     // Vérifier si nous sommes dans un environnement navigateur
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      // Récupérer le thème sauvegardé ou utiliser la préférence système
+      // Récupérer le thème sauvegardé ou utiliser le thème sombre par défaut
       const savedTheme = localStorage.getItem('theme') as Theme;
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      const theme = savedTheme || systemTheme;
+      const theme = savedTheme || 'dark';
       
       this.setTheme(theme);
     } else {
