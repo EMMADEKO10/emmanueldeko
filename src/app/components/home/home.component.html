@@ -31,6 +31,11 @@
            }">
       </div>
     </div>
+    
+    <!-- Motifs géométriques -->
+    <div class="absolute top-20 right-20 w-40 h-40 border border-blue-200/20 dark:border-blue-500/20 rounded-full animate-spin-slow"></div>
+    <div class="absolute bottom-32 left-16 w-24 h-24 border border-purple-200/20 dark:border-purple-500/20 rotate-45 animate-bounce-subtle"></div>
+    <div class="absolute top-1/2 left-10 w-16 h-16 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 dark:from-cyan-500/20 dark:to-blue-500/20 rounded-lg animate-pulse-slow"></div>
   </div>
 
   <!-- Contenu principal -->
@@ -39,7 +44,7 @@
       <!-- Colonne gauche : Contenu textuel -->
       <div class="lg:col-span-7 text-gray-900 dark:text-white space-y-4 md:space-y-8 animate-slideFromLeft order-2 lg:order-1">
         <!-- Bloc de code animé -->
-        <div class="code-block bg-gray-100/80 dark:bg-gray-900/50 p-3 md:p-4 rounded-lg backdrop-blur-sm overflow-x-auto max-w-full border border-gray-200 dark:border-gray-700">
+        <div class="code-block bg-white/90 dark:bg-gray-900/50 p-3 md:p-4 rounded-lg backdrop-blur-sm overflow-x-auto max-w-full border border-gray-200/30 dark:border-gray-700 shadow-lg shadow-gray-200/40 dark:shadow-blue-900/20">
           <div class="typing-animation text-sm md:text-base">
               <span class="text-blue-600 dark:text-blue-400">const </span> 
               <span class="text-green-600 dark:text-green-400">developer</span> 
@@ -69,16 +74,16 @@
 
         <!-- En-tête principal -->
         <div class="space-y-2 md:space-y-4">
-          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            <span class="block transform hover:scale-105 transition-transform duration-300 animate-slideUp" style="--delay: 0.5s">
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-black leading-tight">
+            <span class="block text-gray-900 dark:text-white transform hover:scale-105 transition-transform duration-300 animate-slideUp" style="--delay: 0.5s">
               Architecte de
             </span>
-            <span class="gradient-text block transform hover:scale-105 transition-transform duration-300 animate-slideUp" style="--delay: 0.7s">
+            <span class="gradient-text animate-gradient block transform hover:scale-105 transition-transform duration-300 animate-slideUp" style="--delay: 0.7s">
               l'Excellence Numérique
             </span>
           </h1>
           
-          <p class="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 animate-fadeIn max-w-2xl" style="--delay: 1s">
+          <p class="text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 animate-fadeIn max-w-2xl leading-relaxed" style="--delay: 1s">
             Transformant des concepts complexes en solutions élégantes, 
             je combine expertise technique et design innovant pour créer 
             des expériences numériques exceptionnelles.
@@ -107,12 +112,12 @@
 
         <!-- Stack technologique -->
         <div class="space-y-3 md:space-y-4 animate-fadeIn" style="--delay: 1.6s">
-          <h3 class="text-base md:text-lg font-semibold text-blue-600 dark:text-blue-400">Technologies maîtrisées</h3>
+          <h3 class="text-base md:text-lg font-bold text-blue-600 dark:text-blue-400">Technologies maîtrisées</h3>
           <div class="flex flex-wrap gap-2 md:gap-3">
             <div *ngFor="let tech of technologies" 
-                 class="tech-badge group cursor-pointer px-2 md:px-3 py-1 rounded-full border border-blue-400/50 dark:border-blue-400/30 backdrop-blur-sm transition-all duration-300 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-400/20 dark:hover:bg-blue-400/10 text-sm md:text-base"
+                 class="tech-badge group cursor-pointer px-2 md:px-3 py-1 rounded-full border border-gray-300/50 dark:border-blue-400/30 bg-white/90 dark:bg-transparent backdrop-blur-sm transition-all duration-300 hover:border-blue-400 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-400/10 hover:shadow-md shadow-gray-200/30 dark:shadow-none text-sm md:text-base"
                  [ngStyle]="{'transform': 'rotate(' + tech.rotation + 'deg)'}">
-              <span class="relative z-10" [ngClass]="getTechnologyColor(tech.name)">{{tech.name}}</span>
+              <span class="relative z-10 font-medium" [ngClass]="getTechnologyColor(tech.name)">{{tech.name}}</span>
             </div>
           </div>
         </div>
@@ -130,7 +135,7 @@
             </div>
             
             <!-- Indicateur d'expérience -->
-            <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 text-gray-900 border border-gray-200 dark:bg-black/50 dark:text-white dark:border-gray-700 backdrop-blur-md rounded-full px-3 md:px-4 py-1 md:py-2 whitespace-nowrap text-sm md:text-base">
+            <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white dark:bg-black/50 text-gray-900 dark:text-white border border-gray-200/50 dark:border-gray-700 backdrop-blur-md rounded-full px-3 md:px-4 py-1 md:py-2 whitespace-nowrap text-sm md:text-base shadow-lg shadow-gray-300/40 dark:shadow-blue-900/20">
               <span class="text-blue-600 dark:text-blue-400 font-bold">{{experience}}</span>+ années d'expérience
             </div>
           </div>
@@ -140,22 +145,22 @@
             <div *ngFor="let skill of floatingSkills; let i = index"
                 class="skill-card"
                 [ngStyle]="{'transform': 'rotate(' + skill.rotation + 'deg)'}">
-              <div class="bg-gray-100/80 dark:bg-white/10 border border-gray-200 dark:border-white/20 backdrop-blur-lg rounded-lg p-3 md:p-4 shadow-lg transition-all duration-300 hover:bg-gray-200/80 dark:hover:bg-white/20">
+              <div class="bg-white dark:bg-white/10 border border-gray-200/40 dark:border-white/20 backdrop-blur-lg rounded-lg p-3 md:p-4 shadow-lg shadow-gray-300/30 dark:shadow-none transition-all duration-300 hover:bg-blue-50 dark:hover:bg-white/20 hover:shadow-xl hover:shadow-gray-400/40 dark:hover:shadow-none">
                 <div class="flex items-center space-x-2">
                   <span class="w-2 h-2 rounded-full" [ngClass]="skill.dotColor"></span>
-                  <span class="text-gray-900 dark:text-white font-medium text-sm md:text-base">{{skill.name}}</span>
+                  <span class="text-gray-900 dark:text-white font-semibold text-sm md:text-base">{{skill.name}}</span>
                 </div>
-                <div class="mt-1 text-xs md:text-sm text-blue-600 dark:text-blue-300">{{skill.level}}</div>
+                <div class="mt-1 text-xs md:text-sm text-blue-600 dark:text-blue-300 font-medium">{{skill.level}}</div>
               </div>
             </div>
           </div>
 
           <!-- Métriques de succès -->
-          <div class="mt-6 md:mt-8 bg-white/80 dark:bg-black/30 border border-gray-200 dark:border-gray-700 backdrop-blur-md rounded-lg p-3 md:p-4 animate-fadeIn" style="--delay: 2s">
+          <div class="mt-6 md:mt-8 bg-white dark:bg-black/30 border border-gray-200/40 dark:border-gray-700 backdrop-blur-md rounded-lg p-3 md:p-4 animate-fadeIn shadow-lg shadow-gray-300/30 dark:shadow-blue-900/10" style="--delay: 2s">
             <div class="grid grid-cols-2 gap-3 md:gap-4 text-gray-900 dark:text-white">
               <div *ngFor="let metric of successMetrics" class="text-center">
                 <div class="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">{{metric.value}}</div>
-                <div class="text-xs md:text-sm">{{metric.label}}</div>
+                <div class="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">{{metric.label}}</div>
               </div>
             </div>
           </div>
