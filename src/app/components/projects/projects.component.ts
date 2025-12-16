@@ -174,17 +174,93 @@ export class ProjectsComponent implements OnInit {
     }
   ];
 
+  // Projets réalisés concrets avec URLs
+  realizedProjects = [
+    {
+      id: 1,
+      name: 'Grande Mosaïque',
+      url: 'https://grandemosaique.com',
+      description: 'Plateforme d\'actualités et d\'informations',
+      category: 'media',
+      type: 'Média & Information',
+      icon: 'fas fa-newspaper',
+      gradient: 'from-indigo-500 to-purple-500',
+      technologies: ['Angular', 'Node.js', 'MongoDB'],
+      features: ['Gestion de contenu', 'SEO optimisé', 'Responsive design']
+    },
+    {
+      id: 2,
+      name: 'Diasporium CD',
+      url: 'https://diasporium.cd',
+      description: 'Plateforme d\'accompagnement pour la diaspora congolaise',
+      category: 'social',
+      type: 'Impact Social & Humanitaire',
+      icon: 'fas fa-hands-helping',
+      gradient: 'from-teal-500 to-blue-500',
+      technologies: ['React', 'Express', 'PostgreSQL'],
+      features: ['Accompagnement personnalisé', 'Communauté', 'Services intégrés']
+    },
+    {
+      id: 3,
+      name: 'Sotradon',
+      url: 'https://sotradon.org',
+      description: 'Plateforme de financement de projets et de développement',
+      category: 'social',
+      type: 'Financement de Projets',
+      icon: 'fas fa-hand-holding-usd',
+      gradient: 'from-green-500 to-emerald-500',
+      technologies: ['Angular', 'NestJS', 'MySQL'],
+      features: ['Financement participatif', 'Gestion de projets', 'Paiement sécurisé']
+    },
+    {
+      id: 4,
+      name: 'Brievent',
+      url: 'https://brievent.com',
+      description: 'Plateforme de gestion et publication d\'événements',
+      category: 'events',
+      type: 'Événementiel & Lifestyle',
+      icon: 'fas fa-calendar-alt',
+      gradient: 'from-yellow-500 to-orange-500',
+      technologies: ['Vue.js', 'Laravel', 'Redis'],
+      features: ['Gestion événements', 'Billetterie', 'Promotion sociale']
+    },
+    {
+      id: 5,
+      name: 'ROC Dépannage',
+      url: 'https://rocdepannage.com',
+      description: 'Service de dépannage rapide pour véhicules',
+      category: 'commerce',
+      type: 'Services & Commerce',
+      icon: 'fas fa-car',
+      gradient: 'from-red-500 to-pink-500',
+      technologies: ['React Native', 'Firebase', 'Google Maps API'],
+      features: ['Géolocalisation', 'Réservation instantanée', 'Suivi en temps réel']
+    },
+    {
+      id: 6,
+      name: 'Portfolio Didier Ngoyi',
+      url: 'https://didierngoyprofil.vercel.app',
+      description: 'Portfolio professionnel de M. Didier Ngoyi',
+      category: 'professional',
+      type: 'Professionnels & Experts',
+      icon: 'fas fa-user-tie',
+      gradient: 'from-purple-500 to-violet-500',
+      technologies: ['Next.js', 'Tailwind CSS', 'Vercel'],
+      features: ['Design moderne', 'Performance optimale', 'SEO avancé']
+    }
+  ];
+
   // Statistiques impressionnantes
   statistics = [
     {
-      value: '15+',
+      value: '25+',
       label: 'Projets Réalisés',
       icon: 'fas fa-project-diagram',
       gradient: 'from-blue-500 to-cyan-500',
       color: 'text-blue-400'
     },
     {
-      value: '12+',
+      value: '20+',
       label: 'Clients Satisfaits',
       icon: 'fas fa-handshake',
       gradient: 'from-green-500 to-emerald-500',
@@ -198,7 +274,7 @@ export class ProjectsComponent implements OnInit {
       color: 'text-purple-400'
     },
     {
-      value: '85%',
+      value: '95%',
       label: 'Satisfaction Client',
       icon: 'fas fa-award',
       gradient: 'from-yellow-500 to-orange-500',
@@ -299,6 +375,28 @@ export class ProjectsComponent implements OnInit {
     // Tri par nom par défaut
     list = list.sort((a, b) => a.name.localeCompare(b.name));
     return list;
+  }
+
+  get visibleRealizedProjects() {
+    const term = this.searchTerm.trim().toLowerCase();
+    return this.realizedProjects.filter(project => {
+      const matchesCategory = this.selectedCategory === 'all' || project.category === this.selectedCategory;
+      if (!term) return matchesCategory;
+      const haystack = [
+        project.name,
+        project.description,
+        project.type,
+        ...(project.technologies || []),
+        ...(project.features || [])
+      ].join(' ').toLowerCase();
+      return matchesCategory && haystack.includes(term);
+    });
+  }
+
+  openProject(url: string): void {
+    if (typeof window !== 'undefined') {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
   }
 
   setCategory(categoryId: string) {
