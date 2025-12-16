@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 import { Request, Response } from 'express';
+import * as fs from 'fs';
+import * as path from 'path';
 
 interface ContactFormData {
   name: string;
@@ -8,58 +10,144 @@ interface ContactFormData {
   message: string;
 }
 
-// Configuration du transporteur email
+// Configuration du transporteur email avec SMTP Gmail
 const createTransporter = () => {
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
     auth: {
       user: process.env['EMAIL_USER'] || 'emmanueldeko64@gmail.com',
-      pass: process.env['EMAIL_PASSWORD'] // Mot de passe d'application Gmail
+      pass: process.env['EMAIL_PASSWORD'] || 'xcym ejub xsrl vsgb' // Mot de passe d'application Gmail
+    },
+    tls: {
+      rejectUnauthorized: false
     }
   });
+};
+
+// Fonction pour lire et remplacer les variables dans un template HTML
+const loadEmailTemplate = (templateName: string, variables: Record<string, string> = {}): string => {
+  try {
+    const templatePath = path.join(process.cwd(), 'src', 'lib', 'email-templates', `${templateName}.html`);
+    let template = fs.readFileSync(templatePath, 'utf8');
+    
+    // Remplacer les variables dans le template
+    Object.keys(variables).forEach(key => {
+      const regex = new RegExp(`{{${key}}}`, 'g');
+      template = template.replace(regex, variables[key]);
+    });
+    
+    return template;
+  } catch (error) {
+    console.error('❌ Erreur lors du chargement du template:', error);
+    throw error;
+  }
 };
 
 // Fonction pour envoyer l'email
 const sendContactEmail = async (formData: ContactFormData) => {
   const transporter = createTransporter();
   
+  // Préparer les variables pour le template
+  const templateVariables = {
+    name: formData.name,
+    email: formData.email,
+    subject: formData.subject,
+    message: formData.message.replace(/\n/g, '<br>'),
+    date: new Date().toLocaleString('fr-FR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }),
+    year: new Date().getFullYear().toString()
+  };
+  
+  // Charger le template HTML
+  const htmlContent = loadEmailTemplate('contact-notification', templateVariables);
+  
   const mailOptions = {
-    from: process.env['EMAIL_USER'] || 'emmanueldeko64@gmail.com',
+    from: `"Portfolio Emmanuel Deko" <${process.env['EMAIL_USER'] || 'emmanueldeko64@gmail.com'}>`,
     to: 'emmanueldeko64@gmail.com',
-    subject: `Nouveau message de contact - ${formData.subject}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
-          Nouveau message de contact
-        </h2>
-        
-        <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <h3 style="color: #1e293b; margin-top: 0;">Détails du contact :</h3>
-          <p><strong>Nom :</strong> ${formData.name}</p>
-          <p><strong>Email :</strong> ${formData.email}</p>
-          <p><strong>Sujet :</strong> ${formData.subject}</p>
-        </div>
-        
-        <div style="background-color: #ffffff; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3 style="color: #1e293b; margin-top: 0;">Message :</h3>
-          <p style="line-height: 1.6; color: #374151;">${formData.message.replace(/\n/g, '<br>')}</p>
-        </div>
-        
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #6b7280; font-size: 14px;">
-          <p>Ce message a été envoyé depuis le formulaire de contact de votre portfolio.</p>
-          <p>Date d'envoi : ${new Date().toLocaleString('fr-FR')}</p>
-        </div>
-      </div>
-    `
+    replyTo: formData.email,
+    subject: `📬 Nouveau message de ${formData.name} - ${formData.subject}`,
+    html: htmlContent,
+    // Version texte pour les clients qui ne supportent pas le HTML
+    text: `
+Nouveau message de contact
+
+De : ${formData.name} (${formData.email})
+Sujet : ${formData.subject}
+
+Message :
+${formData.message}
+
+---
+Date : ${templateVariables.date}
+Envoyé depuis le formulaire de contact du portfolio
+    `.trim()
   };
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('📧 Email envoyé avec succès:', info.messageId);
+    console.log('✅ Email envoyé avec succès:', info.messageId);
+    console.log('📧 Destinataire:', mailOptions.to);
+    console.log('📝 Sujet:', mailOptions.subject);
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error('❌ Erreur lors de l\'envoi de l\'email:', error);
     throw error;
+  }
+};
+
+// Fonction pour envoyer un email de confirmation à l'expéditeur
+const sendConfirmationEmail = async (formData: ContactFormData) => {
+  const transporter = createTransporter();
+  
+  // Préparer les variables pour le template de confirmation
+  const templateVariables = {
+    name: formData.name,
+    subject: formData.subject,
+    message: formData.message.replace(/\n/g, '<br>'),
+    year: new Date().getFullYear().toString()
+  };
+  
+  // Charger le template HTML de confirmation
+  const htmlContent = loadEmailTemplate('contact-confirmation', templateVariables);
+  
+  const mailOptions = {
+    from: `"Emmanuel Deko" <${process.env['EMAIL_USER'] || 'emmanueldeko64@gmail.com'}>`,
+    to: formData.email,
+    subject: '✅ Confirmation de réception de votre message',
+    html: htmlContent,
+    text: `
+Bonjour ${formData.name},
+
+Je vous confirme avoir bien reçu votre message concernant "${formData.subject}".
+
+Je m'efforcerai de vous répondre dans les plus brefs délais, généralement sous 24-48 heures.
+
+Récapitulatif de votre message :
+${formData.message}
+
+Cordialement,
+Emmanuel Deko Wembolwa
+Développeur Full Stack • Analyste de Données • Support IT
+emmanueldeko64@gmail.com
+    `.trim()
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Email de confirmation envoyé à:', formData.email);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('⚠️ Erreur lors de l\'envoi de l\'email de confirmation:', error);
+    // Ne pas bloquer si l'email de confirmation échoue
+    return { success: false, error };
   }
 };
 
@@ -87,13 +175,18 @@ const contactHandler = async (req: Request, res: Response) => {
       });
     }
 
-    // Envoi de l'email
-    const result = await sendContactEmail({ name, email, subject, message });
+    // Envoi de l'email de notification à Emmanuel
+    const notificationResult = await sendContactEmail({ name, email, subject, message });
+    
+    // Envoi de l'email de confirmation à l'expéditeur (en arrière-plan)
+    sendConfirmationEmail({ name, email, subject, message }).catch(error => {
+      console.error('⚠️ Échec de l\'envoi de la confirmation, mais le message principal a été envoyé:', error);
+    });
     
     return res.json({
       success: true,
-      message: 'Message envoyé avec succès',
-      messageId: result.messageId
+      message: 'Message envoyé avec succès ! Vous recevrez une confirmation par email.',
+      messageId: notificationResult.messageId
     });
 
   } catch (error) {

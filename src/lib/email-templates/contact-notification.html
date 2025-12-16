@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau message de contact</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6;">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 40px 20px;">
+                <table role="presentation" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <!-- En-tête -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
+                                📬 Nouveau Message
+                            </h1>
+                            <p style="margin: 10px 0 0 0; color: #e0e7ff; font-size: 16px;">
+                                Portfolio Emmanuel Deko
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Contenu principal -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <p style="margin: 0 0 30px 0; font-size: 16px; color: #374151; line-height: 1.5;">
+                                Vous avez reçu un nouveau message depuis votre formulaire de contact.
+                            </p>
+                            
+                            <!-- Carte des informations de contact -->
+                            <div style="background: linear-gradient(135deg, #eff6ff 0%, #f3f4f6 100%); border-left: 4px solid #3b82f6; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+                                <h2 style="margin: 0 0 20px 0; color: #1e3a8a; font-size: 18px; font-weight: 600;">
+                                    👤 Informations du contact
+                                </h2>
+                                
+                                <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <strong style="color: #4b5563; font-size: 14px;">Nom :</strong>
+                                        </td>
+                                        <td style="padding: 8px 0; text-align: right;">
+                                            <span style="color: #1f2937; font-size: 14px; font-weight: 600;">{{name}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <strong style="color: #4b5563; font-size: 14px;">Email :</strong>
+                                        </td>
+                                        <td style="padding: 8px 0; text-align: right;">
+                                            <a href="mailto:{{email}}" style="color: #3b82f6; font-size: 14px; text-decoration: none; font-weight: 600;">{{email}}</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0;">
+                                            <strong style="color: #4b5563; font-size: 14px;">Sujet :</strong>
+                                        </td>
+                                        <td style="padding: 8px 0; text-align: right;">
+                                            <span style="color: #1f2937; font-size: 14px; font-weight: 600;">{{subject}}</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <!-- Message -->
+                            <div style="background-color: #ffffff; border: 2px solid #e5e7eb; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+                                <h2 style="margin: 0 0 15px 0; color: #1e3a8a; font-size: 18px; font-weight: 600;">
+                                    💬 Message
+                                </h2>
+                                <div style="color: #374151; font-size: 15px; line-height: 1.8; white-space: pre-wrap;">{{message}}</div>
+                            </div>
+                            
+                            <!-- Bouton d'action -->
+                            <div style="text-align: center; margin: 30px 0;">
+                                <a href="mailto:{{email}}?subject=Re: {{subject}}" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 15px; box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);">
+                                    📧 Répondre au message
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Pied de page -->
+                    <tr>
+                        <td style="background-color: #f9fafb; padding: 30px; border-radius: 0 0 12px 12px; border-top: 1px solid #e5e7eb;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 13px;">
+                                            📅 Date d'envoi : <strong>{{date}}</strong>
+                                        </p>
+                                        <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 1.6;">
+                                            Ce message a été envoyé depuis le formulaire de contact de votre portfolio.<br>
+                                            © {{year}} Emmanuel Deko - Tous droits réservés
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                
+                <!-- Note de sécurité -->
+                <table role="presentation" style="max-width: 600px; margin: 20px auto 0 auto;">
+                    <tr>
+                        <td style="text-align: center; padding: 20px;">
+                            <p style="margin: 0; color: #6b7280; font-size: 12px; line-height: 1.6;">
+                                🔒 Cet email est automatique et confidentiel.<br>
+                                Si vous n'êtes pas le destinataire, veuillez supprimer ce message.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
