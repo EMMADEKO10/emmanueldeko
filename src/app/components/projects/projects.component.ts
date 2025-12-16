@@ -203,7 +203,7 @@ export class ProjectsComponent implements OnInit {
     {
       id: 3,
       name: 'Sotradon',
-      url: 'https://sotradon.org',
+      url: 'https://sotradons.org',
       description: 'Plateforme de financement de projets et de développement',
       category: 'social',
       type: 'Financement de Projets',
@@ -215,7 +215,7 @@ export class ProjectsComponent implements OnInit {
     {
       id: 4,
       name: 'Brievent',
-      url: 'https://brievent.com',
+      url: 'https://brievents.com',
       description: 'Plateforme de gestion et publication d\'événements',
       category: 'events',
       type: 'Événementiel & Lifestyle',
